@@ -1,0 +1,3435 @@
+[
+  {
+    "id": "A-101",
+    "buildingId": "A",
+    "floor": 1,
+    "number": "101",
+    "area": 126.7,
+    "rooms": 4,
+    "price": 199000,
+    "status": "sold",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        156,
+        1176
+      ],
+      [
+        594,
+        1176
+      ],
+      [
+        594,
+        1296
+      ],
+      [
+        156,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "A-102",
+    "buildingId": "A",
+    "floor": 1,
+    "number": "102",
+    "area": 126.6,
+    "rooms": 4,
+    "price": 161000,
+    "status": "available",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        606,
+        1176
+      ],
+      [
+        1044,
+        1176
+      ],
+      [
+        1044,
+        1296
+      ],
+      [
+        606,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "A-103",
+    "buildingId": "A",
+    "floor": 1,
+    "number": "103",
+    "area": 120.8,
+    "rooms": 4,
+    "price": 187500,
+    "status": "available",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        156,
+        1176
+      ],
+      [
+        594,
+        1176
+      ],
+      [
+        594,
+        1296
+      ],
+      [
+        156,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "A-104",
+    "buildingId": "A",
+    "floor": 1,
+    "number": "104",
+    "area": 62.1,
+    "rooms": 2,
+    "price": 92500,
+    "status": "reserved",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        606,
+        1176
+      ],
+      [
+        1044,
+        1176
+      ],
+      [
+        1044,
+        1296
+      ],
+      [
+        606,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-201",
+    "buildingId": "A",
+    "floor": 2,
+    "number": "201",
+    "area": 85.4,
+    "rooms": 3,
+    "price": 121000,
+    "status": "sold",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        156,
+        1046
+      ],
+      [
+        594,
+        1046
+      ],
+      [
+        594,
+        1166
+      ],
+      [
+        156,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "A-202",
+    "buildingId": "A",
+    "floor": 2,
+    "number": "202",
+    "area": 113.4,
+    "rooms": 4,
+    "price": 162500,
+    "status": "sold",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        606,
+        1046
+      ],
+      [
+        1044,
+        1046
+      ],
+      [
+        1044,
+        1166
+      ],
+      [
+        606,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "A-203",
+    "buildingId": "A",
+    "floor": 2,
+    "number": "203",
+    "area": 55.9,
+    "rooms": 1,
+    "price": 81000,
+    "status": "available",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        156,
+        1046
+      ],
+      [
+        594,
+        1046
+      ],
+      [
+        594,
+        1166
+      ],
+      [
+        156,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "A-204",
+    "buildingId": "A",
+    "floor": 2,
+    "number": "204",
+    "area": 55.6,
+    "rooms": 1,
+    "price": 77500,
+    "status": "available",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        606,
+        1046
+      ],
+      [
+        1044,
+        1046
+      ],
+      [
+        1044,
+        1166
+      ],
+      [
+        606,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "A-301",
+    "buildingId": "A",
+    "floor": 3,
+    "number": "301",
+    "area": 84.4,
+    "rooms": 2,
+    "price": 114500,
+    "status": "reserved",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        156,
+        916
+      ],
+      [
+        594,
+        916
+      ],
+      [
+        594,
+        1036
+      ],
+      [
+        156,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-302",
+    "buildingId": "A",
+    "floor": 3,
+    "number": "302",
+    "area": 83.7,
+    "rooms": 2,
+    "price": 125000,
+    "status": "sold",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        606,
+        916
+      ],
+      [
+        1044,
+        916
+      ],
+      [
+        1044,
+        1036
+      ],
+      [
+        606,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-303",
+    "buildingId": "A",
+    "floor": 3,
+    "number": "303",
+    "area": 91.5,
+    "rooms": 3,
+    "price": 123000,
+    "status": "sold",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        156,
+        916
+      ],
+      [
+        594,
+        916
+      ],
+      [
+        594,
+        1036
+      ],
+      [
+        156,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "A-304",
+    "buildingId": "A",
+    "floor": 3,
+    "number": "304",
+    "area": 126.8,
+    "rooms": 4,
+    "price": 165000,
+    "status": "sold",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        606,
+        916
+      ],
+      [
+        1044,
+        916
+      ],
+      [
+        1044,
+        1036
+      ],
+      [
+        606,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "A-401",
+    "buildingId": "A",
+    "floor": 4,
+    "number": "401",
+    "area": 49.3,
+    "rooms": 1,
+    "price": 81000,
+    "status": "available",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        156,
+        786
+      ],
+      [
+        594,
+        786
+      ],
+      [
+        594,
+        906
+      ],
+      [
+        156,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "A-402",
+    "buildingId": "A",
+    "floor": 4,
+    "number": "402",
+    "area": 60.2,
+    "rooms": 1,
+    "price": 97500,
+    "status": "available",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        606,
+        786
+      ],
+      [
+        1044,
+        786
+      ],
+      [
+        1044,
+        906
+      ],
+      [
+        606,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "A-403",
+    "buildingId": "A",
+    "floor": 4,
+    "number": "403",
+    "area": 70.5,
+    "rooms": 2,
+    "price": 119000,
+    "status": "available",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        156,
+        786
+      ],
+      [
+        594,
+        786
+      ],
+      [
+        594,
+        906
+      ],
+      [
+        156,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-404",
+    "buildingId": "A",
+    "floor": 4,
+    "number": "404",
+    "area": 66.9,
+    "rooms": 2,
+    "price": 85500,
+    "status": "reserved",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        606,
+        786
+      ],
+      [
+        1044,
+        786
+      ],
+      [
+        1044,
+        906
+      ],
+      [
+        606,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-501",
+    "buildingId": "A",
+    "floor": 5,
+    "number": "501",
+    "area": 87.2,
+    "rooms": 3,
+    "price": 135000,
+    "status": "available",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        156,
+        656
+      ],
+      [
+        594,
+        656
+      ],
+      [
+        594,
+        776
+      ],
+      [
+        156,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "A-502",
+    "buildingId": "A",
+    "floor": 5,
+    "number": "502",
+    "area": 61.3,
+    "rooms": 1,
+    "price": 87000,
+    "status": "available",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        606,
+        656
+      ],
+      [
+        1044,
+        656
+      ],
+      [
+        1044,
+        776
+      ],
+      [
+        606,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "A-503",
+    "buildingId": "A",
+    "floor": 5,
+    "number": "503",
+    "area": 77.4,
+    "rooms": 2,
+    "price": 117000,
+    "status": "sold",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        156,
+        656
+      ],
+      [
+        594,
+        656
+      ],
+      [
+        594,
+        776
+      ],
+      [
+        156,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-504",
+    "buildingId": "A",
+    "floor": 5,
+    "number": "504",
+    "area": 77.2,
+    "rooms": 2,
+    "price": 120500,
+    "status": "reserved",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        606,
+        656
+      ],
+      [
+        1044,
+        656
+      ],
+      [
+        1044,
+        776
+      ],
+      [
+        606,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-601",
+    "buildingId": "A",
+    "floor": 6,
+    "number": "601",
+    "area": 81.7,
+    "rooms": 3,
+    "price": 140000,
+    "status": "sold",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        156,
+        526
+      ],
+      [
+        594,
+        526
+      ],
+      [
+        594,
+        646
+      ],
+      [
+        156,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "A-602",
+    "buildingId": "A",
+    "floor": 6,
+    "number": "602",
+    "area": 82.3,
+    "rooms": 2,
+    "price": 128000,
+    "status": "available",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        606,
+        526
+      ],
+      [
+        1044,
+        526
+      ],
+      [
+        1044,
+        646
+      ],
+      [
+        606,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-603",
+    "buildingId": "A",
+    "floor": 6,
+    "number": "603",
+    "area": 85.7,
+    "rooms": 3,
+    "price": 138500,
+    "status": "available",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        156,
+        526
+      ],
+      [
+        594,
+        526
+      ],
+      [
+        594,
+        646
+      ],
+      [
+        156,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "A-604",
+    "buildingId": "A",
+    "floor": 6,
+    "number": "604",
+    "area": 100.3,
+    "rooms": 4,
+    "price": 160000,
+    "status": "available",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        606,
+        526
+      ],
+      [
+        1044,
+        526
+      ],
+      [
+        1044,
+        646
+      ],
+      [
+        606,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "A-701",
+    "buildingId": "A",
+    "floor": 7,
+    "number": "701",
+    "area": 51.7,
+    "rooms": 1,
+    "price": 73500,
+    "status": "sold",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        156,
+        396
+      ],
+      [
+        594,
+        396
+      ],
+      [
+        594,
+        516
+      ],
+      [
+        156,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "A-702",
+    "buildingId": "A",
+    "floor": 7,
+    "number": "702",
+    "area": 61.3,
+    "rooms": 2,
+    "price": 92000,
+    "status": "sold",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        606,
+        396
+      ],
+      [
+        1044,
+        396
+      ],
+      [
+        1044,
+        516
+      ],
+      [
+        606,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-703",
+    "buildingId": "A",
+    "floor": 7,
+    "number": "703",
+    "area": 111.9,
+    "rooms": 4,
+    "price": 149500,
+    "status": "sold",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        156,
+        396
+      ],
+      [
+        594,
+        396
+      ],
+      [
+        594,
+        516
+      ],
+      [
+        156,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "A-704",
+    "buildingId": "A",
+    "floor": 7,
+    "number": "704",
+    "area": 63.8,
+    "rooms": 2,
+    "price": 101000,
+    "status": "sold",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        606,
+        396
+      ],
+      [
+        1044,
+        396
+      ],
+      [
+        1044,
+        516
+      ],
+      [
+        606,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-801",
+    "buildingId": "A",
+    "floor": 8,
+    "number": "801",
+    "area": 81.6,
+    "rooms": 2,
+    "price": 115500,
+    "status": "reserved",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        156,
+        266
+      ],
+      [
+        594,
+        266
+      ],
+      [
+        594,
+        386
+      ],
+      [
+        156,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "A-802",
+    "buildingId": "A",
+    "floor": 8,
+    "number": "802",
+    "area": 55.4,
+    "rooms": 1,
+    "price": 89000,
+    "status": "reserved",
+    "facadeId": "A-front",
+    "polygon": [
+      [
+        606,
+        266
+      ],
+      [
+        1044,
+        266
+      ],
+      [
+        1044,
+        386
+      ],
+      [
+        606,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "A-803",
+    "buildingId": "A",
+    "floor": 8,
+    "number": "803",
+    "area": 59.6,
+    "rooms": 1,
+    "price": 106500,
+    "status": "sold",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        156,
+        266
+      ],
+      [
+        594,
+        266
+      ],
+      [
+        594,
+        386
+      ],
+      [
+        156,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "A-804",
+    "buildingId": "A",
+    "floor": 8,
+    "number": "804",
+    "area": 65.4,
+    "rooms": 2,
+    "price": 93500,
+    "status": "available",
+    "facadeId": "A-back",
+    "polygon": [
+      [
+        606,
+        266
+      ],
+      [
+        1044,
+        266
+      ],
+      [
+        1044,
+        386
+      ],
+      [
+        606,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "B-101",
+    "buildingId": "B",
+    "floor": 1,
+    "number": "101",
+    "area": 87.6,
+    "rooms": 3,
+    "price": 142500,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        156,
+        1176
+      ],
+      [
+        369,
+        1176
+      ],
+      [
+        369,
+        1296
+      ],
+      [
+        156,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "B-102",
+    "buildingId": "B",
+    "floor": 1,
+    "number": "102",
+    "area": 125.6,
+    "rooms": 4,
+    "price": 186500,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        381,
+        1176
+      ],
+      [
+        594,
+        1176
+      ],
+      [
+        594,
+        1296
+      ],
+      [
+        381,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "B-103",
+    "buildingId": "B",
+    "floor": 1,
+    "number": "103",
+    "area": 75.6,
+    "rooms": 2,
+    "price": 96000,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        606,
+        1176
+      ],
+      [
+        819,
+        1176
+      ],
+      [
+        819,
+        1296
+      ],
+      [
+        606,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "B-104",
+    "buildingId": "B",
+    "floor": 1,
+    "number": "104",
+    "area": 119.4,
+    "rooms": 4,
+    "price": 186500,
+    "status": "reserved",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        831,
+        1176
+      ],
+      [
+        1044,
+        1176
+      ],
+      [
+        1044,
+        1296
+      ],
+      [
+        831,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "B-201",
+    "buildingId": "B",
+    "floor": 2,
+    "number": "201",
+    "area": 91.5,
+    "rooms": 3,
+    "price": 122500,
+    "status": "reserved",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        156,
+        1046
+      ],
+      [
+        369,
+        1046
+      ],
+      [
+        369,
+        1166
+      ],
+      [
+        156,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "B-202",
+    "buildingId": "B",
+    "floor": 2,
+    "number": "202",
+    "area": 110.1,
+    "rooms": 4,
+    "price": 155000,
+    "status": "reserved",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        381,
+        1046
+      ],
+      [
+        594,
+        1046
+      ],
+      [
+        594,
+        1166
+      ],
+      [
+        381,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "B-203",
+    "buildingId": "B",
+    "floor": 2,
+    "number": "203",
+    "area": 75.5,
+    "rooms": 2,
+    "price": 99500,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        606,
+        1046
+      ],
+      [
+        819,
+        1046
+      ],
+      [
+        819,
+        1166
+      ],
+      [
+        606,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "B-204",
+    "buildingId": "B",
+    "floor": 2,
+    "number": "204",
+    "area": 57.4,
+    "rooms": 1,
+    "price": 75000,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        831,
+        1046
+      ],
+      [
+        1044,
+        1046
+      ],
+      [
+        1044,
+        1166
+      ],
+      [
+        831,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "B-301",
+    "buildingId": "B",
+    "floor": 3,
+    "number": "301",
+    "area": 101.3,
+    "rooms": 3,
+    "price": 140500,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        156,
+        916
+      ],
+      [
+        369,
+        916
+      ],
+      [
+        369,
+        1036
+      ],
+      [
+        156,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "B-302",
+    "buildingId": "B",
+    "floor": 3,
+    "number": "302",
+    "area": 83.7,
+    "rooms": 2,
+    "price": 105000,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        381,
+        916
+      ],
+      [
+        594,
+        916
+      ],
+      [
+        594,
+        1036
+      ],
+      [
+        381,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "B-303",
+    "buildingId": "B",
+    "floor": 3,
+    "number": "303",
+    "area": 102.6,
+    "rooms": 3,
+    "price": 129500,
+    "status": "reserved",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        606,
+        916
+      ],
+      [
+        819,
+        916
+      ],
+      [
+        819,
+        1036
+      ],
+      [
+        606,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "B-304",
+    "buildingId": "B",
+    "floor": 3,
+    "number": "304",
+    "area": 99.6,
+    "rooms": 3,
+    "price": 124500,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        831,
+        916
+      ],
+      [
+        1044,
+        916
+      ],
+      [
+        1044,
+        1036
+      ],
+      [
+        831,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "B-401",
+    "buildingId": "B",
+    "floor": 4,
+    "number": "401",
+    "area": 69.5,
+    "rooms": 2,
+    "price": 114000,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        156,
+        786
+      ],
+      [
+        369,
+        786
+      ],
+      [
+        369,
+        906
+      ],
+      [
+        156,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "B-402",
+    "buildingId": "B",
+    "floor": 4,
+    "number": "402",
+    "area": 72.2,
+    "rooms": 2,
+    "price": 97500,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        381,
+        786
+      ],
+      [
+        594,
+        786
+      ],
+      [
+        594,
+        906
+      ],
+      [
+        381,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "B-403",
+    "buildingId": "B",
+    "floor": 4,
+    "number": "403",
+    "area": 91.7,
+    "rooms": 3,
+    "price": 144500,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        606,
+        786
+      ],
+      [
+        819,
+        786
+      ],
+      [
+        819,
+        906
+      ],
+      [
+        606,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "B-404",
+    "buildingId": "B",
+    "floor": 4,
+    "number": "404",
+    "area": 115.9,
+    "rooms": 4,
+    "price": 177000,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        831,
+        786
+      ],
+      [
+        1044,
+        786
+      ],
+      [
+        1044,
+        906
+      ],
+      [
+        831,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "B-501",
+    "buildingId": "B",
+    "floor": 5,
+    "number": "501",
+    "area": 70.6,
+    "rooms": 2,
+    "price": 117500,
+    "status": "reserved",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        156,
+        656
+      ],
+      [
+        369,
+        656
+      ],
+      [
+        369,
+        776
+      ],
+      [
+        156,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "B-502",
+    "buildingId": "B",
+    "floor": 5,
+    "number": "502",
+    "area": 84,
+    "rooms": 3,
+    "price": 119000,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        381,
+        656
+      ],
+      [
+        594,
+        656
+      ],
+      [
+        594,
+        776
+      ],
+      [
+        381,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "B-503",
+    "buildingId": "B",
+    "floor": 5,
+    "number": "503",
+    "area": 102,
+    "rooms": 4,
+    "price": 152500,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        606,
+        656
+      ],
+      [
+        819,
+        656
+      ],
+      [
+        819,
+        776
+      ],
+      [
+        606,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "B-504",
+    "buildingId": "B",
+    "floor": 5,
+    "number": "504",
+    "area": 124.6,
+    "rooms": 4,
+    "price": 201500,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        831,
+        656
+      ],
+      [
+        1044,
+        656
+      ],
+      [
+        1044,
+        776
+      ],
+      [
+        831,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "B-601",
+    "buildingId": "B",
+    "floor": 6,
+    "number": "601",
+    "area": 60.2,
+    "rooms": 2,
+    "price": 92500,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        156,
+        526
+      ],
+      [
+        369,
+        526
+      ],
+      [
+        369,
+        646
+      ],
+      [
+        156,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "B-602",
+    "buildingId": "B",
+    "floor": 6,
+    "number": "602",
+    "area": 100.7,
+    "rooms": 4,
+    "price": 142500,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        381,
+        526
+      ],
+      [
+        594,
+        526
+      ],
+      [
+        594,
+        646
+      ],
+      [
+        381,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "B-603",
+    "buildingId": "B",
+    "floor": 6,
+    "number": "603",
+    "area": 128.2,
+    "rooms": 4,
+    "price": 218000,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        606,
+        526
+      ],
+      [
+        819,
+        526
+      ],
+      [
+        819,
+        646
+      ],
+      [
+        606,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "B-604",
+    "buildingId": "B",
+    "floor": 6,
+    "number": "604",
+    "area": 81.2,
+    "rooms": 3,
+    "price": 138000,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        831,
+        526
+      ],
+      [
+        1044,
+        526
+      ],
+      [
+        1044,
+        646
+      ],
+      [
+        831,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "B-701",
+    "buildingId": "B",
+    "floor": 7,
+    "number": "701",
+    "area": 115.5,
+    "rooms": 4,
+    "price": 174000,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        156,
+        396
+      ],
+      [
+        369,
+        396
+      ],
+      [
+        369,
+        516
+      ],
+      [
+        156,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "B-702",
+    "buildingId": "B",
+    "floor": 7,
+    "number": "702",
+    "area": 123.2,
+    "rooms": 4,
+    "price": 215500,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        381,
+        396
+      ],
+      [
+        594,
+        396
+      ],
+      [
+        594,
+        516
+      ],
+      [
+        381,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "B-703",
+    "buildingId": "B",
+    "floor": 7,
+    "number": "703",
+    "area": 50.7,
+    "rooms": 1,
+    "price": 82500,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        606,
+        396
+      ],
+      [
+        819,
+        396
+      ],
+      [
+        819,
+        516
+      ],
+      [
+        606,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "B-704",
+    "buildingId": "B",
+    "floor": 7,
+    "number": "704",
+    "area": 47.8,
+    "rooms": 1,
+    "price": 77500,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        831,
+        396
+      ],
+      [
+        1044,
+        396
+      ],
+      [
+        1044,
+        516
+      ],
+      [
+        831,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "B-801",
+    "buildingId": "B",
+    "floor": 8,
+    "number": "801",
+    "area": 54.7,
+    "rooms": 1,
+    "price": 94000,
+    "status": "reserved",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        156,
+        266
+      ],
+      [
+        369,
+        266
+      ],
+      [
+        369,
+        386
+      ],
+      [
+        156,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "B-802",
+    "buildingId": "B",
+    "floor": 8,
+    "number": "802",
+    "area": 59.6,
+    "rooms": 2,
+    "price": 83000,
+    "status": "reserved",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        381,
+        266
+      ],
+      [
+        594,
+        266
+      ],
+      [
+        594,
+        386
+      ],
+      [
+        381,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "B-803",
+    "buildingId": "B",
+    "floor": 8,
+    "number": "803",
+    "area": 46.8,
+    "rooms": 1,
+    "price": 73500,
+    "status": "sold",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        606,
+        266
+      ],
+      [
+        819,
+        266
+      ],
+      [
+        819,
+        386
+      ],
+      [
+        606,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "B-804",
+    "buildingId": "B",
+    "floor": 8,
+    "number": "804",
+    "area": 129.1,
+    "rooms": 4,
+    "price": 224000,
+    "status": "available",
+    "facadeId": "B-front",
+    "polygon": [
+      [
+        831,
+        266
+      ],
+      [
+        1044,
+        266
+      ],
+      [
+        1044,
+        386
+      ],
+      [
+        831,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "C-101",
+    "buildingId": "C",
+    "floor": 1,
+    "number": "101",
+    "area": 63.5,
+    "rooms": 2,
+    "price": 101500,
+    "status": "reserved",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        156,
+        1176
+      ],
+      [
+        369,
+        1176
+      ],
+      [
+        369,
+        1296
+      ],
+      [
+        156,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "C-102",
+    "buildingId": "C",
+    "floor": 1,
+    "number": "102",
+    "area": 91.5,
+    "rooms": 3,
+    "price": 124500,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        381,
+        1176
+      ],
+      [
+        594,
+        1176
+      ],
+      [
+        594,
+        1296
+      ],
+      [
+        381,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "C-103",
+    "buildingId": "C",
+    "floor": 1,
+    "number": "103",
+    "area": 102.9,
+    "rooms": 4,
+    "price": 163500,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        606,
+        1176
+      ],
+      [
+        819,
+        1176
+      ],
+      [
+        819,
+        1296
+      ],
+      [
+        606,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "C-104",
+    "buildingId": "C",
+    "floor": 1,
+    "number": "104",
+    "area": 81.8,
+    "rooms": 2,
+    "price": 118500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        831,
+        1176
+      ],
+      [
+        1044,
+        1176
+      ],
+      [
+        1044,
+        1296
+      ],
+      [
+        831,
+        1296
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "C-201",
+    "buildingId": "C",
+    "floor": 2,
+    "number": "201",
+    "area": 62.7,
+    "rooms": 2,
+    "price": 89500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        156,
+        1046
+      ],
+      [
+        369,
+        1046
+      ],
+      [
+        369,
+        1166
+      ],
+      [
+        156,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "C-202",
+    "buildingId": "C",
+    "floor": 2,
+    "number": "202",
+    "area": 102.3,
+    "rooms": 4,
+    "price": 158500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        381,
+        1046
+      ],
+      [
+        594,
+        1046
+      ],
+      [
+        594,
+        1166
+      ],
+      [
+        381,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "C-203",
+    "buildingId": "C",
+    "floor": 2,
+    "number": "203",
+    "area": 51.7,
+    "rooms": 1,
+    "price": 67500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        606,
+        1046
+      ],
+      [
+        819,
+        1046
+      ],
+      [
+        819,
+        1166
+      ],
+      [
+        606,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "C-204",
+    "buildingId": "C",
+    "floor": 2,
+    "number": "204",
+    "area": 113.7,
+    "rooms": 4,
+    "price": 152000,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        831,
+        1046
+      ],
+      [
+        1044,
+        1046
+      ],
+      [
+        1044,
+        1166
+      ],
+      [
+        831,
+        1166
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "C-301",
+    "buildingId": "C",
+    "floor": 3,
+    "number": "301",
+    "area": 52.1,
+    "rooms": 1,
+    "price": 73000,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        156,
+        916
+      ],
+      [
+        369,
+        916
+      ],
+      [
+        369,
+        1036
+      ],
+      [
+        156,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "C-302",
+    "buildingId": "C",
+    "floor": 3,
+    "number": "302",
+    "area": 122.4,
+    "rooms": 4,
+    "price": 184000,
+    "status": "reserved",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        381,
+        916
+      ],
+      [
+        594,
+        916
+      ],
+      [
+        594,
+        1036
+      ],
+      [
+        381,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "C-303",
+    "buildingId": "C",
+    "floor": 3,
+    "number": "303",
+    "area": 76,
+    "rooms": 2,
+    "price": 123500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        606,
+        916
+      ],
+      [
+        819,
+        916
+      ],
+      [
+        819,
+        1036
+      ],
+      [
+        606,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "C-304",
+    "buildingId": "C",
+    "floor": 3,
+    "number": "304",
+    "area": 56.8,
+    "rooms": 1,
+    "price": 92000,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        831,
+        916
+      ],
+      [
+        1044,
+        916
+      ],
+      [
+        1044,
+        1036
+      ],
+      [
+        831,
+        1036
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "C-401",
+    "buildingId": "C",
+    "floor": 4,
+    "number": "401",
+    "area": 46.1,
+    "rooms": 1,
+    "price": 59500,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        156,
+        786
+      ],
+      [
+        369,
+        786
+      ],
+      [
+        369,
+        906
+      ],
+      [
+        156,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "C-402",
+    "buildingId": "C",
+    "floor": 4,
+    "number": "402",
+    "area": 103.3,
+    "rooms": 4,
+    "price": 160500,
+    "status": "reserved",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        381,
+        786
+      ],
+      [
+        594,
+        786
+      ],
+      [
+        594,
+        906
+      ],
+      [
+        381,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "C-403",
+    "buildingId": "C",
+    "floor": 4,
+    "number": "403",
+    "area": 48.8,
+    "rooms": 1,
+    "price": 78000,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        606,
+        786
+      ],
+      [
+        819,
+        786
+      ],
+      [
+        819,
+        906
+      ],
+      [
+        606,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "C-404",
+    "buildingId": "C",
+    "floor": 4,
+    "number": "404",
+    "area": 53.3,
+    "rooms": 1,
+    "price": 70000,
+    "status": "reserved",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        831,
+        786
+      ],
+      [
+        1044,
+        786
+      ],
+      [
+        1044,
+        906
+      ],
+      [
+        831,
+        906
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "C-501",
+    "buildingId": "C",
+    "floor": 5,
+    "number": "501",
+    "area": 88.9,
+    "rooms": 3,
+    "price": 144000,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        156,
+        656
+      ],
+      [
+        369,
+        656
+      ],
+      [
+        369,
+        776
+      ],
+      [
+        156,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "C-502",
+    "buildingId": "C",
+    "floor": 5,
+    "number": "502",
+    "area": 79,
+    "rooms": 3,
+    "price": 109500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        381,
+        656
+      ],
+      [
+        594,
+        656
+      ],
+      [
+        594,
+        776
+      ],
+      [
+        381,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "C-503",
+    "buildingId": "C",
+    "floor": 5,
+    "number": "503",
+    "area": 84.3,
+    "rooms": 3,
+    "price": 117500,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        606,
+        656
+      ],
+      [
+        819,
+        656
+      ],
+      [
+        819,
+        776
+      ],
+      [
+        606,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "C-504",
+    "buildingId": "C",
+    "floor": 5,
+    "number": "504",
+    "area": 63.5,
+    "rooms": 2,
+    "price": 103500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        831,
+        656
+      ],
+      [
+        1044,
+        656
+      ],
+      [
+        1044,
+        776
+      ],
+      [
+        831,
+        776
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "C-601",
+    "buildingId": "C",
+    "floor": 6,
+    "number": "601",
+    "area": 78.3,
+    "rooms": 3,
+    "price": 127500,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        156,
+        526
+      ],
+      [
+        369,
+        526
+      ],
+      [
+        369,
+        646
+      ],
+      [
+        156,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "C-602",
+    "buildingId": "C",
+    "floor": 6,
+    "number": "602",
+    "area": 49.4,
+    "rooms": 1,
+    "price": 76500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        381,
+        526
+      ],
+      [
+        594,
+        526
+      ],
+      [
+        594,
+        646
+      ],
+      [
+        381,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "C-603",
+    "buildingId": "C",
+    "floor": 6,
+    "number": "603",
+    "area": 83.1,
+    "rooms": 2,
+    "price": 118500,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        606,
+        526
+      ],
+      [
+        819,
+        526
+      ],
+      [
+        819,
+        646
+      ],
+      [
+        606,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "C-604",
+    "buildingId": "C",
+    "floor": 6,
+    "number": "604",
+    "area": 57.3,
+    "rooms": 1,
+    "price": 82000,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        831,
+        526
+      ],
+      [
+        1044,
+        526
+      ],
+      [
+        1044,
+        646
+      ],
+      [
+        831,
+        646
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "C-701",
+    "buildingId": "C",
+    "floor": 7,
+    "number": "701",
+    "area": 68,
+    "rooms": 2,
+    "price": 119500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        156,
+        396
+      ],
+      [
+        369,
+        396
+      ],
+      [
+        369,
+        516
+      ],
+      [
+        156,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  },
+  {
+    "id": "C-702",
+    "buildingId": "C",
+    "floor": 7,
+    "number": "702",
+    "area": 102.1,
+    "rooms": 4,
+    "price": 177500,
+    "status": "reserved",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        381,
+        396
+      ],
+      [
+        594,
+        396
+      ],
+      [
+        594,
+        516
+      ],
+      [
+        381,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-4.svg"
+  },
+  {
+    "id": "C-703",
+    "buildingId": "C",
+    "floor": 7,
+    "number": "703",
+    "area": 89.1,
+    "rooms": 3,
+    "price": 144500,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        606,
+        396
+      ],
+      [
+        819,
+        396
+      ],
+      [
+        819,
+        516
+      ],
+      [
+        606,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "C-704",
+    "buildingId": "C",
+    "floor": 7,
+    "number": "704",
+    "area": 45.5,
+    "rooms": 1,
+    "price": 78500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        831,
+        396
+      ],
+      [
+        1044,
+        396
+      ],
+      [
+        1044,
+        516
+      ],
+      [
+        831,
+        516
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "C-801",
+    "buildingId": "C",
+    "floor": 8,
+    "number": "801",
+    "area": 102.7,
+    "rooms": 3,
+    "price": 184000,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        156,
+        266
+      ],
+      [
+        369,
+        266
+      ],
+      [
+        369,
+        386
+      ],
+      [
+        156,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "C-802",
+    "buildingId": "C",
+    "floor": 8,
+    "number": "802",
+    "area": 101.7,
+    "rooms": 3,
+    "price": 154000,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        381,
+        266
+      ],
+      [
+        594,
+        266
+      ],
+      [
+        594,
+        386
+      ],
+      [
+        381,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-3.svg"
+  },
+  {
+    "id": "C-803",
+    "buildingId": "C",
+    "floor": 8,
+    "number": "803",
+    "area": 53.8,
+    "rooms": 1,
+    "price": 86500,
+    "status": "available",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        606,
+        266
+      ],
+      [
+        819,
+        266
+      ],
+      [
+        819,
+        386
+      ],
+      [
+        606,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-1.svg"
+  },
+  {
+    "id": "C-804",
+    "buildingId": "C",
+    "floor": 8,
+    "number": "804",
+    "area": 65.8,
+    "rooms": 2,
+    "price": 88500,
+    "status": "sold",
+    "facadeId": "C-front",
+    "polygon": [
+      [
+        831,
+        266
+      ],
+      [
+        1044,
+        266
+      ],
+      [
+        1044,
+        386
+      ],
+      [
+        831,
+        386
+      ]
+    ],
+    "panoramaSceneIds": [
+      "living",
+      "bedroom",
+      "kitchen",
+      "bathroom"
+    ],
+    "floorPlan": "images/floorplans/plan-2.svg"
+  }
+]

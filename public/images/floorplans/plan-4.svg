@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <rect x="40" y="40" width="340" height="260" fill="#f8fafc" stroke="#1b2a41" stroke-width="6"/>
+    <text x="210" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Dhoma ditore</text>
+  <rect x="40" y="300" width="200" height="220" fill="#f8fafc" stroke="#1b2a41" stroke-width="6"/>
+    <text x="140" y="410" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Kuzhina</text>
+  <rect x="240" y="300" width="140" height="220" fill="#f8fafc" stroke="#1b2a41" stroke-width="6"/>
+    <text x="310" y="410" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Banjo</text>
+  <rect x="380" y="40" width="190" height="240" fill="#f8fafc" stroke="#1b2a41" stroke-width="6"/>
+    <text x="475" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Dhoma 1</text>
+  <rect x="570" y="40" width="190" height="240" fill="#f8fafc" stroke="#1b2a41" stroke-width="6"/>
+    <text x="665" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Dhoma 2</text>
+  <rect x="380" y="280" width="380" height="240" fill="#f8fafc" stroke="#1b2a41" stroke-width="6"/>
+    <text x="570" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Dhoma 3</text>
+  <text x="780" y="548" text-anchor="end" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">Plan ilustrues (placeholder) · 4 dhoma</text>
+</svg>

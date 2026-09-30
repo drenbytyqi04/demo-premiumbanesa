@@ -1,0 +1,10 @@
+{
+  "name": "Rezidenca Aurora",
+  "tagline": "Jetesë premium në zemër të qytetit",
+  "location": "Prishtinë, Kosovë",
+  "aerial": {
+    "image": "images/aerial.jpg",
+    "width": 1920,
+    "height": 1080
+  }
+}

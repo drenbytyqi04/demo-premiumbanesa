@@ -1,0 +1,43 @@
+[
+  {
+    "id": "living",
+    "title": "Dhoma ditore",
+    "image": "panoramas/living.jpg",
+    "initialYaw": 20,
+    "hotSpots": [
+      { "pitch": -22, "yaw": -55, "target": "bedroom" },
+      { "pitch": -24, "yaw": -150, "target": "kitchen" },
+      { "pitch": -20, "yaw": -85, "target": "bathroom" }
+    ]
+  },
+  {
+    "id": "bedroom",
+    "title": "Dhoma e gjumit",
+    "image": "panoramas/bedroom.jpg",
+    "initialYaw": 0,
+    "hotSpots": [
+      { "pitch": -24, "yaw": 150, "target": "living" },
+      { "pitch": -24, "yaw": -120, "target": "bathroom" }
+    ]
+  },
+  {
+    "id": "kitchen",
+    "title": "Kuzhina",
+    "image": "panoramas/kitchen.jpg",
+    "initialYaw": 0,
+    "hotSpots": [
+      { "pitch": -22, "yaw": 20, "target": "living" },
+      { "pitch": -22, "yaw": -40, "target": "bathroom" }
+    ]
+  },
+  {
+    "id": "bathroom",
+    "title": "Banjo",
+    "image": "panoramas/bathroom.jpg",
+    "initialYaw": 0,
+    "hotSpots": [
+      { "pitch": -22, "yaw": 170, "target": "living" },
+      { "pitch": -22, "yaw": 60, "target": "bedroom" }
+    ]
+  }
+]

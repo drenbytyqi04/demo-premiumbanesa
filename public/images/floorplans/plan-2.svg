@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <rect x="40" y="40" width="400" height="300" fill="#f8fafc" stroke="#1b2a41" stroke-width="6"/>
+    <text x="240" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Dhoma ditore</text>
+  <rect x="40" y="340" width="250" height="180" fill="#f8fafc" stroke="#1b2a41" stroke-width="6"/>
+    <text x="165" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Kuzhina</text>
+  <rect x="290" y="340" width="150" height="180" fill="#f8fafc" stroke="#1b2a41" stroke-width="6"/>
+    <text x="365" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Banjo</text>
+  <rect x="440" y="40" width="320" height="480" fill="#f8fafc" stroke="#1b2a41" stroke-width="6"/>
+    <text x="600" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#475569">Dhoma e gjumit</text>
+  <text x="780" y="548" text-anchor="end" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">Plan ilustrues (placeholder) · 2 dhoma</text>
+</svg>

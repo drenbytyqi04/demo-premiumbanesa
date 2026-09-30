@@ -1,0 +1,132 @@
+[
+  {
+    "id": "A",
+    "name": "Ndërtesa A",
+    "description": "Pamje nga parku, apartamente me dy fasada dhe ballkone të gjera.",
+    "floors": 8,
+    "polygon": [
+      [
+        620,
+        30
+      ],
+      [
+        951,
+        222
+      ],
+      [
+        951,
+        433
+      ],
+      [
+        837,
+        499
+      ],
+      [
+        506,
+        308
+      ],
+      [
+        506,
+        96
+      ]
+    ],
+    "facades": [
+      {
+        "id": "A-front",
+        "label": "Fasada jugore",
+        "image": "images/facade-a.jpg",
+        "width": 1200,
+        "height": 1500
+      },
+      {
+        "id": "A-back",
+        "label": "Fasada veriore",
+        "image": "images/facade-a-back.jpg",
+        "width": 1200,
+        "height": 1500
+      }
+    ]
+  },
+  {
+    "id": "B",
+    "name": "Ndërtesa B",
+    "description": "Në qendër të kompleksit, afër hyrjes kryesore dhe sheshit.",
+    "floors": 8,
+    "polygon": [
+      [
+        1294,
+        169
+      ],
+      [
+        1409,
+        235
+      ],
+      [
+        1409,
+        446
+      ],
+      [
+        1089,
+        631
+      ],
+      [
+        974,
+        565
+      ],
+      [
+        974,
+        354
+      ]
+    ],
+    "facades": [
+      {
+        "id": "B-front",
+        "label": "Fasada kryesore",
+        "image": "images/facade-b.jpg",
+        "width": 1200,
+        "height": 1500
+      }
+    ]
+  },
+  {
+    "id": "C",
+    "name": "Ndërtesa C",
+    "description": "Kati përdhes me lokale, pamje nga rruga kryesore dhe malet.",
+    "floors": 8,
+    "polygon": [
+      [
+        769,
+        393
+      ],
+      [
+        1066,
+        565
+      ],
+      [
+        1066,
+        776
+      ],
+      [
+        951,
+        842
+      ],
+      [
+        654,
+        671
+      ],
+      [
+        654,
+        459
+      ]
+    ],
+    "facades": [
+      {
+        "id": "C-front",
+        "label": "Fasada kryesore",
+        "image": "images/facade-c.jpg",
+        "width": 1200,
+        "height": 1500
+      }
+    ]
+  }
+]
