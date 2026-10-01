@@ -10,12 +10,6 @@ const NAV = [
   { to: '/apartments', label: 'Banesat', end: false },
 ]
 
-// demo tools for the sales team; kept out of the public navigation
-const STAFF = [
-  { to: '/admin', label: 'Admin' },
-  { to: '/editor', label: 'Editori i poligoneve' },
-]
-
 const CONTACT = { pathname: '/', search: '?s=kontakt' }
 
 export default function Layout() {
@@ -123,17 +117,8 @@ export default function Layout() {
           </div>
         </div>
         <div className="border-t border-white/10">
-          <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-sm text-navy-400 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <div className="mx-auto max-w-7xl px-4 py-6 text-sm text-navy-400 sm:px-6">
             <p>© {year} {complex.name}. Projekt demonstrues me të dhëna fiktive. Panoramat 360°: Poly Haven (CC0).</p>
-            <ul className="flex gap-4">
-              {STAFF.map((n) => (
-                <li key={n.to}>
-                  <Link to={n.to} className="hover:text-white">
-                    {n.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </footer>

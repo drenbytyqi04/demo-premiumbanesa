@@ -153,7 +153,7 @@ export default function EditorPage() {
     [targets],
   )
 
-  // load once on mount / when the target changes (not when data changes after "Ruaj në demo")
+  // load once on mount / when the target changes (not when data changes after saving)
   const loadedKey = useRef<string | null>(null)
   useEffect(() => {
     if (loadedKey.current === targetKey) return
@@ -467,8 +467,12 @@ export default function EditorPage() {
     if (dupIds.length) return say(`ID të dyfishta: ${[...new Set(dupIds)].join(', ')}`, 'warn')
     if (img!.src.startsWith('blob:'))
       say(`Kujdes: kopjoje imazhin te public/${img!.path} që faqja ta shfaqë.`, 'warn')
-    await savePolygons(data)
-    if (!img!.src.startsWith('blob:')) say('U ruajt! Hape ballinën/ndërtesën për ta parë.')
+    try {
+      await savePolygons(data)
+      if (!img!.src.startsWith('blob:')) say('U ruajt dhe u publikua në faqe.')
+    } catch (e) {
+      say((e as Error).message, 'warn')
+    }
   }
 
   const fileName = `polygons-${targetKey.replace(/[^a-z0-9-]/gi, '-')}.json`
@@ -865,8 +869,8 @@ export default function EditorPage() {
             <button className={btnCls.ghost} onClick={() => setShowImport((s) => !s)}>
               Importo JSON
             </button>
-            <button className={btnCls.gold} disabled={!img || !target} onClick={saveToDemo} title="Ruaj në localStorage dhe shfaq menjëherë në faqe">
-              Ruaj në demo
+            <button className={btnCls.gold} disabled={!img || !target} onClick={saveToDemo} title="Ruaj poligonet dhe shfaqi menjëherë në faqe">
+              Ruaj dhe publiko
             </button>
           </div>
           {showImport && (

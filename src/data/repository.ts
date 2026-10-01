@@ -2,15 +2,19 @@
  * Data access layer.
  *
  * Every page talks to data only through the `DataRepository` interface below.
- * Today it is implemented by `localRepository` (static JSON + localStorage overrides).
- * To move to Supabase, write a `supabaseRepository` implementing the same interface
- * (see supabase/schema.sql + the sketch in README.md) and export it as `repository`.
+ * - `supabaseRepository` (supabaseRepository.ts): the real backend, used when
+ *   VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY are set. Visitors can only read;
+ *   writes are allowed by the database (RLS) only for users in the `admins` table.
+ * - `localRepository` (below): demo fallback – static JSON + localStorage overrides,
+ *   so changes are visible only in the browser that made them.
  */
 import type { Apartment, Building, Complex, PanoramaScene, Point, PolygonExport } from '../types'
+import { supabase } from '../lib/supabase'
 import apartmentsJson from './apartments.json'
 import buildingsJson from './buildings.json'
 import complexJson from './complex.json'
 import scenesJson from './scenes.json'
+import { supabaseRepository } from './supabaseRepository'
 
 export interface DataSnapshot {
   complex: Complex
@@ -19,7 +23,8 @@ export interface DataSnapshot {
   scenes: PanoramaScene[]
 }
 
-export type ApartmentPatch = Partial<Pick<Apartment, 'status' | 'price'>>
+/** Fields the admin can change. */
+export type ApartmentPatch = Partial<Pick<Apartment, 'status' | 'price' | 'area' | 'rooms'>>
 
 export interface DataRepository {
   load(): Promise<DataSnapshot>
@@ -141,6 +146,6 @@ export const localRepository: DataRepository = {
   },
 }
 
-/** The repository the app uses. Swap for a Supabase implementation later. */
-export const repository: DataRepository = localRepository
+/** The repository the app uses: Supabase when configured, otherwise the local demo. */
+export const repository: DataRepository = supabase ? supabaseRepository : localRepository
 

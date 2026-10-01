@@ -43,8 +43,42 @@ Design skills used are committed in `.claude/skills/` (`frontend-design` from an
 | `#/buildings/:id`    | Facade with one polygon per apartment (green = free, red = sold, yellow = reserved). Filters for floor, rooms, m² and "only free" dim the units that don't match (filters are kept in the URL). Arrows switch facades (building A has 2). |
 | `#/apartments`       | List of every apartment, with the same filters. |
 | `#/apartments/:id`   | Info panel, floor plan and a Pannellum 360° tour. Floor hotspots move between rooms, and the thumbnail strip jumps straight to a room. |
-| `#/admin`            | Table where you change status and price. Changes are saved in `localStorage` and show up in the colors right away. |
-| `#/editor`           | Polygon editor (see below). |
+
+The public site is read-only and has **no link or login button** to the admin area.
+
+## Admin area (`#/admin`) – login required
+
+Open `https://your-site/#/admin` directly (it is not linked anywhere). After login:
+
+- **Banesat** – change status (e lirë / e rezervuar / e shitur), m², rooms and price per apartment.
+- **Poligonet** – the polygon editor (see below). `#/editor` redirects here.
+
+How the protection works (Supabase mode):
+
+- Visitors use the public *anon* key, which the database allows to **read only** (Row-Level Security in
+  `supabase/migrations/0001_init.sql`). Writes are refused by the database itself, not just hidden in the UI.
+- Only users listed in the `admins` table can update. A signed-in user who is not in `admins` is signed out.
+- Visitors never download the admin code (separate lazy-loaded bundle).
+- Changes reach visitors live (Supabase Realtime) – no reload needed.
+
+### Set up Supabase (once)
+
+1. Create a Supabase project. In **SQL Editor** run `supabase/migrations/0001_init.sql`, then `supabase/seed.sql`
+   (regenerate it from the JSON files any time with `npm run export-seed`).
+2. **Authentication → Users → Add user**: create the admin (email + strong password, "Auto confirm").
+3. Make that user an admin (SQL Editor):
+   ```sql
+   insert into public.admins (user_id) select id from auth.users where email = 'admin@yourcompany.com';
+   ```
+4. **Authentication → Sign In / Providers**: turn **off** "Allow new users to sign up", so nobody else can create an account.
+5. Copy `.env.example` to `.env.local` and fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
+   (Project Settings → API). Restart `npm run dev`. Set the same two variables on your hosting (Netlify/Vercel) before building.
+
+### Demo mode (no Supabase)
+
+Without the env vars the site still runs: data comes from `src/data/*.json` and the admin login is
+`admin@demo.local` / `aurora-demo` (change via `VITE_DEMO_ADMIN_*`). This is **not secure** (the password is in the
+JavaScript) and edits are stored only in that browser's `localStorage` – use it for local testing only.
 
 ## Placeholder images to replace
 
@@ -63,7 +97,7 @@ Your images can be any size. The editor saves the real pixel size, so the overla
 ## Redraw the polygons on your own images (editor)
 
 1. Copy your photo into `public/images/`, using the same name to replace a placeholder (e.g. `aerial.jpg`).
-2. Open **`#/editor`** and choose what you are drawing in **"1 · Imazhi"**: *Pamja ajrore* (buildings) or a facade (apartments).
+2. Log in at **`#/admin`**, open **Poligonet** and choose what you are drawing in **"1 · Imazhi"**: *Pamja ajrore* (buildings) or a facade (apartments).
    - Or click **"Zëvendëso imazhin…"** to load a file straight from disk. If its size differs from the old image, existing polygons are scaled to fit.
 3. Click **"Fshi të gjitha"** to start clean, or keep the existing polygons and adjust them.
 4. **Draw** (`D`): click the corners of a building or apartment. Close the shape by clicking the first point (green) or pressing `Enter`.
@@ -71,7 +105,7 @@ Your images can be any size. The editor saves the real pixel size, so the overla
    New points snap to existing corners, so neighbouring apartments share edges (hold `Alt` to turn snapping off).
 5. **Edit** (`E`): drag points or whole polygons. Drag the small midpoint circles to add points. `Shift`/`Alt`+click a point to delete it. `Delete` removes the selected polygon, the arrow keys nudge it, and you can rename IDs in the list.
    Zoom with `Ctrl`+scroll or `+`/`−`/`0`, pan with `Space`+drag, undo/redo with `Ctrl+Z` / `Ctrl+Shift+Z`.
-6. **"Ruaj në demo"** saves to `localStorage`, so the site shows the new polygons immediately and you can check them.
+6. **"Ruaj dhe publiko"** saves the polygons (to Supabase, or to `localStorage` in demo mode) and the site shows them immediately.
 7. **"Shkarko JSON"**, then make the change permanent:
    ```bash
    npm run apply-polygons -- ~/Downloads/polygons-aerial.json ~/Downloads/polygons-facade-A-front.json
@@ -93,29 +127,20 @@ Export format (the same shape `src/data` uses; points are pixel coordinates in t
 }
 ```
 
-## Data & moving to Supabase
+## Data
 
 ```
-src/data/complex.json      name, location, aerial image + size
-src/data/buildings.json    id, name, floors, polygon (aerial), facades[]
-src/data/apartments.json   id, buildingId, floor, number, area, rooms, price, status,
-                           facadeId, polygon, panoramaSceneIds, floorPlan
-src/data/scenes.json       360° scenes + floor hotspots (pitch/yaw → target scene)
-src/data/repository.ts     ← the ONLY place that knows where data comes from
-src/data/DataContext.tsx   React provider; pages use useData()
-src/types.ts               shared types
-supabase/schema.sql        table sketch matching the types
+src/data/*.json                 seed / demo data (complex, buildings, apartments, 360° scenes)
+src/data/repository.ts          DataRepository interface + local demo implementation
+src/data/supabaseRepository.ts  Supabase implementation (used when VITE_SUPABASE_* are set)
+src/data/DataContext.tsx        React provider; pages use useData()
+src/auth/AuthContext.tsx        admin login (Supabase Auth, or demo credentials)
+src/admin/                      admin shell + login page (lazy-loaded)
+supabase/migrations/0001_init.sql  tables, RLS rules, realtime
+supabase/seed.sql               generated by `npm run export-seed`
 ```
 
-Every page reads and writes data through the `DataRepository` interface (`load`, `updateApartment`, `savePolygons`, `reset`, `subscribe`).
-To move to Supabase, implement that interface with `@supabase/supabase-js`, mapping snake_case columns to the camelCase types, and change one line:
-
-```ts
-// src/data/repository.ts
-export const repository: DataRepository = supabaseRepository
-```
-
-`subscribe` fits Supabase Realtime (`channel.on('postgres_changes', …)`), so status changes made in the admin show up for every visitor live.
+360° scenes stay in `scenes.json` because they describe image files in `public/panoramas/`.
 
 ## Assets & licences
 
