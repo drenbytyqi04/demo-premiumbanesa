@@ -1,13 +1,22 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useData } from '../data/DataContext'
+import site from '../data/site.json'
+
+const year = new Date().getFullYear()
 
 const NAV = [
   { to: '/', label: 'Ballina', end: true },
-  { to: '/apartments', label: 'Apartamentet', end: false },
-  { to: '/admin', label: 'Admin', end: false },
-  { to: '/editor', label: 'Editori', end: false },
+  { to: '/apartments', label: 'Banesat', end: false },
 ]
+
+// demo tools for the sales team; kept out of the public navigation
+const STAFF = [
+  { to: '/admin', label: 'Admin' },
+  { to: '/editor', label: 'Editori i poligoneve' },
+]
+
+const CONTACT = { pathname: '/', search: '?s=kontakt' }
 
 export default function Layout() {
   const { complex } = useData()
@@ -30,8 +39,8 @@ export default function Layout() {
               </svg>
             </span>
             <span className="leading-tight">
-              <span className="block font-display text-lg font-semibold tracking-wide">{complex.name}</span>
-              <span className="hidden text-[11px] uppercase tracking-[0.2em] text-navy-300 sm:block">{complex.location}</span>
+              <span className="block font-display text-lg font-semibold">{complex.name}</span>
+              <span className="hidden text-xs text-navy-300 sm:block">{complex.location}</span>
             </span>
           </Link>
 
@@ -48,12 +57,16 @@ export default function Layout() {
                 {n.label}
               </NavLink>
             ))}
+            <Link to={CONTACT} className="ml-3 inline-flex min-h-10 items-center rounded-full bg-gold-500 px-5 text-sm font-semibold text-navy-950 transition hover:bg-gold-400">
+              Rezervo takim
+            </Link>
           </nav>
 
           <button
-            className="grid size-10 place-items-center rounded-lg hover:bg-white/10 md:hidden"
+            className="grid size-11 place-items-center rounded-lg hover:bg-white/10 md:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-label="Menyja"
+            aria-expanded={open}
           >
             <svg viewBox="0 0 24 24" className="size-6 stroke-white" fill="none" strokeWidth="2" strokeLinecap="round">
               {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
@@ -74,6 +87,9 @@ export default function Layout() {
                 {n.label}
               </NavLink>
             ))}
+            <Link to={CONTACT} className="mt-2 flex min-h-12 items-center justify-center rounded-full bg-gold-500 font-semibold text-navy-950">
+              Rezervo takim
+            </Link>
           </nav>
         )}
       </header>
@@ -83,11 +99,42 @@ export default function Layout() {
       </main>
 
       <footer className="bg-navy-950 text-navy-300">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p>
-            © {new Date().getFullYear()} {complex.name} · Projekt demonstrues me të dhëna fiktive
-          </p>
-          <p className="text-navy-400">Panoramat 360°: Poly Haven (CC0)</p>
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <div className="font-display text-xl font-semibold text-white">{complex.name}</div>
+            <p className="mt-3 max-w-sm">{complex.tagline}. {site.location.address}.</p>
+          </div>
+          <nav className="md:col-span-3" aria-label="Faqet">
+            <ul className="space-y-2">
+              <li><Link to="/" className="hover:text-white">Ballina</Link></li>
+              <li><Link to="/apartments" className="hover:text-white">Të gjitha banesat</Link></li>
+              <li><Link to="/apartments?lira=1" className="hover:text-white">Banesat e lira</Link></li>
+              <li><Link to={CONTACT} className="hover:text-white">Kontakti</Link></li>
+            </ul>
+          </nav>
+          <div className="md:col-span-4">
+            <a href={`tel:${site.contact.phone.replace(/\s/g, '')}`} className="block text-lg font-medium text-white hover:text-gold-300">
+              {site.contact.phone}
+            </a>
+            <a href={`mailto:${site.contact.email}`} className="mt-1 block hover:text-white">
+              {site.contact.email}
+            </a>
+            <p className="mt-1">{site.contact.hours}</p>
+          </div>
+        </div>
+        <div className="border-t border-white/10">
+          <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-sm text-navy-400 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+            <p>© {year} {complex.name}. Projekt demonstrues me të dhëna fiktive. Panoramat 360°: Poly Haven (CC0).</p>
+            <ul className="flex gap-4">
+              {STAFF.map((n) => (
+                <li key={n.to}>
+                  <Link to={n.to} className="hover:text-white">
+                    {n.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </footer>
     </div>

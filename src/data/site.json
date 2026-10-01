@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "title": "Zgjidhni banesën tuaj direkt nga pamja e kompleksit",
+    "text": "Prekni një ndërtesë për të parë katet, çmimet dhe turën 360° të çdo banese të lirë."
+  },
+  "highlights": [
+    { "value": "2027", "label": "Dorëzimi i çelësave, tremujori i dytë" },
+    { "value": "1.200 m²", "label": "Park i brendshëm, pa vetura" },
+    { "value": "140", "label": "Vende parkimi nëntokësor" }
+  ],
+  "location": {
+    "address": "Rruga e Shembullit, Prishtinë",
+    "intro": "Një lagje e qetë banimi, afër qendrës, shkollave dhe parkut të qytetit.",
+    "distances": [
+      { "place": "Qendra e qytetit", "time": "8 min me makinë" },
+      { "place": "Shkolla fillore", "time": "4 min në këmbë" },
+      { "place": "Kopshti i fëmijëve", "time": "3 min në këmbë" },
+      { "place": "Parku i qytetit", "time": "6 min në këmbë" },
+      { "place": "Supermarketi", "time": "2 min në këmbë" },
+      { "place": "Aeroporti", "time": "20 min me makinë" }
+    ]
+  },
+  "features": [
+    { "icon": "parking", "title": "Parking nëntokësor", "text": "Çdo banesë ka të drejtë për një vend parkimi me qasje me ashensor." },
+    { "icon": "heat", "title": "Ngrohje qendrore", "text": "Ngrohje me dysheme dhe matës individual për çdo banesë." },
+    { "icon": "shield", "title": "Hyrje e siguruar", "text": "Video-interfon, kamera në hapësirat e përbashkëta dhe recepsion." },
+    { "icon": "tree", "title": "Oborr pa vetura", "text": "Park i brendshëm me kënd lojërash dhe ulëse, vetëm për banorët." },
+    { "icon": "window", "title": "Dritare me tre xhama", "text": "Izolim termik dhe akustik, profile alumini me ndërprerje termike." },
+    { "icon": "lift", "title": "Dy ashensorë për hyrje", "text": "Ashensorë të heshtur, prej garazhit deri në katin e fundit." }
+  ],
+  "payment": [
+    { "share": "10%", "title": "Kapari", "text": "Banesa rezervohet në emrin tuaj për 14 ditë." },
+    { "share": "30%", "title": "Kontrata", "text": "Kontrata nënshkruhet te noteri dhe çmimi fiksohet." },
+    { "share": "40%", "title": "Gjatë ndërtimit", "text": "Në tri këste, sipas fazave të ndërtimit." },
+    { "share": "20%", "title": "Dorëzimi", "text": "Pagesa e fundit kur merrni çelësat." }
+  ],
+  "contact": {
+    "phone": "+383 44 000 000",
+    "email": "shitja@example.com",
+    "office": "Zyra e shitjes në kantier",
+    "hours": "E hënë – e shtunë, 09:00–18:00"
+  }
+}

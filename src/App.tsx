@@ -1,3 +1,4 @@
+import { MotionConfig } from 'motion/react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import { DataProvider } from './data/DataContext'
@@ -11,6 +12,7 @@ import NotFound from './pages/NotFound'
 
 export default function App() {
   return (
+    <MotionConfig reducedMotion="user">
     <HashRouter>
       <DataProvider>
         <Routes>
@@ -26,5 +28,6 @@ export default function App() {
         </Routes>
       </DataProvider>
     </HashRouter>
+    </MotionConfig>
   )
 }

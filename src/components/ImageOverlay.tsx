@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { asset, centroid, toPoints } from '../lib/format'
 import type { ImageRef, Point } from '../types'
@@ -21,6 +22,10 @@ interface Props {
   className?: string
   imgClassName?: string
   children?: ReactNode
+  /** draw the outlines in one after another once the image has loaded */
+  intro?: boolean
+  /** highlight a shape from outside (e.g. hovering a list item) */
+  highlightId?: string | null
 }
 
 interface Tip {
@@ -34,7 +39,9 @@ interface Tip {
  * Image with an SVG overlay that uses the image's own pixel size as viewBox,
  * so polygons stay glued to the picture at every screen size.
  */
-export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, ctaLabel = 'Shiko', className = '', imgClassName = '', children }: Props) {
+export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, ctaLabel = 'Shiko', className = '', imgClassName = '', children, intro = false, highlightId = null }: Props) {
+  const reduce = useReducedMotion()
+  const animateIn = intro && !reduce
   const wrap = useRef<HTMLDivElement>(null)
   const [tip, setTip] = useState<Tip | null>(null)
   const [loaded, setLoaded] = useState(false)
@@ -86,15 +93,21 @@ export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, c
         className="absolute inset-0 size-full"
         onPointerLeave={() => !tip?.touch && setTip(null)}
       >
-        {shapes.map((s) =>
+        {shapes.map((s, i) =>
           s.points.length > 2 ? (
-            <polygon
+            <motion.polygon
               key={s.id}
               points={toPoints(s.points)}
+              initial={animateIn ? { pathLength: 0, fillOpacity: 0 } : false}
+              animate={animateIn && loaded ? { pathLength: 1, fillOpacity: 1 } : undefined}
+              transition={{
+                pathLength: { duration: 1.1, delay: 0.35 + i * 0.28, ease: [0.65, 0, 0.35, 1] },
+                fillOpacity: { duration: 0.6, delay: 1.1 + i * 0.28 },
+              }}
               className="overlay-shape"
               style={{ ['--shape-rgb' as string]: s.rgb }}
               data-dimmed={s.dimmed ? 'true' : 'false'}
-              data-active={tip?.id === s.id ? 'true' : 'false'}
+              data-active={tip?.id === s.id || highlightId === s.id ? 'true' : 'false'}
               tabIndex={s.dimmed ? -1 : 0}
               role="link"
               aria-label={s.label}

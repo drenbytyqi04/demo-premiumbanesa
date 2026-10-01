@@ -23,6 +23,18 @@ npm run generate:data     # ⚠ reset src/data/*.json to fresh random mock data 
 npm run apply-polygons -- file.json   # merge an editor export into src/data/*.json
 ```
 
+## Home page
+
+`#/` is built from sections in `src/components/home/` with copy in `src/data/site.json`:
+the aerial site plan as hero (outlines draw in on load, live availability per building),
+a stacking plan (floors × units, every cell clickable), apartment types, the 360° tour,
+location & features, the payment plan and a contact form (demo – nothing is sent).
+Animations use [motion](https://motion.dev) and respect `prefers-reduced-motion`.
+Typeface: Archivo (self-hosted via `@fontsource-variable/archivo`).
+
+Design skills used are committed in `.claude/skills/` (`frontend-design` from anthropics/skills,
+`ui-ux-pro-max` installed with `npm i -g ui-ux-pro-max-cli && uipro init --ai claude`).
+
 ## Pages
 
 | Route                | What it does |

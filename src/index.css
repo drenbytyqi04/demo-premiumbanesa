@@ -1,8 +1,11 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Playfair Display', ui-serif, Georgia, serif;
+  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-stone-50: #f6f7f8;
+  --color-stone-100: #eef0f2;
+  --color-stone-200: #dfe3e7;
   --color-navy-50: #f2f5f9;
   --color-navy-100: #e1e7f0;
   --color-navy-200: #c6d1e1;
@@ -22,6 +25,28 @@
 
 html {
   -webkit-tap-highlight-color: transparent;
+  scroll-padding-top: 5rem;
+}
+
+/* Archivo's expanded width, used for headlines like building signage */
+.font-display {
+  font-stretch: 125%;
+  letter-spacing: -0.015em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
 
 body {
@@ -87,14 +112,14 @@ body {
   border-radius: 8px;
   background: rgb(15 27 45 / 0.85);
   color: #fff;
-  font: 500 13px/1.4 Inter, sans-serif;
+  font: 500 13px/1.4 'Archivo Variable', sans-serif;
 }
 .pnlm-hotspot-base.floor-hotspot:hover span {
   visibility: visible;
 }
 .pnlm-container {
   background: #0f1b2d;
-  font-family: Inter, sans-serif;
+  font-family: 'Archivo Variable', sans-serif;
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -105,4 +130,10 @@ body {
 /* we render our own scene title */
 .pnlm-panorama-info {
   display: none !important;
+}
+
+/* stacking plan: sold units are hatched so status doesn't rely on colour alone */
+.stack-sold {
+  background-color: var(--color-stone-100);
+  background-image: repeating-linear-gradient(135deg, rgb(239 68 68 / 0.35) 0 1.5px, transparent 1.5px 7px);
 }
