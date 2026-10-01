@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { Apartment } from '../types'
 import { btnCls, inputCls } from './ui'
@@ -65,21 +65,35 @@ export default function Filters({ apartments, filters, resultCount }: Props) {
   const { state, set, reset, active } = filters
   const floors = useMemo(() => [...new Set(apartments.map((a) => a.floor))].sort((a, b) => a - b), [apartments])
   const rooms = useMemo(() => [...new Set(apartments.map((a) => a.rooms))].sort((a, b) => a - b), [apartments])
+  // phones: filters collapse behind a toggle (always open from md up)
+  const [open, setOpen] = useState(false)
+  const activeCount = [state.floor, state.rooms, state.minArea ?? state.maxArea].filter((v) => v !== null).length + (state.onlyAvailable ? 1 : 0)
 
   return (
     <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-navy-100">
-      <div className="mb-3 flex items-center justify-between">
-        <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-navy-700">
+      <div className={`flex items-center justify-between md:mb-3 ${open ? 'mb-3' : ''}`}>
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          className="-m-2 flex items-center gap-2 rounded-lg p-2 text-sm font-semibold uppercase tracking-wider text-navy-700 md:pointer-events-none"
+        >
           <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M3 5h18M6 12h12M10 19h4" strokeLinecap="round" />
           </svg>
           Filtro
-        </h2>
+          {activeCount > 0 && (
+            <span className="grid size-5 place-items-center rounded-full bg-gold-500 text-[11px] text-navy-950">{activeCount}</span>
+          )}
+          <svg viewBox="0 0 24 24" className={`size-4 transition md:hidden ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M6 9l6 6 6-6" strokeLinecap="round" />
+          </svg>
+        </button>
         <span className="text-sm text-navy-500">
           <strong className="text-navy-900">{resultCount}</strong> apartamente
         </span>
       </div>
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-5 md:items-end">
+      <div className={`grid-cols-2 gap-3 md:grid md:grid-cols-5 md:items-end ${open ? 'grid' : 'hidden'}`}>
         <label className="text-xs font-medium text-navy-600">
           Kati
           <select className={`${inputCls} mt-1`} value={state.floor ?? ''} onChange={(e) => set({ floor: num(e.target.value) })}>

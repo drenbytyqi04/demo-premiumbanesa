@@ -43,7 +43,7 @@ export default function AdminPage() {
         ngjyrat e <Link to="/" className="font-semibold underline">ballinës</Link> dhe të ndërtesave. Me Supabase, këto do të ruhen në databazë.
       </div>
 
-      <div className="mb-4 grid grid-cols-3 gap-3">
+      <div className="mb-4 grid grid-cols-3 gap-2 sm:gap-3">
         {counts.map(([s, n]) => (
           <button
             key={s}
@@ -77,7 +77,56 @@ export default function AdminPage() {
         <span className="self-center text-sm text-navy-500 sm:ml-auto">{list.length} rreshta</span>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl bg-white shadow-sm ring-1 ring-navy-100">
+      {/* phones: one card per apartment */}
+      <div className="space-y-3 sm:hidden">
+        {list.map((a) => (
+          <div key={a.id} className={`rounded-xl p-4 shadow-sm ring-1 transition ${saved === a.id ? 'bg-emerald-50 ring-emerald-200' : 'bg-white ring-navy-100'}`}>
+            <div className="mb-3 flex items-start justify-between gap-3">
+              <div>
+                <Link to={`/apartments/${a.id}`} className="font-semibold">
+                  {a.id}
+                </Link>
+                <div className="text-sm text-navy-500">
+                  Kati {a.floor} · {a.rooms} dh. · {formatArea(a.area)}
+                </div>
+              </div>
+              {saved === a.id ? <span className="text-xs font-medium text-emerald-600">✓ U ruajt</span> : <StatusBadge status={a.status} />}
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <label className="text-xs text-navy-500">
+                Statusi
+                <select
+                  className={`${inputCls} mt-1`}
+                  value={a.status}
+                  onChange={async (e) => {
+                    await updateApartment(a.id, { status: e.target.value as ApartmentStatus })
+                    flash(a.id)
+                  }}
+                >
+                  {STATUSES.map((s) => (
+                    <option key={s} value={s}>
+                      {STATUS_LABELS[s]}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="text-xs text-navy-500">
+                Çmimi (€) · {formatNumber(Math.round(a.price / a.area))} €/m²
+                <PriceInput
+                  className="mt-1 w-full"
+                  value={a.price}
+                  onSave={async (price) => {
+                    await updateApartment(a.id, { price })
+                    flash(a.id)
+                  }}
+                />
+              </label>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="hidden overflow-x-auto rounded-2xl bg-white shadow-sm ring-1 ring-navy-100 sm:block">
         <table className="w-full min-w-[760px] text-left text-sm">
           <thead className="bg-navy-50 text-xs uppercase tracking-wider text-navy-500">
             <tr>
@@ -144,7 +193,7 @@ export default function AdminPage() {
   )
 }
 
-function PriceInput({ value, onSave }: { value: number; onSave: (v: number) => void }) {
+function PriceInput({ value, onSave, className = 'w-32' }: { value: number; onSave: (v: number) => void; className?: string }) {
   const [draft, setDraft] = useState<string | null>(null)
   const commit = () => {
     if (draft === null) return
@@ -158,7 +207,7 @@ function PriceInput({ value, onSave }: { value: number; onSave: (v: number) => v
       inputMode="numeric"
       min={0}
       step={500}
-      className={`${inputCls} w-32 py-1.5`}
+      className={`${inputCls} ${className} py-1.5`}
       value={draft ?? value}
       onChange={(e) => setDraft(e.target.value)}
       onBlur={commit}

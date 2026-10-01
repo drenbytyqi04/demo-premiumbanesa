@@ -21,7 +21,7 @@ export default function Layout() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="sticky top-0 z-40 bg-navy-900/95 text-white shadow-lg shadow-navy-950/20 backdrop-blur">
+      <header className="sticky top-0 z-40 bg-navy-900/95 pt-[env(safe-area-inset-top)] text-white shadow-lg shadow-navy-950/20 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
           <Link to="/" className="flex items-center gap-3">
             <span className="grid size-9 place-items-center rounded-xl bg-gold-500/15 ring-1 ring-gold-500/40">

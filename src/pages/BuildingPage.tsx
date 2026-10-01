@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link, NavLink, useNavigate, useParams } from 'react-router-dom'
 import ApartmentTable from '../components/ApartmentTable'
 import Filters, { matches, useFilters } from '../components/Filters'
@@ -22,6 +22,7 @@ function BuildingView({ buildingId }: { buildingId: string }) {
   const navigate = useNavigate()
   const filters = useFilters()
   const [facadeIdx, setFacadeIdx] = useState(0)
+  const swipeX = useRef<number | null>(null)
 
   const building = buildings.find((b) => b.id === buildingId)!
   const list = apartments.filter((a) => a.buildingId === buildingId).sort((a, b) => b.floor - a.floor || a.number.localeCompare(b.number))
@@ -65,7 +66,7 @@ function BuildingView({ buildingId }: { buildingId: string }) {
         <div>
           {facade ? (
             <div className="rounded-2xl bg-navy-50 p-2 ring-1 ring-navy-100 sm:p-3">
-              <div className="mb-2 flex items-center justify-between px-1">
+              <div className="mb-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1">
                 <div className="text-sm font-medium text-navy-700">
                   {facade.label}
                   {facades.length > 1 && (
@@ -76,7 +77,16 @@ function BuildingView({ buildingId }: { buildingId: string }) {
                 </div>
                 <Legend items={statusLegend} />
               </div>
-              <div className="relative">
+              <div
+                className="relative"
+                onTouchStart={(e) => (swipeX.current = e.touches[0].clientX)}
+                onTouchEnd={(e) => {
+                  // swipe left/right to switch facade
+                  const dx = e.changedTouches[0].clientX - (swipeX.current ?? 0)
+                  if (facades.length > 1 && swipeX.current !== null && Math.abs(dx) > 60) go(dx < 0 ? 1 : -1)
+                  swipeX.current = null
+                }}
+              >
                 <ImageOverlay
                   key={facade.id}
                   image={facade}
@@ -145,7 +155,7 @@ function FacadeArrow({ dir, onClick }: { dir: -1 | 1; onClick: () => void }) {
     <button
       onClick={onClick}
       aria-label={dir < 0 ? 'Fasada e mëparshme' : 'Fasada tjetër'}
-      className={`absolute top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-navy-900 shadow-lg ring-1 ring-navy-900/10 backdrop-blur transition hover:scale-105 hover:bg-white ${dir < 0 ? 'left-2' : 'right-2'}`}
+      className={`absolute top-1/2 z-10 grid size-9 -translate-y-1/2 sm:size-11 place-items-center rounded-full bg-white/90 text-navy-900 shadow-lg ring-1 ring-navy-900/10 backdrop-blur transition hover:scale-105 hover:bg-white ${dir < 0 ? 'left-1 sm:left-2' : 'right-1 sm:right-2'}`}
     >
       <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
         <path d={dir < 0 ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7'} />

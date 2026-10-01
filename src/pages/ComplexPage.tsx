@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ImageOverlay from '../components/ImageOverlay'
 import { Legend } from '../components/ui'
@@ -7,6 +8,13 @@ import { STATUS_RGB, asset, formatArea, formatPrice } from '../lib/format'
 export default function ComplexPage() {
   const { complex, buildings, apartments } = useData()
   const navigate = useNavigate()
+  const scroller = useRef<HTMLDivElement>(null)
+
+  // phones: start the swipeable aerial centred
+  useEffect(() => {
+    const el = scroller.current
+    if (el && el.scrollWidth > el.clientWidth) el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2
+  }, [])
 
   const stats = buildings.map((b) => {
     const list = apartments.filter((a) => a.buildingId === b.id)
@@ -36,9 +44,11 @@ export default function ComplexPage() {
 
       <section className="bg-navy-800 pb-6 sm:px-6">
         <div className="mx-auto max-w-7xl">
+          {/* on phones the aerial is shown larger and can be swiped sideways */}
+          <div ref={scroller} className="no-scrollbar overflow-x-auto sm:overflow-visible">
           <ImageOverlay
             image={complex.aerial}
-            className="overflow-hidden shadow-2xl shadow-navy-950/40 sm:rounded-2xl"
+            className="w-[200vw] max-w-[900px] overflow-hidden shadow-2xl shadow-navy-950/40 sm:w-auto sm:max-w-none sm:rounded-2xl"
             ctaLabel="Hap ndërtesën"
             shapes={stats
               .filter((s) => s.building.polygon)
@@ -73,14 +83,28 @@ export default function ComplexPage() {
               />
             </div>
           </ImageOverlay>
-          <div className="px-4 pt-3 sm:hidden">
-            <div className="rounded-xl bg-white/95 px-3 py-2">
+          </div>
+          <div className="space-y-3 px-4 pt-3 sm:hidden">
+            <div className="flex items-center justify-between gap-3 rounded-xl bg-white/95 px-3 py-2">
               <Legend
                 items={[
                   { rgb: STATUS_RGB.available, label: 'Ka të lira' },
                   { rgb: STATUS_RGB.sold, label: 'E shitur' },
                 ]}
               />
+              <span className="shrink-0 text-xs text-navy-400">← rrëshqit →</span>
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {stats.map((s) => (
+                <Link
+                  key={s.building.id}
+                  to={`/buildings/${s.building.id}`}
+                  className="rounded-xl bg-white/10 px-2 py-2.5 text-center text-white ring-1 ring-white/15 active:bg-white/20"
+                >
+                  <div className="font-display text-lg font-semibold leading-tight">{s.building.id}</div>
+                  <div className={`text-xs ${s.free ? 'text-emerald-300' : 'text-red-300'}`}>{s.free ? `${s.free} të lira` : 'E shitur'}</div>
+                </Link>
+              ))}
             </div>
           </div>
         </div>

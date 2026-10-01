@@ -4,7 +4,7 @@ import type { ApartmentStatus } from '../types'
 
 export function StatusBadge({ status }: { status: ApartmentStatus }) {
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${STATUS_BADGE[status]}`}>
+    <span className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${STATUS_BADGE[status]}`}>
       <span className="size-1.5 rounded-full" style={{ background: `rgb(${STATUS_RGB[status]})` }} />
       {STATUS_LABELS[status]}
     </span>
@@ -13,7 +13,7 @@ export function StatusBadge({ status }: { status: ApartmentStatus }) {
 
 export function Legend({ items }: { items: { rgb: string; label: string }[] }) {
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-navy-600">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-navy-600 sm:gap-x-4 sm:text-sm">
       {items.map((i) => (
         <span key={i.label} className="inline-flex items-center gap-2">
           <span className="size-3 rounded-sm ring-1" style={{ background: `rgb(${i.rgb} / 0.55)`, boxShadow: `inset 0 0 0 1px rgb(${i.rgb})` }} />
@@ -48,7 +48,7 @@ export function PageHeader({ eyebrow, title, children }: { eyebrow?: ReactNode; 
 }
 
 export const inputCls =
-  'w-full rounded-lg border-0 bg-white px-3 py-2 text-sm text-navy-900 shadow-sm ring-1 ring-navy-200 transition focus:ring-2 focus:ring-gold-500 focus:outline-none'
+  'w-full rounded-lg border-0 bg-white px-3 py-2 text-base sm:text-sm text-navy-900 shadow-sm ring-1 ring-navy-200 transition focus:ring-2 focus:ring-gold-500 focus:outline-none'
 
 export const btnCls = {
   primary:

@@ -23,7 +23,7 @@ type Mode = 'draw' | 'edit'
 type Drag =
   | { kind: 'vertex'; poly: number; idx: number }
   | { kind: 'poly'; poly: number; start: Point; orig: Point[] }
-  | { kind: 'pan'; x: number; y: number; sl: number; st: number }
+  | { kind: 'pan'; x: number; y: number; sl: number; st: number; moved: boolean; tap?: { p: Point; first: boolean; alt: boolean } }
   | null
 
 const DRAFT_KEY = (target: string) => `aurora-editor-draft:${target}`
@@ -90,6 +90,8 @@ export default function EditorPage() {
   const [importText, setImportText] = useState('')
   const [snap, setSnap] = useState(true)
   const [draftRestored, setDraftRestored] = useState(false)
+  const [activeVertex, setActiveVertex] = useState<{ poly: number; idx: number } | null>(null)
+  const coarse = useMemo(() => typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches, [])
 
   const svgRef = useRef<SVGSVGElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -234,13 +236,23 @@ export default function EditorPage() {
     // pan: space + drag, middle button
     if (spaceDown.current || e.button === 1) {
       const s = scrollRef.current!
-      drag.current = { kind: 'pan', x: e.clientX, y: e.clientY, sl: s.scrollLeft, st: s.scrollTop }
+      drag.current = { kind: 'pan', x: e.clientX, y: e.clientY, sl: s.scrollLeft, st: s.scrollTop, moved: true }
       svgRef.current!.setPointerCapture(e.pointerId)
       e.preventDefault()
       return
     }
     if (e.button !== 0) return
     const p = toImage(e)
+    const startPan = (tap?: { p: Point; first: boolean; alt: boolean }) => {
+      const s = scrollRef.current!
+      drag.current = { kind: 'pan', x: e.clientX, y: e.clientY, sl: s.scrollLeft, st: s.scrollTop, moved: false, tap }
+      svgRef.current!.setPointerCapture(e.pointerId)
+    }
+
+    // touch in draw mode: a tap adds a point, a drag pans the image
+    if (mode === 'draw' && e.pointerType !== 'mouse') {
+      return startPan({ p, first: kind === 'first', alt: e.altKey })
+    }
 
     if (mode === 'draw') {
       if (kind === 'first' && drawing && drawing.length >= 3) return closeDrawing()
@@ -261,6 +273,7 @@ export default function EditorPage() {
       }
       setUndo((u) => [...u.slice(-99), polys])
       setRedo([])
+      setActiveVertex({ poly: pi, idx })
       drag.current = { kind: 'vertex', poly: pi, idx }
     } else if (kind === 'mid' && pi !== null && idx !== null) {
       // insert a vertex after idx and start dragging it
@@ -273,8 +286,10 @@ export default function EditorPage() {
       setRedo([])
       drag.current = { kind: 'poly', poly: pi, start: p, orig: polys[pi].points }
     } else {
+      // empty area: deselect; dragging pans the image (handy on touch screens)
       setSelected(null)
-      return
+      setActiveVertex(null)
+      return startPan()
     }
     svgRef.current!.setPointerCapture(e.pointerId)
   }
@@ -283,6 +298,8 @@ export default function EditorPage() {
     if (!img) return
     const d = drag.current
     if (d?.kind === 'pan') {
+      if (!d.moved && Math.hypot(e.clientX - d.x, e.clientY - d.y) < 8) return
+      d.moved = true
       const s = scrollRef.current!
       s.scrollLeft = d.sl - (e.clientX - d.x)
       s.scrollTop = d.st - (e.clientY - d.y)
@@ -302,6 +319,14 @@ export default function EditorPage() {
   }
 
   const onPointerUp = () => {
+    const d = drag.current
+    if (d?.kind === 'pan' && !d.moved && d.tap) {
+      if (d.tap.first && drawing && drawing.length >= 3) closeDrawing()
+      else {
+        const sp = snapPoint(d.tap.p, undefined, { altKey: d.tap.alt })
+        setDrawing((dr) => [...(dr ?? []), sp])
+      }
+    }
     drag.current = null
   }
 
@@ -448,14 +473,14 @@ export default function EditorPage() {
 
   const fileName = `polygons-${targetKey.replace(/[^a-z0-9-]/gi, '-')}.json`
   const selPoly = selected !== null ? polys[selected] : null
-  const handleR = 6 * scale
+  const handleR = (coarse ? 11 : 6) * scale
   const stroke = 2 * scale
 
   /* ---------------------------------------------------------------- render */
   return (
-    <div className="flex h-[calc(100dvh-4rem)] flex-col lg:flex-row">
+    <div className="flex flex-col lg:h-[calc(100dvh-4rem)] lg:flex-row">
       {/* ---------------- canvas */}
-      <div className="relative flex min-h-[55vh] flex-1 flex-col bg-navy-950 lg:min-h-0">
+      <div className="relative flex flex-col bg-navy-950 lg:min-h-0 lg:flex-1">
         {/* toolbar */}
         <div className="flex flex-wrap items-center gap-2 border-b border-white/10 bg-navy-900 px-3 py-2 text-sm text-white">
           <div className="flex rounded-lg bg-white/10 p-0.5">
@@ -468,7 +493,8 @@ export default function EditorPage() {
                 }}
                 className={`rounded-md px-3 py-1.5 font-medium transition ${mode === m ? 'bg-gold-500 text-navy-950' : 'text-navy-100 hover:bg-white/10'}`}
               >
-                {m === 'draw' ? '✎ Vizato (D)' : '⤧ Ndrysho (E)'}
+                {m === 'draw' ? '✎ Vizato' : '⤧ Ndrysho'}
+                <span className="hidden sm:inline">{m === 'draw' ? ' (D)' : ' (E)'}</span>
               </button>
             ))}
           </div>
@@ -495,6 +521,19 @@ export default function EditorPage() {
             <input type="checkbox" checked={snap} onChange={(e) => setSnap(e.target.checked)} className="accent-gold-500" />
             Ngjit në pika
           </label>
+          {mode === 'edit' && activeVertex && activeVertex.poly === selected && polys[selected]?.points.length > activeVertex.idx && (
+            <button
+              onClick={() => {
+                const { poly, idx } = activeVertex
+                if (polys[poly].points.length <= 3) return say('Një poligon duhet të ketë të paktën 3 pika', 'warn')
+                commit(polys.map((q, i) => (i === poly ? { ...q, points: q.points.filter((_, j) => j !== idx) } : q)))
+                setActiveVertex(null)
+              }}
+              className="rounded-md bg-red-500/90 px-3 py-1.5 font-medium"
+            >
+              Fshi pikën
+            </button>
+          )}
           {drawing && (
             <div className="flex items-center gap-2">
               <span className="text-navy-300">{drawing.length} pika</span>
@@ -514,7 +553,7 @@ export default function EditorPage() {
         {/* canvas */}
         <div
           ref={scrollRef}
-          className="relative flex-1 overflow-auto"
+          className="relative max-h-[68vh] min-h-48 overflow-auto overscroll-contain lg:max-h-none lg:flex-1"
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
             e.preventDefault()
@@ -664,7 +703,7 @@ export default function EditorPage() {
       </div>
 
       {/* ---------------- sidebar */}
-      <aside className="w-full shrink-0 space-y-5 overflow-y-auto border-l border-navy-100 bg-navy-50/60 p-4 lg:w-[360px]">
+      <aside className="w-full shrink-0 space-y-5 overflow-y-auto border-t border-navy-100 lg:border-l lg:border-t-0 bg-navy-50/60 p-4 lg:w-[360px]">
         <section>
           <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-navy-500">1 · Imazhi</h2>
           <select
@@ -866,6 +905,10 @@ export default function EditorPage() {
             <li><b>Ctrl+Z / Ctrl+Shift+Z</b> zhbëj / ribëj</li>
             <li><b>Ctrl + rrota</b> zoom · <b>Hapësirë + tërhiq</b> lëviz pamjen</li>
             <li><b>Alt</b> gjatë vizatimit = pa ngjitje</li>
+            <li className="pt-1 font-semibold text-navy-800">Në telefon/tablet</li>
+            <li>Prek = shto pikë · tërhiq me gisht = lëviz pamjen</li>
+            <li>Përdor <b>+ / −</b> për zoom dhe <b>Mbyll ✓</b> për ta mbyllur poligonin</li>
+            <li>Ndrysho: prek një pikë, pastaj <b>Fshi pikën</b> për ta hequr</li>
           </ul>
         </details>
       </aside>

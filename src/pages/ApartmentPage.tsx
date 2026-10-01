@@ -30,9 +30,12 @@ export default function ApartmentPage() {
   ]
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-7xl px-4 pb-28 pt-5 sm:px-6 sm:pt-8 lg:pb-8">
       <nav className="mb-4 flex flex-wrap items-center justify-between gap-2 text-sm text-navy-500">
-        <div>
+        <Link to={`/buildings/${building.id}`} className="-ml-2 rounded-lg px-2 py-1 font-medium text-navy-700 sm:hidden">
+          ← {building.name}
+        </Link>
+        <div className="hidden sm:block">
           <Link to="/" className="hover:text-navy-900">
             Ballina
           </Link>{' '}
@@ -56,11 +59,32 @@ export default function ApartmentPage() {
         </div>
       </nav>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
-        <div className="order-2 space-y-4 lg:order-1">
-          <div className="flex items-center justify-between">
-            <h2 className="font-display text-2xl font-semibold">Tura virtuale 360°</h2>
+      {/* phones: title + key facts first, then the tour */}
+      <div className="mb-5 lg:hidden">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <div className="text-sm font-medium text-gold-600">
+              {building.name} · Kati {apt.floor}
+            </div>
+            <h1 className="font-display text-3xl font-semibold">Apartamenti {apt.number}</h1>
+          </div>
+          <StatusBadge status={apt.status} />
+        </div>
+        <div className="no-scrollbar -mx-4 mt-3 flex gap-2 overflow-x-auto px-4">
+          {[formatArea(apt.area), `${apt.rooms} ${apt.rooms === 1 ? 'dhomë' : 'dhoma'}`, `Kati ${apt.floor}`].map((t) => (
+            <span key={t} className="shrink-0 rounded-full bg-navy-50 px-3 py-1 text-sm font-medium text-navy-700">
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-8">
+        <div className="min-w-0 space-y-3 sm:space-y-4">
+          <div className="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="font-display text-xl font-semibold sm:text-2xl">Tura virtuale 360°</h2>
             <span className="hidden text-sm text-navy-500 sm:block">Tërhiqni për të parë përreth · klikoni rrathët për të lëvizur</span>
+            <span className="text-xs text-navy-500 sm:hidden">Rrëshqitni me gisht · prekni rrathët</span>
           </div>
           {tourScenes.length ? (
             <PanoramaViewer scenes={tourScenes} />
@@ -72,9 +96,9 @@ export default function ApartmentPage() {
           </p>
         </div>
 
-        <aside className="order-1 min-w-0 lg:order-2">
-          <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-navy-100 lg:sticky lg:top-24">
-            <div className="flex items-start justify-between gap-4">
+        <aside className="min-w-0">
+          <div className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-navy-100 sm:p-6 lg:sticky lg:top-24">
+            <div className="hidden items-start justify-between gap-4 lg:flex">
               <div>
                 <div className="text-sm font-medium text-gold-600">
                   {building.name} · Kati {apt.floor}
@@ -84,7 +108,7 @@ export default function ApartmentPage() {
               <StatusBadge status={apt.status} />
             </div>
 
-            <div className="mt-5 rounded-xl bg-navy-900 p-4 text-white">
+            <div className="rounded-xl bg-navy-900 p-4 text-white lg:mt-5">
               <div className="text-xs uppercase tracking-wider text-navy-300">Çmimi</div>
               <div className="font-display text-3xl font-semibold">
                 {apt.status === 'sold' ? 'E shitur' : formatPrice(apt.price)}
@@ -92,7 +116,8 @@ export default function ApartmentPage() {
               {apt.status === 'reserved' && <div className="mt-1 text-sm text-gold-300">Aktualisht e rezervuar</div>}
             </div>
 
-            <dl className="mt-5 divide-y divide-navy-100 text-sm">
+            <h2 className="mt-5 text-sm font-semibold uppercase tracking-wider text-navy-500 lg:hidden">Detajet</h2>
+            <dl className="mt-2 divide-y lg:mt-5 divide-navy-100 text-sm">
               {rows.map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5">
                   <dt className="text-navy-500">{k}</dt>
@@ -110,12 +135,28 @@ export default function ApartmentPage() {
 
             <a
               href={`mailto:shitja@example.com?subject=${encodeURIComponent(`Interesim për apartamentin ${apt.id}`)}`}
-              className={`mt-6 flex w-full items-center justify-center rounded-xl px-4 py-3 font-semibold transition ${apt.status === 'sold' ? 'pointer-events-none bg-navy-100 text-navy-400' : 'bg-gold-500 text-navy-950 hover:bg-gold-400'}`}
+              className={`mt-6 hidden w-full lg:flex items-center justify-center rounded-xl px-4 py-3 font-semibold transition ${apt.status === 'sold' ? 'pointer-events-none bg-navy-100 text-navy-400' : 'bg-gold-500 text-navy-950 hover:bg-gold-400'}`}
             >
               {apt.status === 'sold' ? 'Nuk është në dispozicion' : 'Kërko informacion'}
             </a>
           </div>
         </aside>
+      </div>
+
+      {/* phones: sticky price + call to action */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-navy-100 bg-white/95 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 shadow-[0_-8px_24px_rgb(15_27_45/0.08)] backdrop-blur lg:hidden">
+        <div className="mx-auto flex max-w-xl items-center justify-between gap-3">
+          <div className="min-w-0">
+            <div className="text-xs text-navy-500">Nr. {apt.number} · {formatArea(apt.area)}</div>
+            <div className="truncate font-display text-xl font-semibold">{apt.status === 'sold' ? 'E shitur' : formatPrice(apt.price)}</div>
+          </div>
+          <a
+            href={`mailto:shitja@example.com?subject=${encodeURIComponent(`Interesim për apartamentin ${apt.id}`)}`}
+            className={`shrink-0 rounded-xl px-5 py-3 text-sm font-semibold ${apt.status === 'sold' ? 'pointer-events-none bg-navy-100 text-navy-400' : 'bg-gold-500 text-navy-950 active:bg-gold-400'}`}
+          >
+            {apt.status === 'sold' ? 'Jo në dispozicion' : 'Kërko informacion'}
+          </a>
+        </div>
       </div>
     </div>
   )
