@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useData } from '../../data/DataContext'
 import site from '../../data/site.json'
-import { STATUS_RGB, formatPrice } from '../../lib/format'
+import { MD_COLS, STATUS_RGB, formatPrice } from '../../lib/format'
 import ImageOverlay from '../ImageOverlay'
 
 const rise = (delay: number) => ({
@@ -72,6 +72,7 @@ export default function HeroSitePlan() {
         <div ref={scroller} className="no-scrollbar overflow-x-auto md:overflow-visible">
           <ImageOverlay
             intro
+            subtle
             image={complex.aerial}
             highlightId={hovered}
             className="w-[200vw] max-w-[900px] md:w-auto md:max-w-none md:overflow-hidden md:rounded-t-3xl"
@@ -101,7 +102,7 @@ export default function HeroSitePlan() {
         </div>
 
         {/* availability per building – hover highlights the building on the plan */}
-        <div className="grid border-t border-white/10 bg-navy-800 md:grid-cols-3 md:rounded-b-3xl">
+        <div className={`grid border-t border-white/10 bg-navy-800 md:rounded-b-3xl ${MD_COLS[stats.length] ?? "md:grid-cols-3"}`}>
           {stats.map((s, i) => (
             <Link
               key={s.building.id}
@@ -129,7 +130,7 @@ export default function HeroSitePlan() {
           ))}
         </div>
       </div>
-      <p className="mx-auto max-w-7xl px-4 pb-10 pt-3 text-sm text-navy-400 sm:px-6 md:hidden">Rrëshqitni pamjen anash dhe prekni një ndërtesë.</p>
+      <p className="mx-auto max-w-7xl px-4 pb-10 pt-3 text-sm text-navy-400 sm:px-6 md:hidden">Rrëshqitni pamjen anash dhe prekni një lamelë.</p>
       <div className="hidden pb-16 md:block" />
     </section>
   )

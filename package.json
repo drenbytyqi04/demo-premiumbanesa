@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "oxlint",
     "generate:images": "node scripts/generate-demo.mjs images",
-    "generate:data": "node scripts/generate-demo.mjs data",
+    "generate:data": "node scripts/generate-project-data.mjs",
     "panoramas": "node scripts/download-panoramas.mjs",
     "apply-polygons": "node scripts/apply-polygons.mjs",
     "export-seed": "node scripts/export-seed-sql.mjs"

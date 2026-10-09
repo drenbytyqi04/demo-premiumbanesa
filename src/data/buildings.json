@@ -1,131 +1,75 @@
 [
   {
     "id": "A",
-    "name": "Ndërtesa A",
-    "description": "Pamje nga parku, apartamente me dy fasada dhe ballkone të gjera.",
-    "floors": 8,
+    "name": "Lamela A",
+    "description": "Krahu me fasadë në tone të çelura, me ballkone të gjera nga rruga dhe nga oborri.",
+    "floors": 10,
     "polygon": [
       [
-        620,
-        30
+        150,
+        312
       ],
       [
-        951,
-        222
+        760,
+        156
       ],
       [
-        951,
-        433
+        760,
+        1110
       ],
       [
-        837,
-        499
-      ],
-      [
-        506,
-        308
-      ],
-      [
-        506,
-        96
+        150,
+        1052
       ]
     ],
     "facades": [
       {
         "id": "A-front",
-        "label": "Fasada jugore",
-        "image": "images/facade-a.jpg",
-        "width": 1200,
-        "height": 1500
-      },
-      {
-        "id": "A-back",
-        "label": "Fasada veriore",
-        "image": "images/facade-a-back.jpg",
-        "width": 1200,
-        "height": 1500
+        "label": "Fasada nga rruga",
+        "image": "images/projekti/fasada-a.jpg",
+        "width": 960,
+        "height": 960
       }
     ]
   },
   {
     "id": "B",
-    "name": "Ndërtesa B",
-    "description": "Në qendër të kompleksit, afër hyrjes kryesore dhe sheshit.",
-    "floors": 8,
+    "name": "Lamela B",
+    "description": "Krahu me breza të kuq, me pamje nga rruga dhe nga sheshi i brendshëm.",
+    "floors": 10,
     "polygon": [
       [
-        1294,
-        169
+        760,
+        156
       ],
       [
-        1409,
-        235
+        1180,
+        42
       ],
       [
-        1409,
-        446
-      ],
-      [
-        1089,
-        631
-      ],
-      [
-        974,
-        565
-      ],
-      [
-        974,
+        1897,
         354
+      ],
+      [
+        1897,
+        1072
+      ],
+      [
+        1180,
+        1172
+      ],
+      [
+        760,
+        1110
       ]
     ],
     "facades": [
       {
         "id": "B-front",
-        "label": "Fasada kryesore",
-        "image": "images/facade-b.jpg",
-        "width": 1200,
-        "height": 1500
-      }
-    ]
-  },
-  {
-    "id": "C",
-    "name": "Ndërtesa C",
-    "description": "Kati përdhes me lokale, pamje nga rruga kryesore dhe malet.",
-    "floors": 8,
-    "polygon": [
-      [
-        769,
-        393
-      ],
-      [
-        1066,
-        565
-      ],
-      [
-        1066,
-        776
-      ],
-      [
-        951,
-        842
-      ],
-      [
-        654,
-        671
-      ],
-      [
-        654,
-        459
-      ]
-    ],
-    "facades": [
-      {
-        "id": "C-front",
-        "label": "Fasada kryesore",
-        "image": "images/facade-c.jpg",
-        "width": 1200,
-        "height": 1500
+        "label": "Fasada nga rruga",
+        "image": "images/projekti/fasada-b.jpg",
+        "width": 740,
+        "height": 1060
       }
     ]
   }

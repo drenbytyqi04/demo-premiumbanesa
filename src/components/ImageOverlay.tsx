@@ -26,6 +26,8 @@ interface Props {
   intro?: boolean
   /** highlight a shape from outside (e.g. hovering a list item) */
   highlightId?: string | null
+  /** lighter fill at rest, so a photo-real render stays visible */
+  subtle?: boolean
 }
 
 interface Tip {
@@ -39,7 +41,7 @@ interface Tip {
  * Image with an SVG overlay that uses the image's own pixel size as viewBox,
  * so polygons stay glued to the picture at every screen size.
  */
-export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, ctaLabel = 'Shiko', className = '', imgClassName = '', children, intro = false, highlightId = null }: Props) {
+export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, ctaLabel = 'Shiko', className = '', imgClassName = '', children, intro = false, highlightId = null, subtle = false }: Props) {
   const reduce = useReducedMotion()
   const animateIn = intro && !reduce
   const wrap = useRef<HTMLDivElement>(null)
@@ -77,7 +79,7 @@ export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, c
   const below = tip ? tip.y < 150 : false
 
   return (
-    <div ref={wrap} className={`relative select-none ${className}`}>
+    <div ref={wrap} className={`relative select-none ${subtle ? 'overlay-subtle' : ''} ${className}`}>
       <img
         src={asset(image.image)}
         alt=""

@@ -80,19 +80,23 @@ Without the env vars the site still runs: data comes from `src/data/*.json` and 
 `admin@demo.local` / `aurora-demo` (change via `VITE_DEMO_ADMIN_*`). This is **not secure** (the password is in the
 JavaScript) and edits are stored only in that browser's `localStorage` – use it for local testing only.
 
-## Placeholder images to replace
+## Project images
 
-| File | Used for | Current size |
-|------|----------|--------------|
-| `public/images/aerial.jpg` | Aerial view of the complex | 1920×1080 |
-| `public/images/facade-a.jpg` | Building A – south facade (apartments x01, x02) | 1200×1500 |
-| `public/images/facade-a-back.jpg` | Building A – north facade (apartments x03, x04) | 1200×1500 |
-| `public/images/facade-b.jpg` | Building B – main facade | 1200×1500 |
-| `public/images/facade-c.jpg` | Building C – main facade | 1200×1500 |
-| `public/images/floorplans/plan-{1..4}.svg` | Floor plans by room count | SVG |
-| `public/panoramas/{living,bedroom,kitchen,bathroom}.jpg` | 360° tour (already CC0, 2K) | 2048×1024 |
+The studio renders are in `public/images/projekti/` (each with a `-900.jpg` thumbnail for the gallery).
+`npm run generate:data` (`scripts/generate-project-data.mjs`) crops from them:
 
-Your images can be any size. The editor saves the real pixel size, so the overlay always matches the image.
+| File | Used for | Cut from |
+|------|----------|----------|
+| `hero.jpg` | Homepage hero, one clickable outline per wing | `pamja-majtas.jpg` |
+| `fasada-a.jpg` | Lamela A page, 4 apartments × 10 floors | `pamja-ballore.jpg` (left wing) |
+| `fasada-b.jpg` | Lamela B page, 3 apartments × 9 floors (floor 10 is hidden by the overhang) | `pamja-ballore.jpg` (right wing) |
+
+…and writes `src/data/*.json` with 2 wings × 10 floors × 7 apartments = **140 apartments**.
+Apartments facing the courtyard have no polygon on the street facade and appear only in lists and the stacking plan.
+
+⚠ Numbers, m², prices and statuses are **demo values** until the studio's apartment table arrives.
+Re-running `generate:data` overwrites `src/data/*.json`. Still placeholders: the floor plans (`public/images/floorplans/`)
+and the 360° panoramas (`public/panoramas/`). Polygons are measured approximations; refine them in `#/admin/poligonet`.
 
 ## Redraw the polygons on your own images (editor)
 

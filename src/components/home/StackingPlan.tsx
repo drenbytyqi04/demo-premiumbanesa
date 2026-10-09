@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useData } from '../../data/DataContext'
-import { STATUS_LABELS, formatArea, formatPrice, roomsLabel } from '../../lib/format'
+import { MD_COLS, STATUS_LABELS, formatArea, formatPrice, roomsLabel } from '../../lib/format'
 import type { Apartment, ApartmentStatus } from '../../types'
 
 // sold units recede (hatched), free units stand out; status is never shown by colour alone
@@ -45,7 +45,7 @@ export default function StackingPlan() {
           ))}
         </div>
 
-        <div className="mt-6 grid gap-10 md:mt-12 md:grid-cols-3 md:gap-8">
+        <div className={`mt-6 grid gap-10 md:mt-12 md:gap-12 ${MD_COLS[buildings.length] ?? "md:grid-cols-3"}`}>
           {buildings.map((b) => {
             const list = apartments.filter((a) => a.buildingId === b.id)
             const floors = [...new Set(list.map((a) => a.floor))].sort((x, y) => y - x)

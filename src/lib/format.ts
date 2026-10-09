@@ -38,3 +38,6 @@ export function centroid(pts: Point[]): Point {
   const n = pts.length || 1
   return [pts.reduce((s, p) => s + p[0], 0) / n, pts.reduce((s, p) => s + p[1], 0) / n]
 }
+
+/** Static Tailwind classes for "one column per building" grids (dynamic class names would be purged). */
+export const MD_COLS: Record<number, string> = { 1: 'md:grid-cols-1', 2: 'md:grid-cols-2', 3: 'md:grid-cols-3', 4: 'md:grid-cols-4' }

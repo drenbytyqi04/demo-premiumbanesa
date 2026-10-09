@@ -137,3 +137,14 @@ body {
   background-color: var(--color-stone-100);
   background-image: repeating-linear-gradient(135deg, rgb(239 68 68 / 0.35) 0 1.5px, transparent 1.5px 7px);
 }
+
+/* photo-real renders: keep the building visible until hover */
+.overlay-subtle .overlay-shape {
+  fill: rgb(var(--shape-rgb) / 0.16);
+  stroke-width: 2.5;
+}
+.overlay-subtle .overlay-shape:hover,
+.overlay-subtle .overlay-shape:focus-visible,
+.overlay-subtle .overlay-shape[data-active='true'] {
+  fill: rgb(var(--shape-rgb) / 0.5);
+}

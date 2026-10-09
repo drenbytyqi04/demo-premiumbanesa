@@ -4,6 +4,7 @@ import ContactSection from '../components/home/ContactSection'
 import HeroSitePlan from '../components/home/HeroSitePlan'
 import LocationFeatures from '../components/home/LocationFeatures'
 import PaymentPlan from '../components/home/PaymentPlan'
+import ProjectGallery from '../components/home/ProjectGallery'
 import StackingPlan from '../components/home/StackingPlan'
 import TourBand from '../components/home/TourBand'
 import UnitTypes from '../components/home/UnitTypes'
@@ -22,6 +23,7 @@ export default function ComplexPage() {
   return (
     <>
       <HeroSitePlan />
+      <ProjectGallery />
       <StackingPlan />
       <UnitTypes />
       <TourBand />
