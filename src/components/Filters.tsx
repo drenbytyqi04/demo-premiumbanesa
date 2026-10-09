@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { Apartment } from '../types'
 
@@ -190,7 +190,12 @@ function RangeSlider({
 }) {
   // the handles move from local state immediately; the URL (and the list) follow on each step
   const [draft, setDraft] = useState<[number, number]>(value)
-  useEffect(() => setDraft(value), [value[0], value[1]]) // eslint-disable-line react-hooks/exhaustive-deps
+  const box = useRef<HTMLDivElement>(null)
+  // follow outside changes (e.g. "Pastro filtrat"), but not while the user is moving a handle:
+  // the URL can lag a step behind fast key presses and would pull the handle back
+  useEffect(() => {
+    if (!box.current?.contains(document.activeElement)) setDraft(value)
+  }, [value[0], value[1]]) // eslint-disable-line react-hooks/exhaustive-deps
   const [lo, hi] = [Math.max(min, Math.min(draft[0], max)), Math.min(max, Math.max(draft[1], min))]
   const update = (v: [number, number]) => {
     setDraft(v)
@@ -207,7 +212,7 @@ function RangeSlider({
           {fmt(lo)} – {fmt(hi)}
         </span>
       </div>
-      <div className="range-slider relative h-11">
+      <div ref={box} className="range-slider relative h-11">
         <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-white/25" />
         <div className="absolute top-1/2 h-[3px] -translate-y-1/2 bg-white" style={{ left: `${pct(lo)}%`, right: `${100 - pct(hi)}%` }} />
         <input
