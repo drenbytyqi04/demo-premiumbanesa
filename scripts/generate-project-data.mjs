@@ -22,21 +22,29 @@ const UNITS = 7 // per wing per floor
 const FRONT_UNITS = { A: 4, B: 3 } // apartments visible on the street facade, the rest face the courtyard
 
 // ------------------------------------------------------------------ crops (source: 2000px renders)
-const HERO = { file: 'pamja-majtas.jpg', left: 0, top: 130, width: 2000, height: 1300 }
+// hero: the aerial render, zoomed in on the building (crop, then upscaled to HERO_W wide)
+const HERO = { file: 'pamja-ajrore.jpg', left: 470, top: 440, width: 1200, height: 620 }
+const HERO_W = 1920
+const HERO_K = HERO_W / HERO.width
 const FACADE = {
   A: { file: 'pamja-ballore.jpg', left: 150, top: 240, width: 960, height: 960 },
   B: { file: 'pamja-ballore.jpg', left: 1030, top: 150, width: 740, height: 1060 },
 }
 
-async function crop(c, out) {
-  await sharp(join(IMG, c.file)).extract({ left: c.left, top: c.top, width: c.width, height: c.height }).jpeg({ quality: 84, mozjpeg: true }).toFile(join(IMG, out))
+async function crop(c, out, width = c.width) {
+  await sharp(join(IMG, c.file))
+    .extract({ left: c.left, top: c.top, width: c.width, height: c.height })
+    .resize({ width, kernel: 'lanczos3' })
+    .jpeg({ quality: 85, mozjpeg: true })
+    .toFile(join(IMG, out))
 }
 
 // ------------------------------------------------------------------ geometry (in source-render pixels)
-// Hero (pamja-majtas): outline of each wing incl. the top floor above it
+// Hero (pamja-ajrore, 2000×1500): roof + facades of each wing, down to the top of the shop floor.
+// The roof divider between the two green roofs is the border between the wings.
 const HERO_POLY = {
-  A: [[150, 442], [760, 286], [760, 1240], [150, 1182]],
-  B: [[760, 286], [1180, 172], [1897, 484], [1897, 1202], [1180, 1302], [760, 1240]],
+  A: [[807, 617], [875, 565], [1072, 602], [1015, 652], [1025, 890], [815, 822]],
+  B: [[1072, 602], [1125, 607], [1167, 565], [1287, 580], [1335, 612], [1325, 810], [1172, 917], [1025, 890], [1015, 652]],
 }
 
 // Facade (pamja-ballore): floor boundaries at a reference x, plus the slope of the slabs.
@@ -79,7 +87,7 @@ function mulberry32(seed) {
 
 async function main() {
   mkdirSync(DATA, { recursive: true })
-  await crop(HERO, 'hero.jpg')
+  await crop(HERO, 'hero.jpg', HERO_W)
   await crop(FACADE.A, 'fasada-a.jpg')
   await crop(FACADE.B, 'fasada-b.jpg')
 
@@ -87,7 +95,7 @@ async function main() {
     name: 'Rezidenca Aurora',
     tagline: 'Jetesë premium në zemër të qytetit',
     location: 'Prishtinë, Kosovë',
-    aerial: { image: 'images/projekti/hero.jpg', width: HERO.width, height: HERO.height },
+    aerial: { image: 'images/projekti/hero.jpg', width: HERO_W, height: r(HERO.height * HERO_K) },
   }
   const buildings = [
     { id: 'A', name: 'Lamela A', description: 'Krahu me fasadë në tone të çelura, me ballkone të gjera nga rruga dhe nga oborri.' },
@@ -95,7 +103,7 @@ async function main() {
   ].map((b) => ({
     ...b,
     floors: FLOORS,
-    polygon: shift(HERO_POLY[b.id], HERO),
+    polygon: shift(HERO_POLY[b.id], HERO).map(([x, y]) => [r(x * HERO_K), r(y * HERO_K)]),
     facades: [{ id: `${b.id}-front`, label: 'Fasada nga rruga', image: `images/projekti/fasada-${b.id.toLowerCase()}.jpg`, width: FACADE[b.id].width, height: FACADE[b.id].height }],
   }))
 
