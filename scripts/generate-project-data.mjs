@@ -22,10 +22,11 @@ const UNITS = 7 // per wing per floor
 const FRONT_UNITS = { A: 4, B: 3 } // apartments visible on the street facade, the rest face the courtyard
 
 // ------------------------------------------------------------------ crops (source: 2000px renders)
-// hero: the aerial render, zoomed in on the building (crop, then upscaled to HERO_W wide)
-const HERO = { file: 'pamja-ajrore-2.jpg', left: 180, top: 125, width: 1360, height: 620 }
-const HERO_W = 1920
-const HERO_K = HERO_W / HERO.width
+// hero: cut from the ORIGINAL aerial render (not the re-compressed copy), never upscaled,
+// saved as high-quality WebP so the photo stays sharp
+const HERO = { file: 'pamja-ajrore-2-origjinal.webp', left: 60, top: 70, width: 1612, height: 760 }
+const HERO_W = HERO.width
+const HERO_K = 1
 // Both wings share one wide street-facade image (the whole front of the building);
 // each wing's page shows only its own apartments on it.
 const FRONT = { file: 'pamja-ballore.jpg', left: 100, top: 40, width: 1800, height: 1250 }
@@ -90,14 +91,17 @@ function mulberry32(seed) {
 
 async function main() {
   mkdirSync(DATA, { recursive: true })
-  await crop(HERO, 'hero.jpg', HERO_W)
+  await sharp(join(IMG, HERO.file))
+    .extract({ left: HERO.left, top: HERO.top, width: HERO.width, height: HERO.height })
+    .webp({ quality: 92, smartSubsample: true, effort: 6 })
+    .toFile(join(IMG, 'hero.webp'))
   await crop(FRONT, 'fasada.jpg')
 
   const complex = {
     name: 'Rezidenca Aurora',
     tagline: 'Jetesë premium në zemër të qytetit',
     location: 'Prishtinë, Kosovë',
-    aerial: { image: 'images/projekti/hero.jpg', width: HERO_W, height: r(HERO.height * HERO_K) },
+    aerial: { image: 'images/projekti/hero.webp', width: HERO_W, height: r(HERO.height * HERO_K) },
   }
   const buildings = [
     { id: 'A', name: 'Lamela A', description: 'Krahu me fasadë në tone të çelura, me ballkone të gjera nga rruga dhe nga oborri.' },
