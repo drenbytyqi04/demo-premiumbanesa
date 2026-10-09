@@ -62,10 +62,11 @@ function BuildingView({ buildingId }: { buildingId: string }) {
         <Filters apartments={list} filters={filters} resultCount={filtered.length} />
       </div>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,520px)_minmax(0,1fr)]">
+      {/* the facade is the main way to choose, so it gets the wide column at full size */}
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
         <div>
           {facade ? (
-            <div className="rounded-xs bg-navy-50 p-2 ring-1 ring-navy-100 sm:p-3">
+            <div>
               <div className="mb-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1">
                 <div className="text-sm font-medium text-navy-700">
                   {facade.label}
@@ -143,7 +144,7 @@ function BuildingView({ buildingId }: { buildingId: string }) {
 
         <div>
           <h2 className="mb-4 font-display text-3xl">Apartamentet</h2>
-          <ApartmentTable apartments={filtered} />
+          <ApartmentTable apartments={filtered} compact />
         </div>
       </div>
     </div>

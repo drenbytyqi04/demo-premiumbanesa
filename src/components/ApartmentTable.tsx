@@ -3,7 +3,7 @@ import { formatArea, formatPrice } from '../lib/format'
 import type { Apartment } from '../types'
 import { StatusBadge } from './ui'
 
-export default function ApartmentTable({ apartments, showBuilding = false }: { apartments: Apartment[]; showBuilding?: boolean }) {
+export default function ApartmentTable({ apartments, showBuilding = false, compact = false }: { apartments: Apartment[]; showBuilding?: boolean; compact?: boolean }) {
   const navigate = useNavigate()
   if (!apartments.length)
     return <p className="rounded-xs bg-navy-50 p-8 text-center text-navy-500">Asnjë apartament nuk përputhet me filtrat.</p>
@@ -46,14 +46,19 @@ export default function ApartmentTable({ apartments, showBuilding = false }: { a
               <th className="px-4 py-3">Sipërfaqja</th>
               <th className="px-4 py-3">Çmimi</th>
               <th className="px-4 py-3">Statusi</th>
-              <th className="px-4 py-3" />
+              {!compact && <th className="px-4 py-3" />}
             </tr>
           </thead>
           <tbody className="divide-y divide-navy-100">
             {apartments.map((a) => (
               <tr key={a.id} className="cursor-pointer transition hover:bg-navy-50/60" onClick={() => navigate(`/apartments/${a.id}`)}>
                 {showBuilding && <td className="px-4 py-3 font-medium">{a.buildingId}</td>}
-                <td className="px-4 py-3 font-semibold">{a.number}</td>
+                <td className="px-4 py-3 font-semibold">
+                  {/* the number is the row's link for keyboard users; the whole row is clickable with the mouse */}
+                  <Link to={`/apartments/${a.id}`} onClick={(e) => e.stopPropagation()} className="hover:text-gold-500">
+                    {a.number}
+                  </Link>
+                </td>
                 <td className="px-4 py-3">{a.floor}</td>
                 <td className="px-4 py-3">{a.rooms}</td>
                 <td className="px-4 py-3">{formatArea(a.area)}</td>
@@ -61,11 +66,11 @@ export default function ApartmentTable({ apartments, showBuilding = false }: { a
                 <td className="px-4 py-3">
                   <StatusBadge status={a.status} />
                 </td>
-                <td className="px-4 py-3 text-right">
+                {!compact && <td className="px-4 py-3 text-right">
                   <Link to={`/apartments/${a.id}`} className="font-medium text-gold-600 hover:text-navy-900" onClick={(e) => e.stopPropagation()}>
                     Detajet
                   </Link>
-                </td>
+                </td>}
               </tr>
             ))}
           </tbody>
