@@ -7,7 +7,7 @@ import { Icon } from '../icons'
 type Errors = Partial<Record<'name' | 'phone' | 'email', string>>
 
 const field =
-  'mt-1.5 w-full rounded-xl border-0 bg-white px-4 py-3 text-base text-navy-900 ring-1 ring-stone-200 transition placeholder:text-navy-300 focus:ring-2 focus:ring-gold-500 focus:outline-none aria-[invalid=true]:ring-red-400'
+  'mt-1.5 w-full rounded-xs border-0 bg-white px-4 py-3 text-base text-navy-900 ring-1 ring-stone-200 transition placeholder:text-navy-300 focus:ring-2 focus:ring-gold-500 focus:outline-none aria-[invalid=true]:ring-red-400'
 
 export default function ContactSection() {
   const { buildings } = useData()
@@ -38,10 +38,10 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="kontakt" className="bg-navy-900 py-20 text-white sm:py-28" aria-labelledby="contact-title">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12">
+    <section id="kontakt" className="bg-navy-900 py-24 text-white sm:py-36" aria-labelledby="contact-title">
+      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 sm:px-8 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <h2 id="contact-title" className="font-display text-3xl font-semibold leading-tight sm:text-4xl">
+          <h2 id="contact-title" className="font-display text-[2.6rem] leading-[1.02] sm:text-6xl">
             Rezervoni një takim në zyrën e shitjes
           </h2>
           <p className="mt-4 max-w-md text-lg text-navy-200">
@@ -76,7 +76,7 @@ export default function ContactSection() {
         </div>
 
         <div className="lg:col-span-6 lg:col-start-7">
-          <div className="rounded-3xl bg-stone-50 p-6 text-navy-900 sm:p-8">
+          <div className="rounded-xs bg-stone-50 p-6 text-navy-900 sm:p-8">
             <AnimatePresence mode="wait" initial={false}>
               {state === 'sent' ? (
                 <motion.div
@@ -89,9 +89,9 @@ export default function ContactSection() {
                   <span className="mx-auto grid size-14 place-items-center rounded-full bg-emerald-100 text-emerald-700">
                     <Icon name="check" className="size-7" strokeWidth={2.2} />
                   </span>
-                  <h3 className="mt-5 font-display text-2xl font-semibold">Faleminderit, {name}</h3>
+                  <h3 className="mt-5 font-display text-4xl">Faleminderit, {name}</h3>
                   <p className="mx-auto mt-2 max-w-sm text-navy-600">Kërkesa për takim u dërgua. Do t'ju telefonojmë brenda një dite pune.</p>
-                  <button onClick={() => setState('idle')} className="mt-6 min-h-11 rounded-full px-5 font-medium text-navy-700 ring-1 ring-stone-200 hover:bg-white">
+                  <button onClick={() => setState('idle')} className="mt-6 min-h-11 rounded-xs px-5 font-medium text-navy-700 ring-1 ring-stone-200 hover:bg-white">
                     Dërgo një kërkesë tjetër
                   </button>
                 </motion.div>
@@ -134,7 +134,7 @@ export default function ContactSection() {
                     <button
                       type="submit"
                       disabled={state === 'sending'}
-                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-navy-900 px-7 font-semibold text-white transition hover:bg-navy-700 disabled:opacity-60"
+                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xs bg-navy-900 px-7 font-semibold text-white transition hover:bg-navy-700 disabled:opacity-60"
                     >
                       {state === 'sending' && <span className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" aria-hidden="true" />}
                       {state === 'sending' ? 'Duke dërguar…' : 'Rezervo takim'}

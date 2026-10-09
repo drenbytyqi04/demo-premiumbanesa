@@ -52,7 +52,7 @@ export default function AdminPage() {
         </div>
         {mode === 'demo' && (
           <button
-            className="min-h-10 self-start rounded-lg px-3 text-sm font-medium text-red-600 ring-1 ring-red-200 hover:bg-red-50 sm:self-auto"
+            className="min-h-10 self-start rounded-xs px-3 text-sm font-medium text-red-600 ring-1 ring-red-200 hover:bg-red-50 sm:self-auto"
             onClick={() => confirm('Të rikthehen të dhënat fillestare? Ndryshimet lokale do të fshihen.') && reset()}
           >
             Rikthe të dhënat fillestare
@@ -61,7 +61,7 @@ export default function AdminPage() {
       </div>
 
       {row?.kind === 'error' && (
-        <div role="alert" className="mb-4 flex items-start justify-between gap-3 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-800 ring-1 ring-red-200">
+        <div role="alert" className="mb-4 flex items-start justify-between gap-3 rounded-xs bg-red-50 px-4 py-3 text-sm text-red-800 ring-1 ring-red-200">
           <span>
             <strong>{row.id}:</strong> {row.message}
           </span>
@@ -77,7 +77,7 @@ export default function AdminPage() {
             key={s}
             onClick={() => setStatus(status === s ? '' : s)}
             aria-pressed={status === s}
-            className={`rounded-xl p-3 text-left ring-1 transition ${status === s ? 'bg-navy-900 text-white ring-navy-900' : 'bg-white ring-stone-200 hover:bg-stone-100'}`}
+            className={`rounded-xs p-3 text-left ring-1 transition ${status === s ? 'bg-navy-900 text-white ring-navy-900' : 'bg-white ring-stone-200 hover:bg-stone-100'}`}
           >
             <div className="text-2xl font-semibold tabular-nums">{n}</div>
             <div className={`text-xs ${status === s ? 'text-navy-200' : 'text-navy-500'}`}>{STATUS_LABELS[s]}</div>
@@ -109,7 +109,7 @@ export default function AdminPage() {
       {/* phones: cards */}
       <div className="space-y-3 md:hidden">
         {list.map((a) => (
-          <div key={a.id} className="rounded-xl bg-white p-4 shadow-sm ring-1 ring-stone-200">
+          <div key={a.id} className="rounded-xs bg-white p-4 shadow-sm ring-1 ring-stone-200">
             <div className="mb-3 flex items-start justify-between gap-3">
               <div>
                 <div className="font-semibold">{a.id}</div>
@@ -136,7 +136,7 @@ export default function AdminPage() {
       </div>
 
       {/* desktop: table */}
-      <div className="hidden overflow-x-auto rounded-2xl bg-white shadow-sm ring-1 ring-stone-200 md:block">
+      <div className="hidden overflow-x-auto rounded-xs bg-white shadow-sm ring-1 ring-stone-200 md:block">
         <table className="w-full text-left text-sm">
           <thead className="bg-stone-100 text-xs text-navy-500">
             <tr>

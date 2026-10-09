@@ -6,7 +6,7 @@ import { StatusBadge } from './ui'
 export default function ApartmentTable({ apartments, showBuilding = false }: { apartments: Apartment[]; showBuilding?: boolean }) {
   const navigate = useNavigate()
   if (!apartments.length)
-    return <p className="rounded-2xl bg-navy-50 p-8 text-center text-navy-500">Asnjë apartament nuk përputhet me filtrat.</p>
+    return <p className="rounded-xs bg-navy-50 p-8 text-center text-navy-500">Asnjë apartament nuk përputhet me filtrat.</p>
 
   return (
     <>
@@ -16,7 +16,7 @@ export default function ApartmentTable({ apartments, showBuilding = false }: { a
           <Link
             key={a.id}
             to={`/apartments/${a.id}`}
-            className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm ring-1 ring-navy-100 active:bg-navy-50"
+            className="flex items-center justify-between rounded-xs bg-white p-4 ring-1 ring-navy-200 active:bg-navy-50"
           >
             <div>
               <div className="font-semibold">
@@ -35,9 +35,9 @@ export default function ApartmentTable({ apartments, showBuilding = false }: { a
       </div>
 
       {/* desktop: table */}
-      <div className="hidden overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-navy-100 sm:block">
+      <div className="hidden overflow-hidden rounded-xs bg-white ring-1 ring-navy-200 sm:block">
         <table className="w-full text-left text-sm">
-          <thead className="bg-navy-50 text-xs uppercase tracking-wider text-navy-500">
+          <thead className="bg-navy-50 text-xs text-navy-500">
             <tr>
               {showBuilding && <th className="px-4 py-3">Ndërtesa</th>}
               <th className="px-4 py-3">Nr.</th>
@@ -63,7 +63,7 @@ export default function ApartmentTable({ apartments, showBuilding = false }: { a
                 </td>
                 <td className="px-4 py-3 text-right">
                   <Link to={`/apartments/${a.id}`} className="font-medium text-gold-600 hover:text-navy-900" onClick={(e) => e.stopPropagation()}>
-                    Detajet →
+                    Detajet
                   </Link>
                 </td>
               </tr>

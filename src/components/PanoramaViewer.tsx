@@ -88,15 +88,15 @@ export default function PanoramaViewer({ scenes }: Props) {
   const title = scenes.find((s) => s.id === current)?.title
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-navy-950 shadow-xl shadow-navy-900/20">
+    <div className="overflow-hidden rounded-xs bg-navy-950 shadow-xl shadow-navy-900/20">
       <div className="relative aspect-[4/3] w-full sm:aspect-[16/9]">
         <div ref={el} className="absolute inset-0" />
-        <div className="pointer-events-none absolute left-1/2 top-3 -translate-x-1/2 rounded-full bg-navy-950/70 px-4 py-1.5 text-sm font-medium text-white backdrop-blur">
+        <div className="pointer-events-none absolute left-1/2 top-3 -translate-x-1/2 rounded-xs bg-navy-950/70 px-4 py-1.5 text-sm font-medium text-white backdrop-blur">
           {title}
         </div>
         {loading && (
           <div className="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center">
-            <span className="rounded-full bg-navy-950/70 px-3 py-1 text-xs text-navy-100">Duke u ngarkuar…</span>
+            <span className="rounded-xs bg-navy-950/70 px-3 py-1 text-xs text-navy-100">Duke u ngarkuar…</span>
           </div>
         )}
       </div>
@@ -105,7 +105,7 @@ export default function PanoramaViewer({ scenes }: Props) {
           <button
             key={s.id}
             onClick={() => go(s.id)}
-            className={`group relative h-20 w-32 shrink-0 overflow-hidden rounded-lg ring-2 transition sm:h-24 sm:w-40 ${s.id === current ? 'ring-gold-400' : 'ring-transparent opacity-70 hover:opacity-100'}`}
+            className={`group relative h-20 w-32 shrink-0 overflow-hidden rounded-xs ring-2 transition sm:h-24 sm:w-40 ${s.id === current ? 'ring-gold-400' : 'ring-transparent opacity-70 hover:opacity-100'}`}
           >
             <img src={asset(s.image)} alt="" className="size-full object-cover transition group-hover:scale-110" loading="lazy" />
             <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950/90 to-transparent px-2 pb-1 pt-4 text-left text-xs font-medium text-white">

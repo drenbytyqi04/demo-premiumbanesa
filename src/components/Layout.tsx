@@ -6,7 +6,7 @@ import site from '../data/site.json'
 const year = new Date().getFullYear()
 
 const NAV = [
-  { to: '/', label: 'Ballina', end: true },
+  { to: '/', label: 'Projekti', end: true },
   { to: '/apartments', label: 'Banesat', end: false },
 ]
 
@@ -15,73 +15,80 @@ const CONTACT = { pathname: '/', search: '?s=kontakt' }
 export default function Layout() {
   const { complex } = useData()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
+  const overHero = pathname === '/' // the homepage header floats over the photo
 
   useEffect(() => {
     setOpen(false)
     window.scrollTo({ top: 0 })
   }, [pathname])
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const light = overHero && !scrolled && !open // white text on the photo
+  const linkCls = (active: boolean) =>
+    `relative py-2 text-[15px] transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:transition-transform ${
+      light ? 'text-white/85 hover:text-white after:bg-white' : 'text-navy-700 hover:text-navy-950 after:bg-navy-900'
+    } ${active ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`
+
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="sticky top-0 z-40 bg-navy-900/95 pt-[env(safe-area-inset-top)] text-white shadow-lg shadow-navy-950/20 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-          <Link to="/" className="flex items-center gap-3">
-            <span className="grid size-9 place-items-center rounded-xl bg-gold-500/15 ring-1 ring-gold-500/40">
-              <svg viewBox="0 0 24 24" className="size-5 fill-gold-400">
-                <path d="M4 20V9.5l8-6 8 6V20h-5.5v-6h-5v6z" />
-              </svg>
-            </span>
-            <span className="leading-tight">
-              <span className="block font-display text-lg font-semibold">{complex.name}</span>
-              <span className="hidden text-xs text-navy-300 sm:block">{complex.location}</span>
-            </span>
+      <header
+        className={`${overHero ? 'fixed' : 'sticky'} inset-x-0 top-0 z-40 pt-[env(safe-area-inset-top)] transition-[background-color,box-shadow,color] duration-300 ${
+          light ? 'bg-gradient-to-b from-navy-950/55 to-transparent' : 'bg-paper/92 shadow-[0_1px_0_var(--color-navy-200)] backdrop-blur-md'
+        }`}
+      >
+        <div className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-5 sm:px-8">
+          <Link to="/" className={`font-display text-[26px] leading-none tracking-tight ${light ? 'text-white' : 'text-navy-950'}`}>
+            {complex.name}
           </Link>
 
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-9 md:flex" aria-label="Kryesore">
             {NAV.map((n) => (
-              <NavLink
-                key={n.to}
-                to={n.to}
-                end={n.end}
-                className={({ isActive }) =>
-                  `rounded-lg px-4 py-2 text-sm font-medium transition ${isActive ? 'bg-white/10 text-gold-300' : 'text-navy-100 hover:bg-white/5 hover:text-white'}`
-                }
-              >
+              <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => linkCls(isActive)}>
                 {n.label}
               </NavLink>
             ))}
-            <Link to={CONTACT} className="ml-3 inline-flex min-h-10 items-center rounded-full bg-gold-500 px-5 text-sm font-semibold text-navy-950 transition hover:bg-gold-400">
+            <Link
+              to={CONTACT}
+              className={`inline-flex h-11 items-center px-5 text-[15px] font-medium transition-colors ${
+                light ? 'bg-white text-navy-950 hover:bg-gold-500 hover:text-white' : 'bg-navy-950 text-white hover:bg-gold-500'
+              }`}
+            >
               Rezervo takim
             </Link>
           </nav>
 
           <button
-            className="grid size-11 place-items-center rounded-lg hover:bg-white/10 md:hidden"
+            className={`-mr-2 grid size-11 place-items-center md:hidden ${light ? 'text-white' : 'text-navy-950'}`}
             onClick={() => setOpen((o) => !o)}
             aria-label="Menyja"
             aria-expanded={open}
           >
-            <svg viewBox="0 0 24 24" className="size-6 stroke-white" fill="none" strokeWidth="2" strokeLinecap="round">
-              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 9h16M4 15h16" />}
             </svg>
           </button>
         </div>
         {open && (
-          <nav className="border-t border-white/10 px-4 pb-4 md:hidden">
+          <nav className="border-t border-navy-200 bg-paper px-5 pb-6 pt-2 md:hidden" aria-label="Kryesore">
             {NAV.map((n) => (
               <NavLink
                 key={n.to}
                 to={n.to}
                 end={n.end}
-                className={({ isActive }) =>
-                  `block rounded-lg px-3 py-3 text-base ${isActive ? 'bg-white/10 text-gold-300' : 'text-navy-100'}`
-                }
+                className={({ isActive }) => `block border-b border-navy-100 py-4 font-display text-3xl ${isActive ? 'text-gold-500' : 'text-navy-950'}`}
               >
                 {n.label}
               </NavLink>
             ))}
-            <Link to={CONTACT} className="mt-2 flex min-h-12 items-center justify-center rounded-full bg-gold-500 font-semibold text-navy-950">
+            <Link to={CONTACT} className="mt-6 flex h-12 items-center justify-center bg-navy-950 font-medium text-white">
               Rezervo takim
             </Link>
           </nav>
@@ -93,33 +100,33 @@ export default function Layout() {
       </main>
 
       <footer className="bg-navy-950 text-navy-300">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <div className="font-display text-xl font-semibold text-white">{complex.name}</div>
-            <p className="mt-3 max-w-sm">{complex.tagline}. {site.location.address}.</p>
+        <div className="mx-auto max-w-[1400px] px-5 pb-10 pt-20 sm:px-8">
+          <div className="grid gap-12 border-b border-white/10 pb-16 md:grid-cols-12">
+            <div className="md:col-span-6">
+              <div className="font-display text-5xl text-white sm:text-6xl">{complex.name}</div>
+              <p className="mt-5 max-w-sm leading-relaxed">{site.location.address}</p>
+            </div>
+            <nav className="md:col-span-2" aria-label="Faqet">
+              <ul className="space-y-3">
+                <li><Link to="/" className="hover:text-white">Projekti</Link></li>
+                <li><Link to="/apartments" className="hover:text-white">Të gjitha banesat</Link></li>
+                <li><Link to="/apartments?lira=1" className="hover:text-white">Banesat e lira</Link></li>
+                <li><Link to={CONTACT} className="hover:text-white">Kontakti</Link></li>
+              </ul>
+            </nav>
+            <div className="md:col-span-4">
+              <a href={`tel:${site.contact.phone.replace(/\s/g, '')}`} className="block font-display text-3xl text-white hover:text-gold-300">
+                {site.contact.phone}
+              </a>
+              <a href={`mailto:${site.contact.email}`} className="mt-3 block hover:text-white">
+                {site.contact.email}
+              </a>
+              <p className="mt-1">{site.contact.hours}</p>
+            </div>
           </div>
-          <nav className="md:col-span-3" aria-label="Faqet">
-            <ul className="space-y-2">
-              <li><Link to="/" className="hover:text-white">Ballina</Link></li>
-              <li><Link to="/apartments" className="hover:text-white">Të gjitha banesat</Link></li>
-              <li><Link to="/apartments?lira=1" className="hover:text-white">Banesat e lira</Link></li>
-              <li><Link to={CONTACT} className="hover:text-white">Kontakti</Link></li>
-            </ul>
-          </nav>
-          <div className="md:col-span-4">
-            <a href={`tel:${site.contact.phone.replace(/\s/g, '')}`} className="block text-lg font-medium text-white hover:text-gold-300">
-              {site.contact.phone}
-            </a>
-            <a href={`mailto:${site.contact.email}`} className="mt-1 block hover:text-white">
-              {site.contact.email}
-            </a>
-            <p className="mt-1">{site.contact.hours}</p>
-          </div>
-        </div>
-        <div className="border-t border-white/10">
-          <div className="mx-auto max-w-7xl px-4 py-6 text-sm text-navy-400 sm:px-6">
-            <p>© {year} {complex.name}. Projekt demonstrues me të dhëna fiktive. Panoramat 360°: Poly Haven (CC0).</p>
-          </div>
+          <p className="pt-8 text-sm text-navy-400">
+            © {year} {complex.name}. Projekt demonstrues me të dhëna fiktive. Panoramat 360°: Poly Haven (CC0).
+          </p>
         </div>
       </footer>
     </div>

@@ -3,7 +3,7 @@ import { useAuth } from '../auth/AuthContext'
 import { useData } from '../data/DataContext'
 
 const field =
-  'mt-1.5 w-full rounded-xl border-0 bg-white px-4 py-3 text-base text-navy-900 ring-1 ring-stone-200 transition focus:ring-2 focus:ring-gold-500 focus:outline-none'
+  'mt-1.5 w-full rounded-xs border-0 bg-white px-4 py-3 text-base text-navy-900 ring-1 ring-stone-200 transition focus:ring-2 focus:ring-gold-500 focus:outline-none'
 
 export default function LoginPage() {
   const { signIn, mode } = useAuth()
@@ -32,7 +32,7 @@ export default function LoginPage() {
           <div className="font-display text-2xl font-semibold">{complex.name}</div>
           <div className="mt-1 text-sm text-navy-300">Paneli i menaxhimit</div>
         </div>
-        <form onSubmit={submit} className="rounded-3xl bg-stone-50 p-6 shadow-2xl sm:p-8">
+        <form onSubmit={submit} className="rounded-xs bg-stone-50 p-6 shadow-2xl sm:p-8">
           <h1 className="font-display text-xl font-semibold text-navy-900">Kyçu</h1>
           <label className="mt-5 block text-sm font-medium text-navy-700">
             Email
@@ -43,20 +43,20 @@ export default function LoginPage() {
             <input name="password" type="password" autoComplete="current-password" required className={field} />
           </label>
           {error && (
-            <p role="alert" className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+            <p role="alert" className="mt-4 rounded-xs bg-red-50 px-3 py-2 text-sm text-red-700">
               {error}
             </p>
           )}
           <button
             type="submit"
             disabled={busy}
-            className="mt-6 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-navy-900 font-semibold text-white transition hover:bg-navy-700 disabled:opacity-60"
+            className="mt-6 flex min-h-12 w-full items-center justify-center gap-2 rounded-xs bg-navy-900 font-semibold text-white transition hover:bg-navy-700 disabled:opacity-60"
           >
             {busy && <span className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" aria-hidden="true" />}
             {busy ? 'Duke u kyçur…' : 'Kyçu'}
           </button>
           {mode === 'demo' && (
-            <p className="mt-5 rounded-lg bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-900">
+            <p className="mt-5 rounded-xs bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-900">
               Modaliteti demo (pa Supabase): ndryshimet ruhen vetëm në këtë shfletues. Kredencialet demo janë te <code>.env.example</code>.
             </p>
           )}

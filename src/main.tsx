@@ -1,7 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
-import '@fontsource-variable/archivo/wdth.css'
+import '@fontsource-variable/geist/index.css'
+import '@fontsource/instrument-serif/400.css'
+import '@fontsource/instrument-serif/400-italic.css'
 import './index.css'
 
 createRoot(document.getElementById('root')!).render(

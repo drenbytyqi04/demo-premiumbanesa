@@ -7,9 +7,9 @@ import type { Apartment, ApartmentStatus } from '../../types'
 
 // sold units recede (hatched), free units stand out; status is never shown by colour alone
 const CELL: Record<ApartmentStatus, string> = {
-  available: 'bg-emerald-500 text-navy-950 hover:bg-emerald-400',
-  reserved: 'bg-amber-300 text-navy-950 hover:bg-amber-200',
-  sold: 'stack-sold text-navy-500',
+  available: 'bg-[#2e7d56] text-white hover:bg-[#256847]',
+  reserved: 'bg-[#e5c78d] text-navy-950 hover:bg-[#dcb872]',
+  sold: 'stack-sold text-navy-400',
 }
 
 /** Floors × units grid per building, the way sales teams track availability. */
@@ -19,14 +19,14 @@ export default function StackingPlan() {
   const [focus, setFocus] = useState<Apartment | null>(null)
 
   return (
-    <section className="bg-white py-20 sm:py-28" aria-labelledby="stacking-title">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section className="bg-stone-100 py-24 sm:py-36" aria-labelledby="stacking-title">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="grid gap-6 md:grid-cols-12 md:items-end">
-          <h2 id="stacking-title" className="font-display text-3xl font-semibold leading-tight text-navy-900 sm:text-4xl md:col-span-6">
+          <h2 id="stacking-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl md:col-span-6">
             Çdo banesë, kat pas kati
           </h2>
           <p className="max-w-lg text-lg text-navy-600 md:col-span-6">
-            Gjendja e shitjeve në kohë reale. Zgjidhni një banesë të gjelbër për ta parë nga afër.
+            Gjendja e shitjeve në kohë reale. Banesat e lira janë me të gjelbër; zgjidhni njërën për ta parë nga afër.
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export default function StackingPlan() {
               role="tab"
               aria-selected={tab === b.id}
               onClick={() => setTab(b.id)}
-              className={`min-h-11 flex-1 rounded-full text-sm font-semibold transition ${tab === b.id ? 'bg-navy-900 text-white' : 'bg-stone-100 text-navy-700'}`}
+              className={`min-h-11 flex-1 rounded-xs text-sm font-semibold transition ${tab === b.id ? 'bg-navy-900 text-white' : 'bg-stone-100 text-navy-700'}`}
             >
               {b.name}
             </button>
@@ -54,7 +54,7 @@ export default function StackingPlan() {
             return (
               <div key={b.id} className={tab === b.id ? '' : 'hidden md:block'}>
                 <div className="mb-3 flex items-baseline justify-between">
-                  <Link to={`/buildings/${b.id}`} className="font-display text-xl font-semibold text-navy-900 hover:text-gold-600">
+                  <Link to={`/buildings/${b.id}`} className="font-display text-3xl text-navy-950 hover:text-gold-500">
                     {b.name}
                   </Link>
                   <span className="text-sm text-navy-500">{free} të lira</span>
@@ -85,7 +85,7 @@ export default function StackingPlan() {
                             onMouseEnter={() => setFocus(a)}
                             onFocus={() => setFocus(a)}
                             aria-label={`Banesa ${a.number}, kati ${a.floor}, ${roomsLabel(a.rooms)}, ${STATUS_LABELS[a.status]}`}
-                            className={`grid h-11 place-items-center rounded-md text-xs font-semibold tabular-nums transition ${CELL[a.status]} ${focus?.id === a.id ? 'ring-2 ring-navy-900 ring-offset-1' : ''}`}
+                            className={`grid h-10 place-items-center text-[11px] font-medium tabular-nums transition ${CELL[a.status]} ${focus?.id === a.id ? 'outline outline-2 outline-offset-1 outline-navy-950' : ''}`}
                           >
                             {a.number}
                           </Link>
@@ -101,13 +101,13 @@ export default function StackingPlan() {
         <div className="mt-8 flex flex-col gap-4 border-t border-stone-200 pt-6 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-navy-600">
             <span className="inline-flex items-center gap-2">
-              <span className="size-4 rounded bg-emerald-500" /> E lirë
+              <span className="size-3.5 bg-[#2e7d56]" /> E lirë
             </span>
             <span className="inline-flex items-center gap-2">
-              <span className="size-4 rounded bg-amber-300" /> E rezervuar
+              <span className="size-3.5 bg-[#e5c78d]" /> E rezervuar
             </span>
             <span className="inline-flex items-center gap-2">
-              <span className="stack-sold size-4 rounded" /> E shitur
+              <span className="stack-sold size-3.5" /> E shitur
             </span>
           </div>
           <p className="min-h-6 text-sm text-navy-700" aria-live="polite">

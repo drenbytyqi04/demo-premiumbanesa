@@ -34,7 +34,7 @@ function BuildingView({ buildingId }: { buildingId: string }) {
   const go = (d: number) => setFacadeIdx((i) => (i + d + facades.length) % facades.length)
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-[1400px] px-5 py-8 sm:px-8">
       <nav className="mb-4 text-sm text-navy-500">
         <Link to="/" className="hover:text-navy-900">
           Ballina
@@ -43,7 +43,7 @@ function BuildingView({ buildingId }: { buildingId: string }) {
       </nav>
 
       <PageHeader eyebrow={`${building.floors} kate · ${list.length} apartamente · ${free} të lira`} title={building.name}>
-        <div className="flex gap-1 rounded-xl bg-navy-50 p-1">
+        <div className="flex gap-1 rounded-xs bg-navy-50 p-1">
           {buildings.map((b) => (
             <NavLink
               key={b.id}
@@ -65,7 +65,7 @@ function BuildingView({ buildingId }: { buildingId: string }) {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,520px)_minmax(0,1fr)]">
         <div>
           {facade ? (
-            <div className="rounded-2xl bg-navy-50 p-2 ring-1 ring-navy-100 sm:p-3">
+            <div className="rounded-xs bg-navy-50 p-2 ring-1 ring-navy-100 sm:p-3">
               <div className="mb-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1">
                 <div className="text-sm font-medium text-navy-700">
                   {facade.label}
@@ -90,7 +90,7 @@ function BuildingView({ buildingId }: { buildingId: string }) {
                 <ImageOverlay
                   key={facade.id}
                   image={facade}
-                  className="overflow-hidden rounded-xl bg-white"
+                  className="overflow-hidden rounded-xs bg-white"
                   ctaLabel="Hap apartamentin"
                   shapes={onFacade.map((a) => ({
                     id: a.id,
@@ -105,7 +105,7 @@ function BuildingView({ buildingId }: { buildingId: string }) {
                     return (
                       <div className="space-y-1">
                         <div className="flex items-center justify-between gap-3">
-                          <span className="font-display text-base font-semibold">Nr. {a.number}</span>
+                          <span className="font-display text-xl">Nr. {a.number}</span>
                           <StatusBadge status={a.status} />
                         </div>
                         <div className="text-navy-600">
@@ -137,12 +137,12 @@ function BuildingView({ buildingId }: { buildingId: string }) {
               )}
             </div>
           ) : (
-            <p className="rounded-2xl bg-navy-50 p-8 text-center text-navy-500">Kjo ndërtesë nuk ka ende imazh të fasadës.</p>
+            <p className="rounded-xs bg-navy-50 p-8 text-center text-navy-500">Kjo ndërtesë nuk ka ende imazh të fasadës.</p>
           )}
         </div>
 
         <div>
-          <h2 className="mb-3 font-display text-xl font-semibold">Apartamentet</h2>
+          <h2 className="mb-4 font-display text-3xl">Apartamentet</h2>
           <ApartmentTable apartments={filtered} />
         </div>
       </div>

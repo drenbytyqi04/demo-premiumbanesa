@@ -70,20 +70,20 @@ export default function Filters({ apartments, filters, resultCount }: Props) {
   const activeCount = [state.floor, state.rooms, state.minArea ?? state.maxArea].filter((v) => v !== null).length + (state.onlyAvailable ? 1 : 0)
 
   return (
-    <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-navy-100">
+    <div className="rounded-xs bg-white p-4 ring-1 ring-navy-200">
       <div className={`flex items-center justify-between md:mb-3 ${open ? 'mb-3' : ''}`}>
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
-          className="-m-2 flex items-center gap-2 rounded-lg p-2 text-sm font-semibold uppercase tracking-wider text-navy-700 md:pointer-events-none"
+          className="-m-2 flex items-center gap-2 rounded-xs p-2 text-sm font-medium text-navy-800 md:pointer-events-none"
         >
           <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M3 5h18M6 12h12M10 19h4" strokeLinecap="round" />
           </svg>
           Filtro
           {activeCount > 0 && (
-            <span className="grid size-5 place-items-center rounded-full bg-gold-500 text-[11px] text-navy-950">{activeCount}</span>
+            <span className="grid size-5 place-items-center rounded-full bg-gold-500 text-[11px] text-white">{activeCount}</span>
           )}
           <svg viewBox="0 0 24 24" className={`size-4 transition md:hidden ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M6 9l6 6 6-6" strokeLinecap="round" />
@@ -144,7 +144,7 @@ export default function Filters({ apartments, filters, resultCount }: Props) {
           <label className="flex cursor-pointer items-center gap-2 text-sm text-navy-800">
             <input
               type="checkbox"
-              className="size-4 rounded accent-emerald-600"
+              className="size-4 rounded accent-[#2e7d56]"
               checked={state.onlyAvailable}
               onChange={(e) => set({ onlyAvailable: e.target.checked })}
             />

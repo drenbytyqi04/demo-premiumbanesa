@@ -42,25 +42,22 @@ export default function HeroSitePlan() {
   }, [])
 
   return (
-    <section className="bg-navy-900 text-white">
-      <div className="mx-auto grid max-w-7xl gap-6 px-4 pb-8 pt-10 sm:px-6 md:grid-cols-12 md:items-end md:pb-10 md:pt-16">
-        <motion.h1 {...rise(0)} className="font-display text-[2.1rem] font-semibold leading-[1.05] sm:text-5xl md:col-span-7 lg:text-[3.6rem]">
+    <section className="bg-navy-950 text-white">
+      <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-12 pt-32 sm:px-8 md:grid-cols-12 md:items-end md:pb-14 md:pt-40">
+        <motion.h1 {...rise(0)} className="font-display text-[3.1rem] leading-[0.98] sm:text-7xl md:col-span-8 lg:text-[6.2rem]">
           {site.hero.title}
         </motion.h1>
-        <div className="md:col-span-5 md:pb-1">
-          <motion.p {...rise(0.12)} className="max-w-md text-lg leading-relaxed text-navy-200">
+        <div className="md:col-span-4 md:pb-2">
+          <motion.p {...rise(0.12)} className="max-w-sm text-[17px] leading-relaxed text-navy-300">
             {site.hero.text}
           </motion.p>
-          <motion.div {...rise(0.24)} className="mt-6 flex flex-wrap gap-3">
-            <Link
-              to="/apartments?lira=1"
-              className="inline-flex min-h-12 items-center rounded-full bg-gold-500 px-6 font-semibold text-navy-950 transition hover:bg-gold-400"
-            >
+          <motion.div {...rise(0.24)} className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+            <Link to="/apartments?lira=1" className="inline-flex h-12 items-center bg-gold-500 px-6 font-medium text-white transition-colors hover:bg-gold-600">
               Shiko {totalFree} banesat e lira
             </Link>
             <Link
               to={`/apartments/${firstTour.id}`}
-              className="inline-flex min-h-12 items-center rounded-full px-6 font-medium text-white ring-1 ring-white/30 transition hover:bg-white/10"
+              className="inline-flex h-12 items-center border-b border-white/40 font-medium text-white transition-colors hover:border-white"
             >
               Tura virtuale 360°
             </Link>
@@ -68,70 +65,66 @@ export default function HeroSitePlan() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1400px] md:px-6">
-        <div ref={scroller} className="no-scrollbar overflow-x-auto md:overflow-visible">
-          <ImageOverlay
-            intro
-            subtle
-            image={complex.aerial}
-            highlightId={hovered}
-            className="w-[200vw] max-w-[900px] md:w-auto md:max-w-none md:overflow-hidden md:rounded-t-3xl"
-            ctaLabel="Hap ndërtesën"
-            shapes={stats
-              .filter((s) => s.building.polygon)
-              .map((s) => ({
-                id: s.building.id,
-                points: s.building.polygon!,
-                rgb: s.free > 0 ? STATUS_RGB.available : STATUS_RGB.sold,
-                label: `${s.building.name}: ${s.free} banesa të lira`,
-              }))}
-            onSelect={(id) => navigate(`/buildings/${id}`)}
-            renderTooltip={(id) => {
-              const s = stats.find((x) => x.building.id === id)!
-              return (
-                <>
-                  <div className="font-display text-base font-semibold text-navy-900">{s.building.name}</div>
-                  <div className={s.free ? 'font-medium text-emerald-700' : 'font-medium text-red-600'}>
-                    {s.free ? `${s.free} banesa të lira` : 'E shitur plotësisht'}
-                  </div>
-                  {s.minPrice && <div className="text-xs text-navy-500">nga {formatPrice(s.minPrice)}</div>}
-                </>
-              )
-            }}
-          />
-        </div>
-
-        {/* availability per building – hover highlights the building on the plan */}
-        <div className={`grid border-t border-white/10 bg-navy-800 md:rounded-b-3xl ${MD_COLS[stats.length] ?? "md:grid-cols-3"}`}>
-          {stats.map((s, i) => (
-            <Link
-              key={s.building.id}
-              to={`/buildings/${s.building.id}`}
-              onMouseEnter={() => setHovered(s.building.id)}
-              onMouseLeave={() => setHovered(null)}
-              onFocus={() => setHovered(s.building.id)}
-              onBlur={() => setHovered(null)}
-              className={`group flex flex-col gap-3 px-4 py-5 transition hover:bg-white/[0.04] sm:px-6 ${i > 0 ? 'border-t border-white/10 md:border-l md:border-t-0' : ''}`}
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <span className="font-display text-xl font-semibold">{s.building.name}</span>
-                <span className="text-sm text-navy-300">{s.minPrice ? `nga ${formatPrice(s.minPrice)}` : 'E shitur'}</span>
-              </div>
-              <div className="flex h-2 overflow-hidden rounded-full bg-white/10" role="img" aria-label={`${s.free} të lira, ${s.reserved} të rezervuara, ${s.sold} të shitura`}>
-                <span className="bg-emerald-500" style={{ width: `${(s.free / s.total) * 100}%` }} />
-                <span className="bg-amber-400" style={{ width: `${(s.reserved / s.total) * 100}%` }} />
-                <span className="bg-red-400/70" style={{ width: `${(s.sold / s.total) * 100}%` }} />
-              </div>
-              <div className="text-sm text-navy-200">
-                <span className="font-semibold text-white">{s.free} të lira</span> nga {s.total} banesa
-                <span className="text-navy-400">, {s.reserved} të rezervuara</span>
-              </div>
-            </Link>
-          ))}
-        </div>
+      <div ref={scroller} className="no-scrollbar overflow-x-auto md:overflow-visible">
+        <ImageOverlay
+          intro
+          subtle
+          image={complex.aerial}
+          highlightId={hovered}
+          className="w-[200vw] max-w-[900px] md:w-auto md:max-w-none"
+          ctaLabel="Hap lamelën"
+          shapes={stats
+            .filter((s) => s.building.polygon)
+            .map((s) => ({
+              id: s.building.id,
+              points: s.building.polygon!,
+              rgb: s.free > 0 ? STATUS_RGB.available : STATUS_RGB.sold,
+              label: `${s.building.name}: ${s.free} banesa të lira`,
+            }))}
+          onSelect={(id) => navigate(`/buildings/${id}`)}
+          renderTooltip={(id) => {
+            const s = stats.find((x) => x.building.id === id)!
+            return (
+              <>
+                <div className="font-display text-2xl text-navy-950">{s.building.name}</div>
+                <div className="mt-1 text-navy-700">{s.free ? `${s.free} banesa të lira` : 'E shitur plotësisht'}</div>
+                {s.minPrice && <div className="text-sm text-navy-500">nga {formatPrice(s.minPrice)}</div>}
+              </>
+            )
+          }}
+        />
       </div>
-      <p className="mx-auto max-w-7xl px-4 pb-10 pt-3 text-sm text-navy-400 sm:px-6 md:hidden">Rrëshqitni pamjen anash dhe prekni një lamelë.</p>
-      <div className="hidden pb-16 md:block" />
+      <p className="px-5 pt-4 text-sm text-navy-400 md:hidden">Rrëshqitni pamjen anash dhe prekni një lamelë.</p>
+
+      {/* availability per wing – hover highlights the wing on the photo */}
+      <div className={`mx-auto grid max-w-[1400px] px-5 pb-20 pt-6 sm:px-8 md:pt-0 ${MD_COLS[stats.length] ?? 'md:grid-cols-3'}`}>
+        {stats.map((s, i) => (
+          <Link
+            key={s.building.id}
+            to={`/buildings/${s.building.id}`}
+            onMouseEnter={() => setHovered(s.building.id)}
+            onMouseLeave={() => setHovered(null)}
+            onFocus={() => setHovered(s.building.id)}
+            onBlur={() => setHovered(null)}
+            className={`group block border-white/15 py-8 md:pt-10 ${i > 0 ? 'border-t md:border-l md:border-t-0 md:pl-10' : 'md:pr-10'}`}
+          >
+            <div className="flex items-end justify-between gap-4">
+              <span className="font-display text-4xl transition-colors group-hover:text-gold-300 sm:text-5xl">{s.building.name}</span>
+              <span className="pb-1.5 text-navy-300">{s.minPrice ? `nga ${formatPrice(s.minPrice)}` : 'E shitur'}</span>
+            </div>
+            <div className="mt-6 flex h-[3px] bg-white/10" role="img" aria-label={`${s.free} të lira, ${s.reserved} të rezervuara, ${s.sold} të shitura`}>
+              <span className="bg-[#5fb589]" style={{ width: `${(s.free / s.total) * 100}%` }} />
+              <span className="bg-[#e5c78d]" style={{ width: `${(s.reserved / s.total) * 100}%` }} />
+            </div>
+            <div className="mt-4 flex justify-between text-sm text-navy-300">
+              <span>
+                <span className="text-white">{s.free} të lira</span> · {s.reserved} të rezervuara · {s.total} gjithsej
+              </span>
+              <span className="text-white/70 transition-colors group-hover:text-white">Shiko katet</span>
+            </div>
+          </Link>
+        ))}
+      </div>
     </section>
   )
 }

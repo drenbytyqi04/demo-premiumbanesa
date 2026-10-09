@@ -23,14 +23,14 @@ export default function ApartmentsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-[1400px] px-5 py-8 sm:px-8">
       <PageHeader eyebrow="Të gjitha ndërtesat" title="Apartamentet">
-        <div className="flex gap-1 rounded-xl bg-navy-50 p-1">
+        <div className="flex gap-1 rounded-xs bg-navy-50 p-1">
           {[null, ...buildings.map((b) => b.id)].map((id) => (
             <button
               key={id ?? 'all'}
               onClick={() => setBuilding(id)}
-              className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${buildingId === id ? 'bg-navy-900 text-white shadow' : 'text-navy-600 hover:bg-white'}`}
+              className={`rounded-xs px-4 py-2 text-sm font-semibold transition ${buildingId === id ? 'bg-navy-900 text-white shadow' : 'text-navy-600 hover:bg-white'}`}
             >
               {id ?? 'Të gjitha'}
             </button>

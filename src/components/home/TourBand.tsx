@@ -1,45 +1,40 @@
 import { Link } from 'react-router-dom'
 import { useData } from '../../data/DataContext'
 import { asset } from '../../lib/format'
-import { Icon } from '../icons'
 
+/** Full-bleed band: the living-room panorama as backdrop, one clear invitation into the 360° tour. */
 export default function TourBand() {
   const { apartments, scenes } = useData()
   const apt = apartments.find((a) => a.status === 'available' && a.panoramaSceneIds.length >= 4) ?? apartments[0]
-  const tourScenes = apt.panoramaSceneIds.map((id) => scenes.find((s) => s.id === id)).filter((s) => !!s)
+  const living = scenes.find((s) => s.id === apt.panoramaSceneIds[0])
+  const rooms = apt.panoramaSceneIds.map((id) => scenes.find((s) => s.id === id)?.title).filter(Boolean)
 
   return (
     <section className="relative isolate overflow-hidden bg-navy-950 text-white" aria-labelledby="tour-title">
-      <img src={asset(tourScenes[0]?.image ?? '')} alt="" className="absolute inset-0 -z-10 size-full object-cover opacity-45" loading="lazy" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/80 to-navy-950/20" />
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2 lg:items-center">
-        <div>
-          <h2 id="tour-title" className="font-display text-3xl font-semibold leading-tight sm:text-4xl">
+      {living && (
+        <img
+          src={asset(living.image)}
+          alt=""
+          className="absolute inset-0 -z-10 size-full scale-[1.6] object-cover object-[50%_55%] opacity-70"
+          loading="lazy"
+        />
+      )}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950/90 via-navy-950/55 to-navy-950/10" />
+      <div className="mx-auto flex min-h-[78vh] max-w-[1400px] flex-col justify-end px-5 py-24 sm:px-8 sm:py-32">
+        <div className="max-w-2xl">
+          <h2 id="tour-title" className="font-display text-[2.6rem] leading-[1.02] sm:text-6xl lg:text-7xl">
             Ecni nëpër banesë para se të vini në zyrë
           </h2>
-          <p className="mt-4 max-w-md text-lg text-navy-200">
-            Çdo banesë ka turë 360°. Rrotullohuni në çdo dhomë dhe kaloni nga dhoma ditore te kuzhina me një prekje.
+          <p className="mt-6 max-w-md text-[17px] leading-relaxed text-white/75">
+            Çdo banesë ka turë 360°. Rrotullohuni në çdo dhomë dhe kaloni nga njëra te tjetra me një prekje.
           </p>
-          <Link
-            to={`/apartments/${apt.id}`}
-            className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-6 font-semibold text-navy-950 transition hover:bg-gold-300"
-          >
-            <Icon name="rotate" className="size-5" />
-            Hap turën e banesës {apt.number}
-          </Link>
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <Link to={`/apartments/${apt.id}`} className="inline-flex h-12 items-center bg-white px-6 font-medium text-navy-950 transition-colors hover:bg-gold-500 hover:text-white">
+              Hap turën 360°
+            </Link>
+            <span className="text-sm text-white/60">{rooms.join('  ·  ')}</span>
+          </div>
         </div>
-        <ul className="grid grid-cols-2 gap-3">
-          {tourScenes.map((s) => (
-            <li key={s.id}>
-              <Link to={`/apartments/${apt.id}`} className="group block overflow-hidden rounded-2xl ring-1 ring-white/15">
-                <div className="relative aspect-[4/3]">
-                  <img src={asset(s.image)} alt="" className="size-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
-                  <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950/90 to-transparent px-3 pb-2 pt-8 text-sm font-medium">{s.title}</span>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   )

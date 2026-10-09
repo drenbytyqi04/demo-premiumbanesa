@@ -5,36 +5,48 @@ import { asset } from '../../lib/format'
 
 const images = site.gallery.images
 
+// editorial layout: one large view, two beside it, then a row of four
+const TILE = [
+  'col-span-2 aspect-[4/3] md:col-span-8 md:row-span-2 md:aspect-auto md:h-[640px]',
+  'aspect-square md:col-span-4 md:aspect-auto md:h-[312px]',
+  'aspect-square md:col-span-4 md:aspect-auto md:h-[312px]',
+  'aspect-[4/5] md:col-span-3 md:aspect-[4/5]',
+  'aspect-[4/5] md:col-span-3 md:aspect-[4/5]',
+  'aspect-[4/5] md:col-span-3 md:aspect-[4/5]',
+  'aspect-[4/5] md:col-span-3 md:aspect-[4/5]',
+]
+
 /** Renders of the project in a masonry layout; opens a full-screen viewer on click. */
 export default function ProjectGallery() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section className="bg-stone-100 py-20 sm:py-28" aria-labelledby="gallery-title">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section className="bg-paper py-24 sm:py-36" aria-labelledby="gallery-title">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="grid gap-6 md:grid-cols-12 md:items-end">
-          <h2 id="gallery-title" className="font-display text-3xl font-semibold leading-tight text-navy-900 sm:text-4xl md:col-span-6">
+          <h2 id="gallery-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl md:col-span-6">
             {site.gallery.title}
           </h2>
           <p className="max-w-lg text-lg text-navy-600 md:col-span-6">{site.gallery.text}</p>
         </div>
 
-        <ul className="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3">
+        <ul className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-12 md:gap-4">
           {images.map((img, i) => (
-            <li key={img.src} className="mb-4 break-inside-avoid">
+            <li key={img.src} className={TILE[i] ?? 'md:col-span-3'}>
               <button
                 onClick={() => setOpen(i)}
-                className="group relative block w-full overflow-hidden rounded-2xl bg-stone-200 focus-visible:outline-offset-4"
+                className="group relative block size-full overflow-hidden bg-navy-100 focus-visible:outline-offset-4"
                 aria-label={`Hap foton: ${img.alt}`}
               >
                 <img
-                  src={asset(img.thumb)}
+                  src={asset(i === 0 ? img.src : img.thumb)}
                   alt={img.alt}
-                  width={img.width}
-                  height={img.height}
-                  loading="lazy"
-                  className="h-auto w-full transition duration-700 group-hover:scale-[1.03]"
+                  loading={i < 3 ? 'eager' : 'lazy'}
+                  className="size-full object-cover transition duration-[1.2s] ease-out group-hover:scale-[1.04]"
                 />
+                <span className="absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-navy-950/70 to-transparent px-4 pb-3 pt-10 text-left text-sm text-white opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                  {img.alt}
+                </span>
               </button>
             </li>
           ))}
@@ -107,7 +119,7 @@ function Lightbox({ index, onIndex, onClose }: { index: number; onIndex: (i: num
             key={img.src}
             src={asset(img.src)}
             alt={img.alt}
-            className="max-h-full max-w-full rounded-lg object-contain"
+            className="max-h-full max-w-full rounded-xs object-contain"
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}

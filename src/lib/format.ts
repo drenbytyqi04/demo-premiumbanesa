@@ -8,15 +8,15 @@ export const STATUS_LABELS: Record<ApartmentStatus, string> = {
 
 /** Polygon fill colours (rgb) per status; opacity is applied in CSS. */
 export const STATUS_RGB: Record<ApartmentStatus, string> = {
-  available: '34 197 94',
-  sold: '239 68 68',
-  reserved: '234 179 8',
+  available: '46 125 86', // pine green
+  sold: '168 64 46', // brick
+  reserved: '201 148 52', // ochre
 }
 
 export const STATUS_BADGE: Record<ApartmentStatus, string> = {
-  available: 'bg-emerald-50 text-emerald-700 ring-emerald-600/20',
-  sold: 'bg-red-50 text-red-700 ring-red-600/20',
-  reserved: 'bg-amber-50 text-amber-800 ring-amber-600/20',
+  available: 'bg-[#2e7d56]/10 text-[#24623f] ring-[#2e7d56]/30',
+  sold: 'bg-[#a8402e]/8 text-[#8c3524] ring-[#a8402e]/25',
+  reserved: 'bg-[#c99434]/12 text-[#7a5612] ring-[#c99434]/35',
 }
 
 const eur = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })

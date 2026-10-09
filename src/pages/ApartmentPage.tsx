@@ -30,9 +30,9 @@ export default function ApartmentPage() {
   ]
 
   return (
-    <div className="mx-auto max-w-7xl px-4 pb-28 pt-5 sm:px-6 sm:pt-8 lg:pb-8">
+    <div className="mx-auto max-w-[1400px] px-5 pb-28 pt-5 sm:px-8 sm:pt-8 lg:pb-8">
       <nav className="mb-4 flex flex-wrap items-center justify-between gap-2 text-sm text-navy-500">
-        <Link to={`/buildings/${building.id}`} className="-ml-2 rounded-lg px-2 py-1 font-medium text-navy-700 sm:hidden">
+        <Link to={`/buildings/${building.id}`} className="-ml-2 rounded-xs px-2 py-1 font-medium text-navy-700 sm:hidden">
           ← {building.name}
         </Link>
         <div className="hidden sm:block">
@@ -47,12 +47,12 @@ export default function ApartmentPage() {
         </div>
         <div className="flex gap-2">
           {prev && (
-            <Link to={`/apartments/${prev.id}`} className="rounded-lg px-2 py-1 hover:bg-navy-50">
+            <Link to={`/apartments/${prev.id}`} className="rounded-xs px-2 py-1 hover:bg-navy-50">
               ← {prev.number}
             </Link>
           )}
           {next && (
-            <Link to={`/apartments/${next.id}`} className="rounded-lg px-2 py-1 hover:bg-navy-50">
+            <Link to={`/apartments/${next.id}`} className="rounded-xs px-2 py-1 hover:bg-navy-50">
               {next.number} →
             </Link>
           )}
@@ -66,13 +66,13 @@ export default function ApartmentPage() {
             <div className="text-sm font-medium text-gold-600">
               {building.name} · Kati {apt.floor}
             </div>
-            <h1 className="font-display text-3xl font-semibold">Apartamenti {apt.number}</h1>
+            <h1 className="font-display text-5xl text-navy-950">Apartamenti {apt.number}</h1>
           </div>
           <StatusBadge status={apt.status} />
         </div>
         <div className="no-scrollbar -mx-4 mt-3 flex gap-2 overflow-x-auto px-4">
           {[formatArea(apt.area), `${apt.rooms} ${apt.rooms === 1 ? 'dhomë' : 'dhoma'}`, `Kati ${apt.floor}`].map((t) => (
-            <span key={t} className="shrink-0 rounded-full bg-navy-50 px-3 py-1 text-sm font-medium text-navy-700">
+            <span key={t} className="shrink-0 rounded-xs bg-navy-50 px-3 py-1 text-sm font-medium text-navy-700">
               {t}
             </span>
           ))}
@@ -82,14 +82,14 @@ export default function ApartmentPage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-8">
         <div className="min-w-0 space-y-3 sm:space-y-4">
           <div className="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="font-display text-xl font-semibold sm:text-2xl">Tura virtuale 360°</h2>
+            <h2 className="font-display text-3xl sm:text-4xl">Tura virtuale 360°</h2>
             <span className="hidden text-sm text-navy-500 sm:block">Tërhiqni për të parë përreth · klikoni rrathët për të lëvizur</span>
             <span className="text-xs text-navy-500 sm:hidden">Rrëshqitni me gisht · prekni rrathët</span>
           </div>
           {tourScenes.length ? (
             <PanoramaViewer scenes={tourScenes} />
           ) : (
-            <p className="rounded-2xl bg-navy-50 p-8 text-center text-navy-500">Tura virtuale nuk është ende në dispozicion.</p>
+            <p className="rounded-xs bg-navy-50 p-8 text-center text-navy-500">Tura virtuale nuk është ende në dispozicion.</p>
           )}
           <p className="text-xs text-navy-400">
             Pamjet 360° janë ilustruese (panorama CC0 nga Poly Haven) dhe nuk paraqesin apartamentin real.
@@ -97,26 +97,26 @@ export default function ApartmentPage() {
         </div>
 
         <aside className="min-w-0">
-          <div className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-navy-100 sm:p-6 lg:sticky lg:top-24">
+          <div className="rounded-xs bg-white p-5 ring-1 ring-navy-200 sm:p-6 lg:sticky lg:top-24">
             <div className="hidden items-start justify-between gap-4 lg:flex">
               <div>
                 <div className="text-sm font-medium text-gold-600">
                   {building.name} · Kati {apt.floor}
                 </div>
-                <h1 className="font-display text-3xl font-semibold">Apartamenti {apt.number}</h1>
+                <h1 className="font-display text-5xl text-navy-950">Apartamenti {apt.number}</h1>
               </div>
               <StatusBadge status={apt.status} />
             </div>
 
-            <div className="rounded-xl bg-navy-900 p-4 text-white lg:mt-5">
-              <div className="text-xs uppercase tracking-wider text-navy-300">Çmimi</div>
-              <div className="font-display text-3xl font-semibold">
+            <div className="rounded-xs bg-navy-900 p-4 text-white lg:mt-5">
+              <div className="text-xs text-navy-300">Çmimi</div>
+              <div className="font-display text-4xl">
                 {apt.status === 'sold' ? 'E shitur' : formatPrice(apt.price)}
               </div>
               {apt.status === 'reserved' && <div className="mt-1 text-sm text-gold-300">Aktualisht e rezervuar</div>}
             </div>
 
-            <h2 className="mt-5 text-sm font-semibold uppercase tracking-wider text-navy-500 lg:hidden">Detajet</h2>
+            <h2 className="mt-5 text-sm font-medium text-navy-500 lg:hidden">Detajet</h2>
             <dl className="mt-2 divide-y lg:mt-5 divide-navy-100 text-sm">
               {rows.map(([k, v]) => (
                 <div key={k} className="flex justify-between py-2.5">
@@ -128,14 +128,14 @@ export default function ApartmentPage() {
 
             <div className="mt-5">
               <div className="mb-2 text-sm font-medium text-navy-700">Plani i apartamentit</div>
-              <a href={asset(apt.floorPlan)} target="_blank" rel="noreferrer" className="block overflow-hidden rounded-xl ring-1 ring-navy-100 transition hover:ring-gold-400">
+              <a href={asset(apt.floorPlan)} target="_blank" rel="noreferrer" className="block overflow-hidden rounded-xs ring-1 ring-navy-100 transition hover:ring-gold-400">
                 <img src={asset(apt.floorPlan)} alt={`Plani i apartamentit ${apt.number}`} className="w-full bg-white" />
               </a>
             </div>
 
             <a
               href={`mailto:shitja@example.com?subject=${encodeURIComponent(`Interesim për apartamentin ${apt.id}`)}`}
-              className={`mt-6 hidden w-full lg:flex items-center justify-center rounded-xl px-4 py-3 font-semibold transition ${apt.status === 'sold' ? 'pointer-events-none bg-navy-100 text-navy-400' : 'bg-gold-500 text-navy-950 hover:bg-gold-400'}`}
+              className={`mt-6 hidden w-full lg:flex items-center justify-center rounded-xs px-4 py-3 font-semibold transition ${apt.status === 'sold' ? 'pointer-events-none bg-navy-100 text-navy-400' : 'bg-gold-500 text-white hover:bg-gold-600'}`}
             >
               {apt.status === 'sold' ? 'Nuk është në dispozicion' : 'Kërko informacion'}
             </a>
@@ -148,11 +148,11 @@ export default function ApartmentPage() {
         <div className="mx-auto flex max-w-xl items-center justify-between gap-3">
           <div className="min-w-0">
             <div className="text-xs text-navy-500">Nr. {apt.number} · {formatArea(apt.area)}</div>
-            <div className="truncate font-display text-xl font-semibold">{apt.status === 'sold' ? 'E shitur' : formatPrice(apt.price)}</div>
+            <div className="truncate font-display text-2xl">{apt.status === 'sold' ? 'E shitur' : formatPrice(apt.price)}</div>
           </div>
           <a
             href={`mailto:shitja@example.com?subject=${encodeURIComponent(`Interesim për apartamentin ${apt.id}`)}`}
-            className={`shrink-0 rounded-xl px-5 py-3 text-sm font-semibold ${apt.status === 'sold' ? 'pointer-events-none bg-navy-100 text-navy-400' : 'bg-gold-500 text-navy-950 active:bg-gold-400'}`}
+            className={`shrink-0 rounded-xs px-5 py-3 text-sm font-semibold ${apt.status === 'sold' ? 'pointer-events-none bg-navy-100 text-navy-400' : 'bg-gold-500 text-white active:bg-gold-600'}`}
           >
             {apt.status === 'sold' ? 'Jo në dispozicion' : 'Kërko informacion'}
           </a>

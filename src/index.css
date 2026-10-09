@@ -1,26 +1,30 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
-  --color-stone-50: #f6f7f8;
-  --color-stone-100: #eef0f2;
-  --color-stone-200: #dfe3e7;
-  --color-navy-50: #f2f5f9;
-  --color-navy-100: #e1e7f0;
-  --color-navy-200: #c6d1e1;
-  --color-navy-300: #9eb0ca;
-  --color-navy-400: #6f87ab;
-  --color-navy-500: #4f6891;
-  --color-navy-600: #3d5277;
-  --color-navy-700: #324361;
-  --color-navy-800: #1f2b42;
-  --color-navy-900: #0f1b2d;
-  --color-navy-950: #09111e;
-  --color-gold-300: #e2cd9c;
-  --color-gold-400: #d4b87a;
-  --color-gold-500: #c8a867;
-  --color-gold-600: #a98a4b;
+  /* Palette taken from the building: green-roof ink, terracotta facade, limestone.
+     Token names are historical: "navy" = ink scale, "gold" = terracotta accent. */
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+  --color-stone-50: #f7f6f3;
+  --color-stone-100: #efeeea;
+  --color-stone-200: #e0ded8;
+  --color-navy-50: #f2f3f0;
+  --color-navy-100: #e5e7e2;
+  --color-navy-200: #cdd1c9;
+  --color-navy-300: #a7aea4;
+  --color-navy-400: #7c857a;
+  --color-navy-500: #5d665c;
+  --color-navy-600: #485047;
+  --color-navy-700: #363d36;
+  --color-navy-800: #242a25;
+  --color-navy-900: #18201b;
+  --color-navy-950: #0e130f;
+  --color-gold-300: #e6b49b;
+  --color-gold-400: #d07a52;
+  --color-gold-500: #b5532e;
+  --color-gold-600: #964224;
+  --color-paper: #f3f2ef;
+  --radius-xs: 2px;
 }
 
 html {
@@ -28,10 +32,11 @@ html {
   scroll-padding-top: 5rem;
 }
 
-/* Archivo's expanded width, used for headlines like building signage */
+/* Instrument Serif has a single weight: never fake-bold it */
 .font-display {
-  font-stretch: 125%;
-  letter-spacing: -0.015em;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em;
+  line-height: 1.02;
 }
 
 :focus-visible {
@@ -50,7 +55,7 @@ html {
 }
 
 body {
-  @apply bg-white font-sans text-navy-900 antialiased;
+  @apply bg-paper font-sans text-navy-900 antialiased;
 }
 
 /* ---------- interactive image overlays ---------- */
@@ -112,14 +117,14 @@ body {
   border-radius: 8px;
   background: rgb(15 27 45 / 0.85);
   color: #fff;
-  font: 500 13px/1.4 'Archivo Variable', sans-serif;
+  font: 500 13px/1.4 'Geist Variable', sans-serif;
 }
 .pnlm-hotspot-base.floor-hotspot:hover span {
   visibility: visible;
 }
 .pnlm-container {
   background: #0f1b2d;
-  font-family: 'Archivo Variable', sans-serif;
+  font-family: 'Geist Variable', sans-serif;
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -135,16 +140,19 @@ body {
 /* stacking plan: sold units are hatched so status doesn't rely on colour alone */
 .stack-sold {
   background-color: var(--color-stone-100);
-  background-image: repeating-linear-gradient(135deg, rgb(239 68 68 / 0.35) 0 1.5px, transparent 1.5px 7px);
+  background-image: repeating-linear-gradient(135deg, rgb(168 64 46 / 0.22) 0 1px, transparent 1px 6px);
 }
 
-/* photo-real renders: keep the building visible until hover */
+/* photo-real renders: a fine white contour at rest, status colour on hover */
 .overlay-subtle .overlay-shape {
-  fill: rgb(var(--shape-rgb) / 0.16);
-  stroke-width: 2.5;
+  fill: rgb(255 255 255 / 0.04);
+  stroke: rgb(255 255 255 / 0.85);
+  stroke-width: 1.5;
 }
 .overlay-subtle .overlay-shape:hover,
 .overlay-subtle .overlay-shape:focus-visible,
 .overlay-subtle .overlay-shape[data-active='true'] {
-  fill: rgb(var(--shape-rgb) / 0.5);
+  fill: rgb(var(--shape-rgb) / 0.42);
+  stroke: #fff;
+  stroke-width: 2;
 }

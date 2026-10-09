@@ -158,7 +158,7 @@ export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, c
 
       {tip && (
         <div
-          className={`absolute z-20 w-max max-w-[220px] rounded-xl bg-white/95 p-3 text-sm shadow-xl shadow-navy-900/20 ring-1 ring-navy-900/10 backdrop-blur ${tip.touch ? '' : 'pointer-events-none'}`}
+          className={`absolute z-20 w-max max-w-[220px] rounded-xs bg-white/95 p-3 text-sm shadow-xl shadow-navy-900/20 ring-1 ring-navy-900/10 backdrop-blur ${tip.touch ? '' : 'pointer-events-none'}`}
           style={{
             left: tipX,
             top: tip.y,
@@ -169,9 +169,9 @@ export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, c
           {tip.touch && (
             <button
               onClick={() => onSelect(tip.id)}
-              className="mt-2 w-full rounded-lg bg-navy-900 px-3 py-2 text-sm font-medium text-white active:bg-navy-700"
+              className="mt-2 w-full rounded-xs bg-navy-900 px-3 py-2 text-sm font-medium text-white active:bg-navy-700"
             >
-              {ctaLabel} →
+              {ctaLabel}
             </button>
           )}
         </div>

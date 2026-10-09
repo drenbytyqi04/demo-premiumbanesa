@@ -487,7 +487,7 @@ export default function EditorPage() {
       <div className="relative flex flex-col bg-navy-950 lg:min-h-0 lg:flex-1">
         {/* toolbar */}
         <div className="flex flex-wrap items-center gap-2 border-b border-white/10 bg-navy-900 px-3 py-2 text-sm text-white">
-          <div className="flex rounded-lg bg-white/10 p-0.5">
+          <div className="flex rounded-xs bg-white/10 p-0.5">
             {(['draw', 'edit'] as Mode[]).map((m) => (
               <button
                 key={m}
@@ -495,7 +495,7 @@ export default function EditorPage() {
                   setMode(m)
                   if (m === 'edit') setDrawing(null)
                 }}
-                className={`rounded-md px-3 py-1.5 font-medium transition ${mode === m ? 'bg-gold-500 text-navy-950' : 'text-navy-100 hover:bg-white/10'}`}
+                className={`rounded-xs px-3 py-1.5 font-medium transition ${mode === m ? 'bg-gold-500 text-white' : 'text-navy-100 hover:bg-white/10'}`}
               >
                 {m === 'draw' ? '✎ Vizato' : '⤧ Ndrysho'}
                 <span className="hidden sm:inline">{m === 'draw' ? ' (D)' : ' (E)'}</span>
@@ -514,7 +514,7 @@ export default function EditorPage() {
             <ToolBtn onClick={() => setZoom((z) => Math.max(0.25, z / 1.25))} title="Zvogëlo (−)">
               −
             </ToolBtn>
-            <button onClick={() => setZoom(1)} className="w-14 rounded-md py-1.5 text-center tabular-nums hover:bg-white/10" title="Përshtat (0)">
+            <button onClick={() => setZoom(1)} className="w-14 rounded-xs py-1.5 text-center tabular-nums hover:bg-white/10" title="Përshtat (0)">
               {Math.round(zoom * 100)}%
             </button>
             <ToolBtn onClick={() => setZoom((z) => Math.min(8, z * 1.25))} title="Zmadho (+)">
@@ -533,7 +533,7 @@ export default function EditorPage() {
                 commit(polys.map((q, i) => (i === poly ? { ...q, points: q.points.filter((_, j) => j !== idx) } : q)))
                 setActiveVertex(null)
               }}
-              className="rounded-md bg-red-500/90 px-3 py-1.5 font-medium"
+              className="rounded-xs bg-red-500/90 px-3 py-1.5 font-medium"
             >
               Fshi pikën
             </button>
@@ -541,10 +541,10 @@ export default function EditorPage() {
           {drawing && (
             <div className="flex items-center gap-2">
               <span className="text-navy-300">{drawing.length} pika</span>
-              <button onClick={closeDrawing} disabled={drawing.length < 3} className="rounded-md bg-emerald-600 px-3 py-1.5 font-medium disabled:opacity-40">
+              <button onClick={closeDrawing} disabled={drawing.length < 3} className="rounded-xs bg-emerald-600 px-3 py-1.5 font-medium disabled:opacity-40">
                 Mbyll ✓
               </button>
-              <button onClick={() => setDrawing(null)} className="rounded-md px-2 py-1.5 text-navy-200 hover:bg-white/10">
+              <button onClick={() => setDrawing(null)} className="rounded-xs px-2 py-1.5 text-navy-200 hover:bg-white/10">
                 Anulo
               </button>
             </div>
@@ -699,7 +699,7 @@ export default function EditorPage() {
 
         {notice && (
           <div
-            className={`pointer-events-none absolute bottom-4 left-1/2 z-10 max-w-[90%] -translate-x-1/2 rounded-xl px-4 py-2 text-sm font-medium shadow-lg ${notice.tone === 'ok' ? 'bg-emerald-600 text-white' : 'bg-amber-400 text-navy-950'}`}
+            className={`pointer-events-none absolute bottom-4 left-1/2 z-10 max-w-[90%] -translate-x-1/2 rounded-xs px-4 py-2 text-sm font-medium shadow-lg ${notice.tone === 'ok' ? 'bg-emerald-600 text-white' : 'bg-amber-400 text-navy-950'}`}
           >
             {notice.text}
           </div>
@@ -749,7 +749,7 @@ export default function EditorPage() {
             </label>
           )}
           {draftRestored && (
-            <p className="mt-2 rounded-lg bg-amber-100 px-3 py-2 text-xs text-amber-900">
+            <p className="mt-2 rounded-xs bg-amber-100 px-3 py-2 text-xs text-amber-900">
               U rikthye drafti yt i fundit për këtë imazh. Kliko “Ringarko” për të filluar nga të dhënat e aplikacionit.
             </p>
           )}
@@ -783,7 +783,7 @@ export default function EditorPage() {
                       setNextId(id)
                       setMode('draw')
                     }}
-                    className={`rounded-md px-2 py-0.5 font-mono text-xs ring-1 transition ${suggestedId === id ? 'bg-gold-500 text-navy-950 ring-gold-500' : 'bg-white text-navy-700 ring-navy-200 hover:bg-navy-100'}`}
+                    className={`rounded-xs px-2 py-0.5 font-mono text-xs ring-1 transition ${suggestedId === id ? 'bg-gold-500 text-white ring-gold-500' : 'bg-white text-navy-700 ring-navy-200 hover:bg-navy-100'}`}
                   >
                     {id}
                   </button>
@@ -809,9 +809,9 @@ export default function EditorPage() {
               </button>
             )}
           </h2>
-          {dupIds.length > 0 && <p className="mb-2 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-700">ID të dyfishta: {[...new Set(dupIds)].join(', ')}</p>}
+          {dupIds.length > 0 && <p className="mb-2 rounded-xs bg-red-50 px-3 py-2 text-xs text-red-700">ID të dyfishta: {[...new Set(dupIds)].join(', ')}</p>}
           {unknownIds.length > 0 && (
-            <p className="mb-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">
+            <p className="mb-2 rounded-xs bg-amber-50 px-3 py-2 text-xs text-amber-800">
               Këto ID nuk ekzistojnë në të dhëna dhe do të injorohen në faqe: {unknownIds.join(', ')}
             </p>
           )}
@@ -819,7 +819,7 @@ export default function EditorPage() {
             {polys.map((p, i) => (
               <li
                 key={i}
-                className={`flex items-center gap-2 rounded-lg px-2 py-1.5 ring-1 transition ${i === selected ? 'bg-gold-300/30 ring-gold-500' : 'bg-white ring-navy-100'}`}
+                className={`flex items-center gap-2 rounded-xs px-2 py-1.5 ring-1 transition ${i === selected ? 'bg-gold-300/30 ring-gold-500' : 'bg-white ring-navy-100'}`}
                 onClick={() => {
                   setSelected(i)
                   setMode('edit')
@@ -897,7 +897,7 @@ export default function EditorPage() {
           </p>
         </section>
 
-        <details className="rounded-xl bg-white p-3 text-xs text-navy-600 ring-1 ring-navy-100">
+        <details className="rounded-xs bg-white p-3 text-xs text-navy-600 ring-1 ring-navy-100">
           <summary className="cursor-pointer font-semibold text-navy-800">Shkurtesat</summary>
           <ul className="mt-2 space-y-1">
             <li><b>D</b> vizato · <b>E</b> ndrysho</li>
@@ -922,7 +922,7 @@ export default function EditorPage() {
 
 function ToolBtn({ children, ...rest }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button {...rest} className="grid size-8 place-items-center rounded-md text-base hover:bg-white/10 disabled:opacity-30">
+    <button {...rest} className="grid size-8 place-items-center rounded-xs text-base hover:bg-white/10 disabled:opacity-30">
       {children}
     </button>
   )
