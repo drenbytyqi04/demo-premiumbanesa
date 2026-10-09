@@ -87,7 +87,7 @@ The studio renders are in `public/images/projekti/` (each with a `-900.jpg` thum
 
 | File | Used for | Cut from |
 |------|----------|----------|
-| `hero.webp` | Homepage hero, cut from the original aerial (not upscaled) | `pamja-ajrore-2-origjinal.webp` |
+| `pamja-ajrore-3-origjinal.webp` | Homepage hero: the original aerial, served as-is | (original file) |
 | `fasada-a.jpg` | Lamela A page, 4 apartments × 10 floors | `pamja-ballore.jpg` (left wing) |
 | `fasada-b.jpg` | Lamela B page, 3 apartments × 9 floors (floor 10 is hidden by the overhang) | `pamja-ballore.jpg` (right wing) |
 

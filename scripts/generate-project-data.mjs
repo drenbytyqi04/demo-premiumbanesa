@@ -24,7 +24,7 @@ const FRONT_UNITS = { A: 4, B: 3 } // apartments visible on the street facade, t
 // ------------------------------------------------------------------ crops (source: 2000px renders)
 // hero: cut from the ORIGINAL aerial render (not the re-compressed copy), never upscaled,
 // saved as high-quality WebP so the photo stays sharp
-const HERO = { file: 'pamja-ajrore-2-origjinal.webp', left: 60, top: 70, width: 1612, height: 760 }
+const HERO = { file: 'pamja-ajrore-3-origjinal.webp', left: 0, top: 0, width: 2000, height: 911 }
 const HERO_W = HERO.width
 const HERO_K = 1
 // Both wings share one wide street-facade image (the whole front of the building);
@@ -43,11 +43,11 @@ async function crop(c, out, width = c.width) {
 }
 
 // ------------------------------------------------------------------ geometry (in source-render pixels)
-// Hero (pamja-ajrore-2, 1732×908): roof + facades of each wing, down to the top of the shop floor.
+// Hero (pamja-ajrore-3, 2000×911): roof + facades of each wing, down to the top of the shop floor.
 // The divider between the two green roofs is the border between the wings.
 const HERO_POLY = {
-  A: [[483, 238], [555, 170], [850, 212], [770, 290], [800, 345], [805, 595], [495, 518]],
-  B: [[850, 212], [920, 218], [965, 172], [1155, 190], [1222, 235], [1215, 500], [1000, 652], [805, 595], [800, 345], [770, 290]],
+  A: [[490, 172], [900, 252], [790, 350], [852, 442], [852, 795], [400, 700], [380, 265]],
+  B: [[900, 252], [1000, 262], [1085, 170], [1345, 200], [1435, 265], [1418, 555], [1120, 842], [852, 795], [852, 442], [790, 350]],
 }
 
 // Facade (pamja-ballore): floor boundaries at a reference x, plus the slope of the slabs.
@@ -89,19 +89,26 @@ function mulberry32(seed) {
   }
 }
 
+let heroImage = 'hero.webp'
+
 async function main() {
   mkdirSync(DATA, { recursive: true })
-  await sharp(join(IMG, HERO.file))
-    .extract({ left: HERO.left, top: HERO.top, width: HERO.width, height: HERO.height })
-    .webp({ quality: 92, smartSubsample: true, effort: 6 })
-    .toFile(join(IMG, 'hero.webp'))
+  // the whole original is used, so serve it as-is (no re-encoding); otherwise cut a high-quality WebP
+  const meta = await sharp(join(IMG, HERO.file)).metadata()
+  const full = HERO.left === 0 && HERO.top === 0 && HERO.width === meta.width && HERO.height === meta.height
+  if (!full)
+    await sharp(join(IMG, HERO.file))
+      .extract({ left: HERO.left, top: HERO.top, width: HERO.width, height: HERO.height })
+      .webp({ quality: 92, smartSubsample: true, effort: 6 })
+      .toFile(join(IMG, 'hero.webp'))
+  heroImage = full ? HERO.file : 'hero.webp'
   await crop(FRONT, 'fasada.jpg')
 
   const complex = {
     name: 'Rezidenca Aurora',
     tagline: 'Jetesë premium në zemër të qytetit',
     location: 'Prishtinë, Kosovë',
-    aerial: { image: 'images/projekti/hero.webp', width: HERO_W, height: r(HERO.height * HERO_K) },
+    aerial: { image: `images/projekti/${heroImage}`, width: HERO_W, height: r(HERO.height * HERO_K) },
   }
   const buildings = [
     { id: 'A', name: 'Lamela A', description: 'Krahu me fasadë në tone të çelura, me ballkone të gjera nga rruga dhe nga oborri.' },
