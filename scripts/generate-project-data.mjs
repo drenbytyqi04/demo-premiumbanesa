@@ -23,7 +23,7 @@ const FRONT_UNITS = { A: 4, B: 3 } // apartments visible on the street facade, t
 
 // ------------------------------------------------------------------ crops (source: 2000px renders)
 // hero: the aerial render, zoomed in on the building (crop, then upscaled to HERO_W wide)
-const HERO = { file: 'pamja-ajrore.jpg', left: 470, top: 440, width: 1200, height: 620 }
+const HERO = { file: 'pamja-ajrore-2.jpg', left: 180, top: 125, width: 1360, height: 620 }
 const HERO_W = 1920
 const HERO_K = HERO_W / HERO.width
 const FACADE = {
@@ -40,11 +40,11 @@ async function crop(c, out, width = c.width) {
 }
 
 // ------------------------------------------------------------------ geometry (in source-render pixels)
-// Hero (pamja-ajrore, 2000×1500): roof + facades of each wing, down to the top of the shop floor.
-// The roof divider between the two green roofs is the border between the wings.
+// Hero (pamja-ajrore-2, 1732×908): roof + facades of each wing, down to the top of the shop floor.
+// The divider between the two green roofs is the border between the wings.
 const HERO_POLY = {
-  A: [[807, 617], [875, 565], [1072, 602], [1015, 652], [1025, 890], [815, 822]],
-  B: [[1072, 602], [1125, 607], [1167, 565], [1287, 580], [1335, 612], [1325, 810], [1172, 917], [1025, 890], [1015, 652]],
+  A: [[483, 238], [555, 170], [850, 212], [770, 290], [800, 345], [805, 595], [495, 518]],
+  B: [[850, 212], [920, 218], [965, 172], [1155, 190], [1222, 235], [1215, 500], [1000, 652], [805, 595], [800, 345], [770, 290]],
 }
 
 // Facade (pamja-ballore): floor boundaries at a reference x, plus the slope of the slabs.
