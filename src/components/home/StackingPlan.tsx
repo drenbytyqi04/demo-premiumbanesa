@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useData } from '../../data/DataContext'
 import { MD_COLS, STATUS_LABELS, formatArea, formatPrice, roomsLabel } from '../../lib/format'
 import type { Apartment, ApartmentStatus } from '../../types'
+import { RevealHeading } from '../motion'
 
 // sold units recede (hatched), free units stand out; status is never shown by colour alone
 const CELL: Record<ApartmentStatus, string> = {
@@ -22,9 +23,7 @@ export default function StackingPlan() {
     <section className="bg-stone-100 py-24 sm:py-36" aria-labelledby="stacking-title">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="grid gap-6 md:grid-cols-12 md:items-end">
-          <h2 id="stacking-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl md:col-span-6">
-            Çdo banesë, kat pas kati
-          </h2>
+          <RevealHeading id="stacking-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl md:col-span-6">{"Çdo banesë, kat pas kati"}</RevealHeading>
           <p className="max-w-lg text-lg text-navy-600 md:col-span-6">
             Gjendja e shitjeve në kohë reale. Banesat e lira janë me të gjelbër; zgjidhni njërën për ta parë nga afër.
           </p>

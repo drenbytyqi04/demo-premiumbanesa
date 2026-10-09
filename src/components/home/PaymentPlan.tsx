@@ -1,4 +1,6 @@
+import { motion } from 'motion/react'
 import site from '../../data/site.json'
+import { RevealHeading } from '../motion'
 
 const SHADES = ['bg-gold-500', 'bg-navy-500', 'bg-navy-700', 'bg-navy-900']
 
@@ -7,14 +9,20 @@ export default function PaymentPlan() {
   return (
     <section className="bg-stone-100 py-24 sm:py-36" aria-labelledby="payment-title">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-        <h2 id="payment-title" className="max-w-2xl font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl">
-          Paguani sipas ecurisë së ndërtimit
-        </h2>
+        <RevealHeading id="payment-title" className="max-w-2xl font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl">{"Paguani sipas ecurisë së ndërtimit"}</RevealHeading>
         <p className="mt-4 max-w-xl text-lg text-navy-600">Pa kredi të detyrueshme dhe pa kamatë. Çmimi fiksohet me kontratë.</p>
 
         <div className="mt-14 flex h-[3px] overflow-hidden" aria-hidden="true">
           {site.payment.map((p, i) => (
-            <span key={p.title} className={SHADES[i % SHADES.length]} style={{ width: p.share }} />
+            <motion.span
+              key={p.title}
+              className={`origin-left ${SHADES[i % SHADES.length]}`}
+              style={{ width: p.share }}
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, amount: 1 }}
+              transition={{ duration: 0.7, delay: 0.15 + i * 0.25, ease: [0.65, 0, 0.35, 1] }}
+            />
           ))}
         </div>
 

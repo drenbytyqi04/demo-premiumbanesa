@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { scrollToTarget } from '../lib/smoothScroll'
 import Architecture from '../components/home/Architecture'
 import ConstructionProgress from '../components/home/ConstructionProgress'
 import ContactSection from '../components/home/ContactSection'
@@ -20,7 +21,7 @@ export default function ComplexPage() {
   // "#/?s=kontakt" scrolls to a section (HashRouter leaves no room for #anchors)
   useEffect(() => {
     if (!section) return
-    const t = window.setTimeout(() => document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' }), 60)
+    const t = window.setTimeout(() => { const el = document.getElementById(section); if (el) scrollToTarget(el) }, 60)
     return () => window.clearTimeout(t)
   }, [section])
 

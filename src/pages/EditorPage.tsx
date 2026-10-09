@@ -557,6 +557,7 @@ export default function EditorPage() {
         {/* canvas */}
         <div
           ref={scrollRef}
+          data-lenis-prevent
           className="relative max-h-[68vh] min-h-48 overflow-auto overscroll-contain lg:max-h-none lg:flex-1"
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {

@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
+import { motion } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useData } from '../data/DataContext'
 import site from '../data/site.json'
+import { scrollToTarget } from '../lib/smoothScroll'
 
 const year = new Date().getFullYear()
 
@@ -22,11 +24,26 @@ export default function Layout() {
 
   useEffect(() => {
     setOpen(false)
-    window.scrollTo({ top: 0 })
+    scrollToTarget(0, { immediate: true })
   }, [pathname])
 
+  // the header slides away while scrolling down and returns when scrolling up
+  const [hidden, setHidden] = useState(false)
+  const lastY = useRef(0)
+  // no fade on the very first page load (the hero has its own entrance), only between pages
+  const firstPage = useRef(true)
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    firstPage.current = false
+  }, [])
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 24)
+      if (Math.abs(y - lastY.current) > 6) {
+        setHidden(y > lastY.current && y > 400)
+        lastY.current = y
+      }
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -41,7 +58,7 @@ export default function Layout() {
   return (
     <div className="flex min-h-dvh flex-col">
       <header
-        className={`${overHero ? 'fixed' : 'sticky'} inset-x-0 top-0 z-40 pt-[env(safe-area-inset-top)] transition-[background-color,box-shadow,color] duration-300 ${
+        className={`${overHero ? 'fixed' : 'sticky'} inset-x-0 top-0 z-40 pt-[env(safe-area-inset-top)] transition-[background-color,box-shadow,color,translate] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${hidden && !open ? '-translate-y-full' : ''} ${
           light ? 'bg-gradient-to-b from-navy-950/55 to-transparent' : 'bg-paper/92 shadow-[0_1px_0_var(--color-navy-200)] backdrop-blur-md'
         }`}
       >
@@ -97,7 +114,10 @@ export default function Layout() {
       </header>
 
       <main className="flex-1">
-        <Outlet />
+        {/* page transition: each page fades in */}
+        <motion.div key={pathname} initial={firstPage.current ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
+          <Outlet />
+        </motion.div>
       </main>
 
       <footer className="bg-navy-950 text-navy-300">

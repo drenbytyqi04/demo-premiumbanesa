@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useData } from '../../data/DataContext'
 import { asset } from '../../lib/format'
+import { ParallaxImage, RevealHeading } from '../motion'
 
 /** Full-bleed band: the living-room panorama as backdrop, one clear invitation into the 360° tour. */
 export default function TourBand() {
@@ -12,19 +13,18 @@ export default function TourBand() {
   return (
     <section className="relative isolate overflow-hidden bg-navy-950 text-white" aria-labelledby="tour-title">
       {living && (
-        <img
+        <ParallaxImage
           src={asset(living.image)}
           alt=""
-          className="absolute inset-0 -z-10 size-full scale-[1.6] object-cover object-[50%_55%] opacity-70"
-          loading="lazy"
+          strength={12}
+          className="absolute inset-0 -z-10"
+          imgClassName="scale-[1.6] object-[50%_55%] opacity-70"
         />
       )}
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950/90 via-navy-950/55 to-navy-950/10" />
       <div className="mx-auto flex min-h-[78vh] max-w-[1400px] flex-col justify-end px-5 py-24 sm:px-8 sm:py-32">
         <div className="max-w-2xl">
-          <h2 id="tour-title" className="font-display text-[2.6rem] leading-[1.02] sm:text-6xl lg:text-7xl">
-            Ecni nëpër banesë para se të vini në zyrë
-          </h2>
+          <RevealHeading id="tour-title" className="font-display text-[2.6rem] leading-[1.02] sm:text-6xl lg:text-7xl">{"Ecni nëpër banesë para se të vini në zyrë"}</RevealHeading>
           <p className="mt-6 max-w-md text-[17px] leading-relaxed text-white/75">
             Çdo banesë ka turë 360°. Rrotullohuni në çdo dhomë dhe kaloni nga njëra te tjetra me një prekje.
           </p>

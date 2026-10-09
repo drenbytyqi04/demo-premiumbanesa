@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useData } from '../../data/DataContext'
 import { asset, formatPrice, formatNumber } from '../../lib/format'
+import { RevealHeading } from '../motion'
 
 const NAMES: Record<number, string> = {
   1: 'Garsonierë me një dhomë gjumi',
@@ -29,9 +30,7 @@ export default function UnitTypes() {
   return (
     <section className="bg-paper py-24 sm:py-36" aria-labelledby="types-title">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-        <h2 id="types-title" className="max-w-2xl font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl">
-          Katër tipologji, nga 45 deri në 130&nbsp;m²
-        </h2>
+        <RevealHeading id="types-title" className="max-w-2xl font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl">{"Katër tipologji, nga 45 deri në 130 m²"}</RevealHeading>
         <p className="mt-4 max-w-xl text-lg text-navy-600">Të gjitha banesat kanë ballkon, dritare në dy anë dhe depo në bodrum.</p>
 
         <ul className="mt-12 divide-y divide-stone-200 border-y border-stone-200">

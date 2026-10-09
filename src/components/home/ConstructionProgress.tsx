@@ -1,4 +1,6 @@
+import { motion } from 'motion/react'
 import site from '../../data/site.json'
+import { RevealHeading } from '../motion'
 
 const { progress } = site
 
@@ -12,16 +14,21 @@ export default function ConstructionProgress() {
     <section className="bg-navy-950 py-24 text-white sm:py-36" aria-labelledby="progress-title">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="grid gap-6 md:grid-cols-12 md:items-end">
-          <h2 id="progress-title" className="font-display text-[2.6rem] leading-[1.02] sm:text-6xl md:col-span-7">
-            {progress.title}
-          </h2>
+          <RevealHeading id="progress-title" className="font-display text-[2.6rem] leading-[1.02] sm:text-6xl md:col-span-7">{progress.title}</RevealHeading>
           <p className="max-w-md text-[17px] text-white/65 md:col-span-5">
             {progress.text} Përditësimi i fundit: <span className="text-white">{progress.updated}</span>.
           </p>
         </div>
 
         <div className="mt-16 h-[3px] bg-white/15" role="progressbar" aria-valuenow={Math.round(pct)} aria-valuemin={0} aria-valuemax={100} aria-label="Ecuria e punimeve">
-          <div className="h-full bg-gold-400" style={{ width: `${pct}%` }} />
+          <motion.div
+            className="h-full origin-left bg-gold-400"
+            style={{ width: `${pct}%` }}
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, amount: 1 }}
+            transition={{ duration: 1.6, ease: [0.65, 0, 0.35, 1] }}
+          />
         </div>
 
         <ol className="mt-10 grid gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">

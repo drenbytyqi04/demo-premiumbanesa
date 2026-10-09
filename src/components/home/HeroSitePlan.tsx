@@ -5,6 +5,7 @@ import { useData } from '../../data/DataContext'
 import site from '../../data/site.json'
 import { MD_COLS, STATUS_RGB, formatPrice } from '../../lib/format'
 import ImageOverlay from '../ImageOverlay'
+import { RevealHeading } from '../motion'
 
 const rise = (delay: number) => ({
   initial: { opacity: 0, y: 18 },
@@ -44,14 +45,14 @@ export default function HeroSitePlan() {
   return (
     <section className="bg-navy-950 text-white">
       <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-12 pt-32 sm:px-8 md:grid-cols-12 md:items-end md:pb-14 md:pt-40">
-        <motion.h1 {...rise(0)} className="font-display text-[3.1rem] leading-[0.98] sm:text-7xl md:col-span-8 lg:text-[6.2rem]">
+        <RevealHeading as="h1" immediate delay={0.1} className="font-display text-[3.1rem] leading-[0.98] sm:text-7xl md:col-span-8 lg:text-[6.2rem]">
           {site.hero.title}
-        </motion.h1>
+        </RevealHeading>
         <div className="md:col-span-4 md:pb-2">
-          <motion.p {...rise(0.12)} className="max-w-sm text-[17px] leading-relaxed text-navy-300">
+          <motion.p {...rise(0.55)} className="max-w-sm text-[17px] leading-relaxed text-navy-300">
             {site.hero.text}
           </motion.p>
-          <motion.div {...rise(0.24)} className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+          <motion.div {...rise(0.7)} className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
             <Link to="/apartments?lira=1" className="inline-flex h-12 items-center bg-gold-500 px-6 font-medium text-white transition-colors hover:bg-gold-600">
               Shiko {totalFree} banesat e lira
             </Link>
@@ -65,7 +66,14 @@ export default function HeroSitePlan() {
         </div>
       </div>
 
-      <div ref={scroller} className="no-scrollbar overflow-x-auto md:overflow-visible">
+      <motion.div
+        ref={scroller}
+        className="no-scrollbar overflow-x-auto md:overflow-hidden"
+        initial={{ opacity: 0, scale: 1.06 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        style={{ transformOrigin: '50% 30%' }}
+      >
         <ImageOverlay
           intro
           subtle
@@ -93,7 +101,7 @@ export default function HeroSitePlan() {
             )
           }}
         />
-      </div>
+      </motion.div>
       <p className="px-5 pt-4 text-sm text-navy-400 md:hidden">Rrëshqitni pamjen anash dhe prekni një lamelë.</p>
 
       {/* availability per wing – hover highlights the wing on the photo */}

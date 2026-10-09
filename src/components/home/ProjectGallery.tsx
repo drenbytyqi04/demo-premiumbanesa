@@ -2,6 +2,8 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import site from '../../data/site.json'
 import { asset } from '../../lib/format'
+import { setScrollLocked } from '../../lib/smoothScroll'
+import { RevealHeading } from '../motion'
 
 const images = site.gallery.images
 
@@ -24,15 +26,20 @@ export default function ProjectGallery() {
     <section className="bg-paper py-24 sm:py-36" aria-labelledby="gallery-title">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="grid gap-6 md:grid-cols-12 md:items-end">
-          <h2 id="gallery-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl md:col-span-6">
-            {site.gallery.title}
-          </h2>
+          <RevealHeading id="gallery-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl md:col-span-6">{site.gallery.title}</RevealHeading>
           <p className="max-w-lg text-lg text-navy-600 md:col-span-6">{site.gallery.text}</p>
         </div>
 
         <ul className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-12 md:gap-4">
           {images.map((img, i) => (
-            <li key={img.src} className={TILE[i] ?? 'md:col-span-3'}>
+            <motion.li
+              key={img.src}
+              className={TILE[i] ?? 'md:col-span-3'}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.9, delay: (i % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+            >
               <button
                 onClick={() => setOpen(i)}
                 className="group relative block size-full overflow-hidden bg-navy-100 focus-visible:outline-offset-4"
@@ -48,7 +55,7 @@ export default function ProjectGallery() {
                   {img.alt}
                 </span>
               </button>
-            </li>
+            </motion.li>
           ))}
         </ul>
       </div>
@@ -69,8 +76,10 @@ function Lightbox({ index, onIndex, onClose }: { index: number; onIndex: (i: num
     closeRef.current?.focus()
     const overflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    setScrollLocked(true)
     return () => {
       document.body.style.overflow = overflow
+      setScrollLocked(false)
       prev?.focus()
     }
   }, [])
@@ -88,6 +97,7 @@ function Lightbox({ index, onIndex, onClose }: { index: number; onIndex: (i: num
   return (
     <motion.div
       role="dialog"
+      data-lenis-prevent
       aria-modal="true"
       aria-label="Galeria e projektit"
       className="fixed inset-0 z-50 flex flex-col bg-navy-950/95 pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)] text-white backdrop-blur"

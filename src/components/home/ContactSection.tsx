@@ -3,6 +3,7 @@ import { useState, type FormEvent, type ReactElement, type ReactNode } from 'rea
 import { useData } from '../../data/DataContext'
 import site from '../../data/site.json'
 import { Icon } from '../icons'
+import { RevealHeading } from '../motion'
 
 type Errors = Partial<Record<'name' | 'phone' | 'email', string>>
 
@@ -41,9 +42,7 @@ export default function ContactSection() {
     <section id="kontakt" className="bg-navy-900 py-24 text-white sm:py-36" aria-labelledby="contact-title">
       <div className="mx-auto grid max-w-[1400px] gap-12 px-5 sm:px-8 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <h2 id="contact-title" className="font-display text-[2.6rem] leading-[1.02] sm:text-6xl">
-            Rezervoni një takim në zyrën e shitjes
-          </h2>
+          <RevealHeading id="contact-title" className="font-display text-[2.6rem] leading-[1.02] sm:text-6xl">{"Rezervoni një takim në zyrën e shitjes"}</RevealHeading>
           <p className="mt-4 max-w-md text-lg text-navy-200">
             Ju tregojmë banesat që ju interesojnë, planet e detajuara dhe kantierin. Ju telefonojmë brenda një dite pune.
           </p>

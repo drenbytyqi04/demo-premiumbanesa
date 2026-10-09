@@ -1,5 +1,6 @@
 import site from '../../data/site.json'
 import { Icon, type IconName } from '../icons'
+import { RevealHeading } from '../motion'
 
 const { lat, lng, zoom } = site.location.map
 const d = 0.012 / Math.pow(2, zoom - 15)
@@ -11,9 +12,7 @@ export default function LocationFeatures() {
     <section id="lokacioni" className="bg-paper py-24 sm:py-36">
       <div className="mx-auto grid max-w-[1400px] gap-20 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5" aria-labelledby="location-title">
-          <h2 id="location-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl">
-            Afër gjithçkaje që ju duhet çdo ditë
-          </h2>
+          <RevealHeading id="location-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl">{"Afër gjithçkaje që ju duhet çdo ditë"}</RevealHeading>
           <p className="mt-4 text-lg text-navy-600">{site.location.intro}</p>
           <p className="mt-6 flex items-center gap-2 font-medium text-navy-900">
             <Icon name="pin" className="size-5 text-gold-600" />
@@ -30,9 +29,7 @@ export default function LocationFeatures() {
         </div>
 
         <div className="lg:col-span-6 lg:col-start-7" aria-labelledby="features-title">
-          <h2 id="features-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl">
-            Ndërtuar për të jetuar gjatë
-          </h2>
+          <RevealHeading id="features-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl">{"Ndërtuar për të jetuar gjatë"}</RevealHeading>
           <ul className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2">
             {site.features.map((f) => (
               <li key={f.title} className="flex gap-4 border-t border-navy-200 pt-5">
