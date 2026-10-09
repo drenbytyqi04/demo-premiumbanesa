@@ -1,9 +1,13 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import Architecture from '../components/home/Architecture'
+import ConstructionProgress from '../components/home/ConstructionProgress'
 import ContactSection from '../components/home/ContactSection'
+import Faq from '../components/home/Faq'
 import HeroSitePlan from '../components/home/HeroSitePlan'
 import LocationFeatures from '../components/home/LocationFeatures'
 import PaymentPlan from '../components/home/PaymentPlan'
+import ProjectFacts from '../components/home/ProjectFacts'
 import ProjectGallery from '../components/home/ProjectGallery'
 import StackingPlan from '../components/home/StackingPlan'
 import TourBand from '../components/home/TourBand'
@@ -23,12 +27,16 @@ export default function ComplexPage() {
   return (
     <>
       <HeroSitePlan />
+      <ProjectFacts />
+      <Architecture />
       <ProjectGallery />
       <StackingPlan />
       <UnitTypes />
       <TourBand />
       <LocationFeatures />
+      <ConstructionProgress />
       <PaymentPlan />
+      <Faq />
       <ContactSection />
     </>
   )

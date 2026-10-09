@@ -8,6 +8,7 @@ const year = new Date().getFullYear()
 const NAV = [
   { to: '/', label: 'Projekti', end: true },
   { to: '/apartments', label: 'Banesat', end: false },
+  { to: { pathname: '/', search: '?s=lokacioni' }, label: 'Lokacioni', end: true, section: true },
 ]
 
 const CONTACT = { pathname: '/', search: '?s=kontakt' }
@@ -51,7 +52,7 @@ export default function Layout() {
 
           <nav className="hidden items-center gap-9 md:flex" aria-label="Kryesore">
             {NAV.map((n) => (
-              <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => linkCls(isActive)}>
+              <NavLink key={n.label} to={n.to} end={n.end} className={({ isActive }) => linkCls(isActive && !n.section)}>
                 {n.label}
               </NavLink>
             ))}
@@ -80,10 +81,10 @@ export default function Layout() {
           <nav className="border-t border-navy-200 bg-paper px-5 pb-6 pt-2 md:hidden" aria-label="Kryesore">
             {NAV.map((n) => (
               <NavLink
-                key={n.to}
+                key={n.label}
                 to={n.to}
                 end={n.end}
-                className={({ isActive }) => `block border-b border-navy-100 py-4 font-display text-3xl ${isActive ? 'text-gold-500' : 'text-navy-950'}`}
+                className={({ isActive }) => `block border-b border-navy-100 py-4 font-display text-3xl ${isActive && !n.section ? "text-gold-500" : "text-navy-950"}`}
               >
                 {n.label}
               </NavLink>

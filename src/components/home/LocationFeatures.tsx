@@ -1,9 +1,14 @@
 import site from '../../data/site.json'
 import { Icon, type IconName } from '../icons'
 
+const { lat, lng, zoom } = site.location.map
+const d = 0.012 / Math.pow(2, zoom - 15)
+const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${lng - d * 1.6},${lat - d},${lng + d * 1.6},${lat + d}&layer=mapnik&marker=${lat},${lng}`
+const osmLink = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=${zoom + 2}/${lat}/${lng}`
+
 export default function LocationFeatures() {
   return (
-    <section className="bg-paper py-24 sm:py-36">
+    <section id="lokacioni" className="bg-paper py-24 sm:py-36">
       <div className="mx-auto grid max-w-[1400px] gap-20 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5" aria-labelledby="location-title">
           <h2 id="location-title" className="font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl">
@@ -40,6 +45,21 @@ export default function LocationFeatures() {
             ))}
           </ul>
         </div>
+      </div>
+
+      {/* map (OpenStreetMap, no API key); loads only when scrolled near */}
+      <div className="mx-auto mt-20 max-w-[1400px] px-5 sm:px-8">
+        <div className="relative aspect-[4/3] overflow-hidden bg-navy-100 sm:aspect-[21/9]">
+          <iframe
+            title={`Harta: ${site.location.address}`}
+            src={mapUrl}
+            loading="lazy"
+            className="absolute inset-0 size-full border-0 grayscale-[35%]"
+          />
+        </div>
+        <a href={osmLink} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm text-navy-500 underline-offset-4 hover:text-navy-950 hover:underline">
+          Hape hartën më të madhe
+        </a>
       </div>
     </section>
   )

@@ -9,12 +9,12 @@
       "label": "Dorëzimi i çelësave, tremujori i dytë"
     },
     {
-      "value": "1.200 m²",
-      "label": "Park i brendshëm, pa vetura"
-    },
-    {
       "value": "140",
       "label": "Vende parkimi nëntokësor"
+    },
+    {
+      "value": "1.200 m²",
+      "label": "Oborr i brendshëm pa vetura"
     }
   ],
   "location": {
@@ -45,7 +45,12 @@
         "place": "Aeroporti",
         "time": "20 min me makinë"
       }
-    ]
+    ],
+    "map": {
+      "lat": 42.6629,
+      "lng": 21.1655,
+      "zoom": 15
+    }
   },
   "features": [
     {
@@ -108,8 +113,8 @@
     "hours": "E hënë – e shtunë, 09:00–18:00"
   },
   "gallery": {
-    "title": "Dy lamela, të bashkuara në majë",
-    "text": "Dy krahë banimi me nga 10 kate, të lidhur në majë nga kati i fundit, mbi një kat përdhes me dyqane dhe oborr të brendshëm.",
+    "title": "Projekti nga çdo kënd",
+    "text": "Renderat e projektit nga rruga, nga oborri dhe nga ajri.",
     "images": [
       {
         "src": "images/projekti/pamja-majtas.jpg",
@@ -161,5 +166,88 @@
         "alt": "Fasada e parë nga poshtë"
       }
     ]
-  }
+  },
+  "concept": [
+    {
+      "image": "images/projekti/mes-krahve.jpg",
+      "alt": "Hapësira mes dy lamelave, e mbuluar nga kati i fundit",
+      "title": "Dy lamela, një urë mbi to",
+      "text": "Kati i fundit shtrihet mbi të dy krahët dhe i lidh si një urë. Poshtë tij hapet një portë e lartë dhjetë kate, që e sjell dritën dhe ajrin deri te oborri."
+    },
+    {
+      "image": "images/projekti/kendi.jpg",
+      "alt": "Brezat e ballkoneve në fasadën prej terrakote",
+      "title": "Fasada që jep hije",
+      "text": "Brezat e ballkoneve rrethojnë çdo kat. Verës mbrojnë dritaret nga dielli, ndërsa çdo banesë fiton një hapësirë të jashtme që përdoret gjatë gjithë vitit."
+    },
+    {
+      "image": "images/projekti/oborri.jpg",
+      "alt": "Oborri i brendshëm dhe hyrja e banorëve",
+      "title": "Oborri, vetëm për banorët",
+      "text": "Hyrja e banorëve është nga oborri i brendshëm, larg rrugës. Dyqanet në katin përdhes i keni poshtë shtëpisë, pa e prishur qetësinë e banesave."
+    }
+  ],
+  "progress": {
+    "title": "Ku jemi me punimet",
+    "text": "Përditësohet nga zyra e shitjes pas çdo faze të përfunduar.",
+    "updated": "Tetor 2026",
+    "phases": [
+      {
+        "title": "Leja e ndërtimit",
+        "date": "Mars 2025",
+        "status": "done"
+      },
+      {
+        "title": "Gërmimi dhe themelet",
+        "date": "Qershor 2025",
+        "status": "done"
+      },
+      {
+        "title": "Garazhi dhe kati përdhes",
+        "date": "Dhjetor 2025",
+        "status": "done"
+      },
+      {
+        "title": "Struktura e kateve",
+        "date": "Tetor 2026",
+        "status": "current"
+      },
+      {
+        "title": "Fasada dhe dritaret",
+        "date": "Mars 2027",
+        "status": "next"
+      },
+      {
+        "title": "Dorëzimi i çelësave",
+        "date": "Qershor 2027",
+        "status": "next"
+      }
+    ]
+  },
+  "faq": [
+    {
+      "q": "Si mund ta rezervoj një banesë?",
+      "a": "Zgjidhni banesën në faqe dhe rezervoni një takim. Në zyrën e shitjes nënshkruani marrëveshjen e rezervimit dhe paguani kaparin prej 10%. Banesa mbetet në emrin tuaj për 14 ditë, deri te kontrata."
+    },
+    {
+      "q": "A mund ta blej banesën me kredi bankare?",
+      "a": "Po. Bashkëpunojmë me disa banka në Kosovë dhe ju ndihmojmë me dokumentet që kërkon banka. Mund ta kombinoni kredinë me pagesat sipas fazave të ndërtimit."
+    },
+    {
+      "q": "A përfshihet parkingu në çmim?",
+      "a": "Jo. Vendi i parkimit në garazhin nëntokësor dhe depoja blihen veçmas. Çdo banesë ka të drejtë për të paktën një vend parkimi."
+    },
+    {
+      "q": "Në çfarë gjendje dorëzohet banesa?",
+      "a": "E përfunduar plotësisht: me dysheme, dyer, dritare me tre xhama, banjo të pajisura, ngrohje me dysheme dhe instalime të gatshme për kuzhinën. Mobilimi nuk përfshihet."
+    },
+    {
+      "q": "A mund ta ndryshoj planin e banesës?",
+      "a": "Para se të fillojnë punimet e brendshme të katit tuaj, ndryshime të vogla, si muret ndarëse ose pozicioni i kuzhinës, mund të bëhen në marrëveshje me arkitektin."
+    },
+    {
+      "q": "A mund ta vizitoj kantierin?",
+      "a": "Po, me takim dhe të shoqëruar nga stafi ynë. Rezervoni një takim dhe ju tregojmë edhe banesën tuaj në vend."
+    }
+  ]
 }

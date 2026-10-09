@@ -197,3 +197,17 @@ body {
 .range-slider input[type='range']:focus-visible::-webkit-slider-thumb {
   box-shadow: 0 0 0 4px var(--color-gold-500);
 }
+
+/* FAQ: hide the default marker and fade the answer in */
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq[open] .faq-body {
+  animation: faq-in 0.35s ease-out;
+}
+@keyframes faq-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
