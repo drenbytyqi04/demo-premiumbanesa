@@ -46,7 +46,10 @@ export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, c
   const animateIn = intro && !reduce
   const wrap = useRef<HTMLDivElement>(null)
   const [tip, setTip] = useState<Tip | null>(null)
-  const [loaded, setLoaded] = useState(false)
+  // remember WHICH image finished loading, so a fast (cached/CDN) load can't be undone by a later reset
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null)
+  const loaded = loadedSrc === image.image
+  const imgRef = useRef<HTMLImageElement>(null)
   const lastPointer = useRef<string>('mouse')
 
   // clear touch tooltip when tapping outside
@@ -59,7 +62,14 @@ export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, c
     return () => document.removeEventListener('pointerdown', onDown)
   }, [tip?.touch])
 
-  useEffect(() => setLoaded(false), [image.image])
+  // an image already complete before React attached onLoad (cache) never fires the event
+  useEffect(() => {
+    const el = imgRef.current
+    if (el?.complete && el.naturalWidth > 0) setLoadedSrc(image.image)
+    // last resort: never wait on a lost load event for more than 2.5 s
+    const t = window.setTimeout(() => setLoadedSrc(image.image), 2500)
+    return () => window.clearTimeout(t)
+  }, [image.image])
 
   const rel = (clientX: number, clientY: number) => {
     const r = wrap.current!.getBoundingClientRect()
@@ -80,14 +90,20 @@ export default function ImageOverlay({ image, shapes, renderTooltip, onSelect, c
 
   return (
     <div ref={wrap} className={`relative select-none ${subtle ? 'overlay-subtle' : ''} ${className}`}>
+      {/* placeholder sits BEHIND the image, so the image always shows once the browser has it */}
+      {!loaded && <div className="absolute inset-0 animate-pulse bg-navy-100" />}
       <img
         src={asset(image.image)}
         alt=""
         draggable={false}
-        onLoad={() => setLoaded(true)}
-        className={`block h-auto w-full transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'} ${imgClassName}`}
+        width={image.width}
+        height={image.height}
+        style={{ aspectRatio: `${image.width} / ${image.height}` }}
+        ref={imgRef}
+        onLoad={() => setLoadedSrc(image.image)}
+        onError={() => setLoadedSrc(image.image)}
+        className={`relative block h-auto w-full ${imgClassName}`}
       />
-      {!loaded && <div className="absolute inset-0 animate-pulse bg-navy-100" />}
 
       <svg
         viewBox={`0 0 ${image.width} ${image.height}`}
