@@ -156,3 +156,44 @@ body {
   stroke: #fff;
   stroke-width: 2;
 }
+
+/* two-handle range slider: the inputs overlap; only their thumbs take pointer events */
+.range-slider input[type='range'] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  background: transparent;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.range-slider input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 0;
+  box-shadow: 0 0 0 4px rgb(255 255 255 / 0.15);
+  cursor: grab;
+}
+.range-slider input[type='range']::-moz-range-thumb {
+  pointer-events: auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 0;
+  cursor: grab;
+}
+.range-slider input[type='range']::-webkit-slider-runnable-track {
+  background: transparent;
+}
+.range-slider input[type='range']::-moz-range-track {
+  background: transparent;
+}
+.range-slider input[type='range']:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px var(--color-gold-500);
+}

@@ -38,9 +38,9 @@
       {
         "id": "A-front",
         "label": "Fasada nga rruga",
-        "image": "images/projekti/fasada-a.jpg",
-        "width": 960,
-        "height": 960
+        "image": "images/projekti/fasada.jpg",
+        "width": 1800,
+        "height": 1250
       }
     ]
   },
@@ -95,9 +95,9 @@
       {
         "id": "B-front",
         "label": "Fasada nga rruga",
-        "image": "images/projekti/fasada-b.jpg",
-        "width": 740,
-        "height": 1060
+        "image": "images/projekti/fasada.jpg",
+        "width": 1800,
+        "height": 1250
       }
     ]
   }

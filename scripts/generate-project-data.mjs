@@ -26,10 +26,12 @@ const FRONT_UNITS = { A: 4, B: 3 } // apartments visible on the street facade, t
 const HERO = { file: 'pamja-ajrore-2.jpg', left: 180, top: 125, width: 1360, height: 620 }
 const HERO_W = 1920
 const HERO_K = HERO_W / HERO.width
-const FACADE = {
-  A: { file: 'pamja-ballore.jpg', left: 150, top: 240, width: 960, height: 960 },
-  B: { file: 'pamja-ballore.jpg', left: 1030, top: 150, width: 740, height: 1060 },
-}
+// Both wings share one wide street-facade image (the whole front of the building);
+// each wing's page shows only its own apartments on it.
+const FRONT = { file: 'pamja-ballore.jpg', left: 100, top: 40, width: 1800, height: 1250 }
+const FACADE = { A: FRONT, B: FRONT }
+// Lamela B's lines below were measured on an earlier close-up crop; this is where that crop sat in the render
+const B_ORIGIN = { left: 1030, top: 150 }
 
 async function crop(c, out, width = c.width) {
   await sharp(join(IMG, c.file))
@@ -52,7 +54,7 @@ const HERO_POLY = {
 const WING = {
   A: { x0: 215, x1: 1000, xRef: 600, slope: -0.019, bounds: [1180, 1107, 1022, 937, 855, 772, 687, 602, 517, 432, 355] },
   // Lamela B: window rows fan out in perspective, so every line is given at two x positions
-  // (in fasada-b.jpg pixels). Floor 10 is hidden behind the top-floor overhang in this render.
+  // (in the B_ORIGIN close-up's pixels). Floor 10 is hidden behind the top-floor overhang in this render.
   B: { x0: 65, x1: 615, xL: 170, xR: 500, lines: [[995, 1000], [940, 935], [855, 830], [765, 735], [675, 635], [590, 540], [505, 440], [415, 345], [330, 245], [245, 150]] },
 }
 
@@ -66,7 +68,8 @@ function facadePolygon(id, floor, slot, count) {
     const y = (b, x) => { const [l, rr] = w.lines[b]; return l + ((rr - l) * (x - w.xL)) / (w.xR - w.xL) }
     const xa = w.x0 + ((w.x1 - w.x0) * slot) / count + 4
     const xb = w.x0 + ((w.x1 - w.x0) * (slot + 1)) / count - 4
-    return [[xa, y(floor, xa) + 4], [xb, y(floor, xb) + 4], [xb, y(floor - 1, xb) - 4], [xa, y(floor - 1, xa) - 4]].map(([x, yy]) => [r(x), r(yy)])
+    const pts = [[xa, y(floor, xa) + 4], [xb, y(floor, xb) + 4], [xb, y(floor - 1, xb) - 4], [xa, y(floor - 1, xa) - 4]]
+    return shift(pts.map(([x, yy]) => [x + B_ORIGIN.left, yy + B_ORIGIN.top]), FACADE[id])
   }
   const y = (b, x) => w.bounds[b] + w.slope * (x - w.xRef)
   const xa = w.x0 + ((w.x1 - w.x0) * slot) / count + 4
@@ -88,8 +91,7 @@ function mulberry32(seed) {
 async function main() {
   mkdirSync(DATA, { recursive: true })
   await crop(HERO, 'hero.jpg', HERO_W)
-  await crop(FACADE.A, 'fasada-a.jpg')
-  await crop(FACADE.B, 'fasada-b.jpg')
+  await crop(FRONT, 'fasada.jpg')
 
   const complex = {
     name: 'Rezidenca Aurora',
@@ -104,7 +106,7 @@ async function main() {
     ...b,
     floors: FLOORS,
     polygon: shift(HERO_POLY[b.id], HERO).map(([x, y]) => [r(x * HERO_K), r(y * HERO_K)]),
-    facades: [{ id: `${b.id}-front`, label: 'Fasada nga rruga', image: `images/projekti/fasada-${b.id.toLowerCase()}.jpg`, width: FACADE[b.id].width, height: FACADE[b.id].height }],
+    facades: [{ id: `${b.id}-front`, label: 'Fasada nga rruga', image: 'images/projekti/fasada.jpg', width: FACADE[b.id].width, height: FACADE[b.id].height }],
   }))
 
   const rand = mulberry32(20261009)
