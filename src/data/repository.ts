@@ -6,8 +6,11 @@
  *   VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY are set. Visitors can only read;
  *   writes are allowed by the database (RLS) only for users in the `admins` table.
  * - `localRepository` (below): demo fallback – static JSON + localStorage overrides,
- *   so changes are visible only in the browser that made them.
+ *   so changes are visible only in the browser that made them. Never used when Supabase is
+ *   configured: a failing backend shows an honest error instead of fake inventory.
  */
+import { z } from 'zod'
+import type { Inquiry } from '../lib/inquiry'
 import type { Apartment, Building, Complex, PanoramaScene, Point, PolygonExport } from '../types'
 import { supabase } from '../lib/supabase'
 import apartmentsJson from './apartments.json'
@@ -35,6 +38,8 @@ export interface DataRepository {
   reset(): Promise<void>
   /** Notify when data changed elsewhere (other tab, realtime, …). Returns unsubscribe. */
   subscribe(onChange: () => void): () => void
+  /** Store a contact/appointment request. Resolves only when it was really stored. */
+  submitInquiry(inquiry: Inquiry): Promise<void>
 }
 
 // ------------------------------------------------------------------ local implementation
@@ -56,10 +61,38 @@ interface Overrides {
 
 const empty = (): Overrides => ({ apartments: {}, facades: {} })
 
+const point = z.tuple([z.number().finite(), z.number().finite()])
+const polygonSet = z.object({
+  image: z.string().min(1),
+  width: z.number().positive(),
+  height: z.number().positive(),
+  polygons: z.record(z.string(), z.array(point).min(3)),
+})
+const overridesSchema = z.object({
+  apartments: z.record(
+    z.string(),
+    z
+      .object({
+        status: z.enum(['available', 'reserved', 'sold']),
+        price: z.number().nonnegative(),
+        area: z.number().positive(),
+        rooms: z.number().int().min(1).max(10),
+      })
+      .partial(),
+  ),
+  aerial: polygonSet.optional(),
+  facades: z.record(z.string(), polygonSet),
+})
+
+/** Stored demo edits; corrupted or outdated storage is discarded instead of breaking the site. */
 function readOverrides(): Overrides {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? { ...empty(), ...JSON.parse(raw) } : empty()
+    if (!raw) return empty()
+    const parsed = overridesSchema.safeParse({ ...empty(), ...JSON.parse(raw) })
+    if (parsed.success) return parsed.data as Overrides
+    console.warn('Të dhënat demo në localStorage nuk janë të vlefshme dhe u injoruan.', parsed.error)
+    return empty()
   } catch {
     return empty()
   }
@@ -110,6 +143,8 @@ function applyOverrides(o: Overrides): DataSnapshot {
   return { complex, buildings, apartments, scenes }
 }
 
+const INQUIRY_KEY = 'aurora-demo-inquiries-v1'
+
 export const localRepository: DataRepository = {
   async load() {
     return applyOverrides(readOverrides())
@@ -143,6 +178,12 @@ export const localRepository: DataRepository = {
       listeners.delete(onChange)
       window.removeEventListener('storage', onStorage)
     }
+  },
+  async submitInquiry(inquiry) {
+    // demo only: kept in this browser so the flow can be tried; nothing reaches the sales team
+    const list: (Inquiry & { createdAt: string })[] = JSON.parse(localStorage.getItem(INQUIRY_KEY) ?? '[]')
+    if (!list.some((i) => i.clientId === inquiry.clientId)) list.push({ ...inquiry, createdAt: new Date().toISOString() })
+    localStorage.setItem(INQUIRY_KEY, JSON.stringify(list.slice(-50)))
   },
 }
 

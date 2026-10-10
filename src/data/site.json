@@ -1,116 +1,82 @@
 {
+  "$comment": "Teksti publik i faqes. null = e dhënë e pakonfirmuar: faqja shfaq 'Të dhënat së shpejti'. Mos shkruani fakte pa i verifikuar me investitorin.",
   "hero": {
     "title": "Zgjidhni banesën nga vetë ndërtesa",
     "text": "Prekni njërën nga dy lamelat në foto për të parë katet, çmimet dhe turën 360° të çdo banese të lirë."
   },
-  "highlights": [
-    {
-      "value": "2027",
-      "label": "Dorëzimi i çelësave, tremujori i dytë"
-    },
-    {
-      "value": "140",
-      "label": "Vende parkimi nëntokësor"
-    },
-    {
-      "value": "1.200 m²",
-      "label": "Oborr i brendshëm pa vetura"
-    }
-  ],
+  "facts": {
+    "delivery": null,
+    "parking": null,
+    "courtyardArea": null
+  },
   "location": {
-    "address": "Rruga e Shembullit, Prishtinë",
-    "intro": "Një lagje e qetë banimi, afër qendrës, shkollave dhe parkut të qytetit.",
-    "distances": [
-      {
-        "place": "Qendra e qytetit",
-        "time": "8 min me makinë"
-      },
-      {
-        "place": "Shkolla fillore",
-        "time": "4 min në këmbë"
-      },
-      {
-        "place": "Kopshti i fëmijëve",
-        "time": "3 min në këmbë"
-      },
-      {
-        "place": "Parku i qytetit",
-        "time": "6 min në këmbë"
-      },
-      {
-        "place": "Supermarketi",
-        "time": "2 min në këmbë"
-      },
-      {
-        "place": "Aeroporti",
-        "time": "20 min me makinë"
-      }
-    ],
-    "map": {
-      "lat": 42.6629,
-      "lng": 21.1655,
-      "zoom": 15
-    }
+    "address": null,
+    "intro": "Adresa e saktë, distancat deri te shkollat, qendra dhe shërbimet, si dhe harta publikohen sapo të konfirmohen nga investitori.",
+    "distances": [],
+    "map": null
   },
   "features": [
     {
+      "icon": "trees",
+      "title": "Oborr i brendshëm",
+      "text": "Hyrja e banorëve është nga oborri, larg rrugës."
+    },
+    {
+      "icon": "store",
+      "title": "Dyqane në katin përdhes",
+      "text": "Lokalet afariste janë të ndara nga katet e banimit."
+    },
+    {
+      "icon": "bridge",
+      "title": "Kati i fundit si urë",
+      "text": "Kati i fundit i lidh të dy lamelat mbi një portë të lartë."
+    },
+    {
+      "icon": "balcony",
+      "title": "Ballkone në çdo kat",
+      "text": "Brezat e ballkoneve rrethojnë fasadën në çdo kat."
+    },
+    {
+      "icon": "leaf",
+      "title": "Kulme të gjelbra",
+      "text": "Sipas renderave të projektit, kulmet janë të gjelbëruara."
+    },
+    {
       "icon": "parking",
-      "title": "Parking nëntokësor",
-      "text": "Çdo banesë ka të drejtë për një vend parkimi me qasje me ashensor."
-    },
-    {
-      "icon": "heat",
-      "title": "Ngrohje qendrore",
-      "text": "Ngrohje me dysheme dhe matës individual për çdo banesë."
-    },
-    {
-      "icon": "shield",
-      "title": "Hyrje e siguruar",
-      "text": "Video-interfon, kamera në hapësirat e përbashkëta dhe recepsion."
-    },
-    {
-      "icon": "tree",
-      "title": "Oborr pa vetura",
-      "text": "Park i brendshëm me kënd lojërash dhe ulëse, vetëm për banorët."
-    },
-    {
-      "icon": "window",
-      "title": "Dritare me tre xhama",
-      "text": "Izolim termik dhe akustik, profile alumini me ndërprerje termike."
-    },
-    {
-      "icon": "lift",
-      "title": "Dy ashensorë për hyrje",
-      "text": "Ashensorë të heshtur, prej garazhit deri në katin e fundit."
+      "title": "Parkingu",
+      "text": null
     }
   ],
-  "payment": [
-    {
-      "share": "10%",
-      "title": "Kapari",
-      "text": "Banesa rezervohet në emrin tuaj për 14 ditë."
-    },
-    {
-      "share": "30%",
-      "title": "Kontrata",
-      "text": "Kontrata nënshkruhet te noteri dhe çmimi fiksohet."
-    },
-    {
-      "share": "40%",
-      "title": "Gjatë ndërtimit",
-      "text": "Në tri këste, sipas fazave të ndërtimit."
-    },
-    {
-      "share": "20%",
-      "title": "Dorëzimi",
-      "text": "Pagesa e fundit kur merrni çelësat."
-    }
-  ],
+  "payment": {
+    "illustrative": true,
+    "steps": [
+      {
+        "percent": 10,
+        "title": "Kapari",
+        "text": "Rezervimi i banesës. Afatet konfirmohen nga zyra e shitjes."
+      },
+      {
+        "percent": 30,
+        "title": "Kontrata",
+        "text": "Me nënshkrimin e kontratës te noteri."
+      },
+      {
+        "percent": 40,
+        "title": "Gjatë ndërtimit",
+        "text": "Gjatë ndërtimit, sipas fazave të punimeve."
+      },
+      {
+        "percent": 20,
+        "title": "Dorëzimi",
+        "text": "Në dorëzimin e çelësave."
+      }
+    ]
+  },
   "contact": {
-    "phone": "+383 44 000 000",
-    "email": "shitja@example.com",
-    "office": "Zyra e shitjes në kantier",
-    "hours": "E hënë – e shtunë, 09:00–18:00"
+    "phone": null,
+    "email": null,
+    "office": null,
+    "hours": null
   },
   "gallery": {
     "title": "Projekti nga çdo kënd",
@@ -189,65 +155,66 @@
   ],
   "progress": {
     "title": "Ku jemi me punimet",
-    "text": "Përditësohet nga zyra e shitjes pas çdo faze të përfunduar.",
-    "updated": "Tetor 2026",
+    "text": "Datat dhe gjendja e punimeve publikohen pasi t'i konfirmojë investitori.",
+    "illustrative": true,
+    "updated": null,
     "phases": [
       {
         "title": "Leja e ndërtimit",
-        "date": "Mars 2025",
-        "status": "done"
+        "date": null,
+        "status": null
       },
       {
         "title": "Gërmimi dhe themelet",
-        "date": "Qershor 2025",
-        "status": "done"
+        "date": null,
+        "status": null
       },
       {
         "title": "Garazhi dhe kati përdhes",
-        "date": "Dhjetor 2025",
-        "status": "done"
+        "date": null,
+        "status": null
       },
       {
         "title": "Struktura e kateve",
-        "date": "Tetor 2026",
-        "status": "current"
+        "date": null,
+        "status": null
       },
       {
         "title": "Fasada dhe dritaret",
-        "date": "Mars 2027",
-        "status": "next"
+        "date": null,
+        "status": null
       },
       {
         "title": "Dorëzimi i çelësave",
-        "date": "Qershor 2027",
-        "status": "next"
+        "date": null,
+        "status": null
       }
     ]
   },
   "faq": [
     {
       "q": "Si mund ta rezervoj një banesë?",
-      "a": "Zgjidhni banesën në faqe dhe rezervoni një takim. Në zyrën e shitjes nënshkruani marrëveshjen e rezervimit dhe paguani kaparin prej 10%. Banesa mbetet në emrin tuaj për 14 ditë, deri te kontrata."
+      "a": "Zgjidhni banesën në faqe dhe na dërgoni një kërkesë ose rezervoni një takim. Kushtet e rezervimit (kapari dhe afatet) i konfirmon zyra e shitjes."
     },
     {
       "q": "A mund ta blej banesën me kredi bankare?",
-      "a": "Po. Bashkëpunojmë me disa banka në Kosovë dhe ju ndihmojmë me dokumentet që kërkon banka. Mund ta kombinoni kredinë me pagesat sipas fazave të ndërtimit."
+      "a": "Mundësitë e financimit i konfirmon zyra e shitjes. Na shkruani dhe ju informojmë për kushtet aktuale."
     },
     {
       "q": "A përfshihet parkingu në çmim?",
-      "a": "Jo. Vendi i parkimit në garazhin nëntokësor dhe depoja blihen veçmas. Çdo banesë ka të drejtë për të paktën një vend parkimi."
+      "a": "Të dhënat për parkingun (numri i vendeve dhe çmimi) publikohen së shpejti."
     },
     {
       "q": "Në çfarë gjendje dorëzohet banesa?",
-      "a": "E përfunduar plotësisht: me dysheme, dyer, dritare me tre xhama, banjo të pajisura, ngrohje me dysheme dhe instalime të gatshme për kuzhinën. Mobilimi nuk përfshihet."
+      "a": "Specifikimi teknik i dorëzimit publikohet pasi të miratohet nga investitori. Deri atëherë, pyesni zyrën e shitjes."
     },
     {
       "q": "A mund ta ndryshoj planin e banesës?",
-      "a": "Para se të fillojnë punimet e brendshme të katit tuaj, ndryshime të vogla, si muret ndarëse ose pozicioni i kuzhinës, mund të bëhen në marrëveshje me arkitektin."
+      "a": "Çdo kërkesë për ndryshim shqyrtohet nga arkitekti dhe varet nga faza e punimeve. Kontaktoni zyrën e shitjes."
     },
     {
       "q": "A mund ta vizitoj kantierin?",
-      "a": "Po, me takim dhe të shoqëruar nga stafi ynë. Rezervoni një takim dhe ju tregojmë edhe banesën tuaj në vend."
+      "a": "Vizitat organizohen vetëm me takim dhe të shoqëruara nga stafi."
     }
   ]
 }

@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import site from '../../data/site.json'
+import site from '../../data/site'
 import { asset } from '../../lib/format'
 import { setScrollLocked } from '../../lib/smoothScroll'
 import { RevealHeading } from '../motion'

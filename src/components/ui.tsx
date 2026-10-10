@@ -57,5 +57,19 @@ export const btnCls = {
   ghost:
     'inline-flex items-center justify-center gap-2 rounded-xs bg-white px-4 py-2 text-sm font-medium text-navy-800 ring-1 ring-navy-200 transition hover:bg-navy-50 disabled:opacity-40',
   danger:
-    'inline-flex items-center justify-center gap-2 rounded-xs bg-white px-3 py-2 text-sm font-medium text-red-600 shadow-sm ring-1 ring-red-200 transition hover:bg-red-50 disabled:opacity-40',
+    'inline-flex items-center justify-center gap-2 rounded-xs bg-white px-3 py-2 text-sm font-medium text-sold shadow-sm ring-1 ring-sold/30 transition hover:bg-sold/8 disabled:opacity-40',
+}
+
+/** Neutral state for a project fact that has not been confirmed yet. */
+export function Pending({ className = '' }: { className?: string }) {
+  return <span className={`italic opacity-70 ${className}`}>Të dhënat së shpejti</span>
+}
+
+/** Small label that marks demo/illustrative content so it is never mistaken for a confirmed fact. */
+export function IllustrativeTag({ children = 'Ilustruese', dark = false }: { children?: ReactNode; dark?: boolean }) {
+  return (
+    <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] font-medium uppercase tracking-[0.14em] ring-1 ${dark ? 'text-white/70 ring-white/25' : 'text-navy-600 ring-navy-300'}`}>
+      {children}
+    </span>
+  )
 }

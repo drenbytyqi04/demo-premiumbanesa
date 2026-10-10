@@ -43,7 +43,7 @@ export default function LoginPage() {
             <input name="password" type="password" autoComplete="current-password" required className={field} />
           </label>
           {error && (
-            <p role="alert" className="mt-4 rounded-xs bg-red-50 px-3 py-2 text-sm text-red-700">
+            <p role="alert" className="mt-4 rounded-xs bg-sold/8 px-3 py-2 text-sm text-sold">
               {error}
             </p>
           )}
@@ -56,7 +56,7 @@ export default function LoginPage() {
             {busy ? 'Duke u kyçur…' : 'Kyçu'}
           </button>
           {mode === 'demo' && (
-            <p className="mt-5 rounded-xs bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-900">
+            <p className="mt-5 rounded-xs bg-reserved/10 px-3 py-2 text-xs leading-relaxed text-reserved-ink">
               Modaliteti demo (pa Supabase): ndryshimet ruhen vetëm në këtë shfletues. Kredencialet demo janë te <code>.env.example</code>.
             </p>
           )}

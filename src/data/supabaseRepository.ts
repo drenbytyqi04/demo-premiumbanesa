@@ -141,6 +141,25 @@ export const supabaseRepository: DataRepository = {
     throw new Error('Rikthimi i të dhënave fillestare është vetëm për modalitetin demo.')
   },
 
+  async submitInquiry(i) {
+    // narrowly scoped server function: validates, de-duplicates by client_id and rate-limits;
+    // the inquiries table itself is not writable or readable by visitors
+    const { error } = await db().rpc('submit_inquiry', {
+      p_client_id: i.clientId,
+      p_name: i.name,
+      p_phone: i.phone,
+      p_email: i.email,
+      p_building_id: i.buildingId,
+      p_rooms: i.rooms,
+      p_apartment_id: i.apartmentId,
+      p_message: i.message,
+    })
+    if (error) {
+      if (/rate_limited/.test(error.message)) throw new Error('Keni dërguar disa kërkesa radhazi. Provoni përsëri pas pak minutash.')
+      throw new Error('Kërkesa nuk u dërgua. Kontrolloni lidhjen dhe provoni përsëri.')
+    }
+  },
+
   subscribe(onChange) {
     // live updates: visitors see status/price changes without reloading
     const channel = db()

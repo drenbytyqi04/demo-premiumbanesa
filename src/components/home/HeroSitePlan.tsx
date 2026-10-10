@@ -2,10 +2,11 @@ import { motion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useData } from '../../data/DataContext'
-import site from '../../data/site.json'
+import site from '../../data/site'
 import { MD_COLS, STATUS_RGB, formatPrice } from '../../lib/format'
 import ImageOverlay from '../ImageOverlay'
 import { RevealHeading } from '../motion'
+import { startingPrice } from '../../lib/domain'
 
 const rise = (delay: number) => ({
   initial: { opacity: 0, y: 18 },
@@ -30,7 +31,7 @@ export default function HeroSitePlan() {
       free: free.length,
       reserved: count('reserved'),
       sold: count('sold'),
-      minPrice: free.length ? Math.min(...free.map((a) => a.price)) : null,
+      minPrice: startingPrice(free),
     }
   })
   const totalFree = stats.reduce((s, x) => s + x.free, 0)
@@ -43,7 +44,7 @@ export default function HeroSitePlan() {
   }, [])
 
   return (
-    <section className="bg-navy-950 text-white">
+    <section className="overflow-x-clip bg-navy-950 text-white">
       <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-12 pt-32 sm:px-8 md:grid-cols-12 md:items-end md:pb-14 md:pt-40">
         <RevealHeading as="h1" immediate delay={0.1} className="font-display text-[3.1rem] leading-[0.98] sm:text-7xl md:col-span-8 lg:text-[6.2rem]">
           {site.hero.title}

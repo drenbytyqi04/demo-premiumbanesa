@@ -2,7 +2,8 @@ import { motion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useData } from '../data/DataContext'
-import site from '../data/site.json'
+import site, { telHref } from '../data/site'
+import { Pending } from './ui'
 import { scrollToTarget } from '../lib/smoothScroll'
 
 const year = new Date().getFullYear()
@@ -125,7 +126,7 @@ export default function Layout() {
           <div className="grid gap-12 border-b border-white/10 pb-16 md:grid-cols-12">
             <div className="md:col-span-6">
               <div className="font-display text-5xl text-white sm:text-6xl">{complex.name}</div>
-              <p className="mt-5 max-w-sm leading-relaxed">{site.location.address}</p>
+              <p className="mt-5 max-w-sm leading-relaxed">{site.location.address ?? 'Adresa: të dhënat së shpejti'}</p>
             </div>
             <nav className="md:col-span-2" aria-label="Faqet">
               <ul className="space-y-3">
@@ -136,17 +137,29 @@ export default function Layout() {
               </ul>
             </nav>
             <div className="md:col-span-4">
-              <a href={`tel:${site.contact.phone.replace(/\s/g, '')}`} className="block font-display text-3xl text-white hover:text-gold-300">
-                {site.contact.phone}
-              </a>
-              <a href={`mailto:${site.contact.email}`} className="mt-3 block hover:text-white">
-                {site.contact.email}
-              </a>
-              <p className="mt-1">{site.contact.hours}</p>
+              <div className="text-sm uppercase tracking-[0.14em] text-navy-400">Kontakti</div>
+              {site.contact.phone ? (
+                <a href={telHref(site.contact.phone)} className="mt-3 block font-display text-3xl text-white hover:text-gold-300">
+                  {site.contact.phone}
+                </a>
+              ) : (
+                <p className="mt-3">
+                  Telefoni dhe emaili: <Pending />
+                </p>
+              )}
+              {site.contact.email && (
+                <a href={`mailto:${site.contact.email}`} className="mt-3 block hover:text-white">
+                  {site.contact.email}
+                </a>
+              )}
+              {site.contact.hours && <p className="mt-1">{site.contact.hours}</p>}
+              <Link to={CONTACT} className="mt-4 inline-block text-white underline-offset-4 hover:underline">
+                Na shkruani përmes formularit
+              </Link>
             </div>
           </div>
           <p className="pt-8 text-sm text-navy-400">
-            © {year} {complex.name}. Projekt demonstrues me të dhëna fiktive. Panoramat 360°: Poly Haven (CC0).
+            © {year} {complex.name}. Faqe demonstruese: çmimet, statuset, planet dhe pamjet 360° janë ilustruese. Panoramat 360°: Poly Haven (CC0).
           </p>
         </div>
       </footer>

@@ -4,6 +4,7 @@ import { StatusBadge } from '../components/ui'
 import { useData } from '../data/DataContext'
 import { asset, formatArea, formatPrice, formatNumber } from '../lib/format'
 import NotFound from './NotFound'
+import { pricePerM2, roomType } from '../lib/domain'
 
 export default function ApartmentPage() {
   const { id } = useParams()
@@ -20,13 +21,17 @@ export default function ApartmentPage() {
   const prev = siblings[idx - 1]
   const next = siblings[idx + 1]
 
+  const inquiryLink = { pathname: '/', search: `?s=kontakt&banesa=${encodeURIComponent(apt.id)}` }
+  const ppm = pricePerM2(apt)
+  const priceText = apt.status === 'sold' ? 'E shitur' : apt.price > 0 ? formatPrice(apt.price) : 'Çmimi sipas kërkesës'
+
   const rows: [string, string][] = [
     ['Ndërtesa', building.name],
     ['Kati', String(apt.floor)],
     ['Numri', apt.number],
     ['Sipërfaqja', formatArea(apt.area)],
-    ['Dhoma', String(apt.rooms)],
-    ['Çmimi / m²', apt.status === 'sold' ? '—' : `${formatNumber(Math.round(apt.price / apt.area))} €`],
+    ['Tipi', roomType(apt.rooms)],
+    ['Çmimi / m²', apt.status === 'sold' || ppm === null ? '—' : `${formatNumber(ppm)} €`],
   ]
 
   return (
@@ -71,7 +76,7 @@ export default function ApartmentPage() {
           <StatusBadge status={apt.status} />
         </div>
         <div className="no-scrollbar -mx-4 mt-3 flex gap-2 overflow-x-auto px-4">
-          {[formatArea(apt.area), `${apt.rooms} ${apt.rooms === 1 ? 'dhomë' : 'dhoma'}`, `Kati ${apt.floor}`].map((t) => (
+          {[formatArea(apt.area), `Banesë ${roomType(apt.rooms)}`, `Kati ${apt.floor}`].map((t) => (
             <span key={t} className="shrink-0 rounded-xs bg-navy-50 px-3 py-1 text-sm font-medium text-navy-700">
               {t}
             </span>
@@ -111,8 +116,9 @@ export default function ApartmentPage() {
             <div className="rounded-xs bg-navy-900 p-4 text-white lg:mt-5">
               <div className="text-xs text-navy-300">Çmimi</div>
               <div className="font-display text-4xl">
-                {apt.status === 'sold' ? 'E shitur' : formatPrice(apt.price)}
+                {priceText}
               </div>
+              {apt.status !== 'sold' && apt.price > 0 && <div className="mt-1 text-xs text-navy-300">Çmim ilustrues, konfirmohet nga zyra e shitjes</div>}
               {apt.status === 'reserved' && <div className="mt-1 text-sm text-gold-300">Aktualisht e rezervuar</div>}
             </div>
 
@@ -127,18 +133,18 @@ export default function ApartmentPage() {
             </dl>
 
             <div className="mt-5">
-              <div className="mb-2 text-sm font-medium text-navy-700">Plani i apartamentit</div>
+              <div className="mb-2 flex items-baseline justify-between gap-3 text-sm font-medium text-navy-700">Plani i apartamentit <span className="text-xs font-normal text-navy-500">Plan ilustrues, jo projekt i miratuar</span></div>
               <a href={asset(apt.floorPlan)} target="_blank" rel="noreferrer" className="block overflow-hidden rounded-xs ring-1 ring-navy-100 transition hover:ring-gold-400">
-                <img src={asset(apt.floorPlan)} alt={`Plani i apartamentit ${apt.number}`} className="w-full bg-white" />
+                <img src={asset(apt.floorPlan)} alt={`Plan ilustrues i banesës ${roomType(apt.rooms)}`} className="w-full bg-white" />
               </a>
             </div>
 
-            <a
-              href={`mailto:shitja@example.com?subject=${encodeURIComponent(`Interesim për apartamentin ${apt.id}`)}`}
-              className={`mt-6 hidden w-full lg:flex items-center justify-center rounded-xs px-4 py-3 font-semibold transition ${apt.status === 'sold' ? 'pointer-events-none bg-navy-100 text-navy-400' : 'bg-gold-500 text-white hover:bg-gold-600'}`}
+            <Link
+              to={inquiryLink}
+              className={`mt-6 hidden w-full lg:flex items-center justify-center rounded-xs px-4 py-3 font-semibold transition ${apt.status === 'sold' ? 'bg-navy-950 text-white hover:bg-navy-800' : 'bg-gold-500 text-white hover:bg-gold-600'}`}
             >
-              {apt.status === 'sold' ? 'Nuk është në dispozicion' : 'Kërko informacion'}
-            </a>
+              {apt.status === 'sold' ? 'Pyet për banesa të ngjashme' : 'Kërko informacion'}
+            </Link>
           </div>
         </aside>
       </div>
@@ -148,14 +154,14 @@ export default function ApartmentPage() {
         <div className="mx-auto flex max-w-xl items-center justify-between gap-3">
           <div className="min-w-0">
             <div className="text-xs text-navy-500">Nr. {apt.number} · {formatArea(apt.area)}</div>
-            <div className="truncate font-display text-2xl">{apt.status === 'sold' ? 'E shitur' : formatPrice(apt.price)}</div>
+            <div className="truncate font-display text-2xl">{priceText}</div>
           </div>
-          <a
-            href={`mailto:shitja@example.com?subject=${encodeURIComponent(`Interesim për apartamentin ${apt.id}`)}`}
-            className={`shrink-0 rounded-xs px-5 py-3 text-sm font-semibold ${apt.status === 'sold' ? 'pointer-events-none bg-navy-100 text-navy-400' : 'bg-gold-500 text-white active:bg-gold-600'}`}
+          <Link
+            to={inquiryLink}
+            className={`shrink-0 rounded-xs px-5 py-3 text-sm font-semibold ${apt.status === 'sold' ? 'bg-navy-950 text-white' : 'bg-gold-500 text-white active:bg-gold-600'}`}
           >
-            {apt.status === 'sold' ? 'Jo në dispozicion' : 'Kërko informacion'}
-          </a>
+            {apt.status === 'sold' ? 'Banesa të ngjashme' : 'Kërko informacion'}
+          </Link>
         </div>
       </div>
     </div>

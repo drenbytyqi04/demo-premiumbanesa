@@ -1,6 +1,9 @@
 import { motion } from 'motion/react'
-import site from '../../data/site.json'
+import site from '../../data/site'
 import { RevealHeading } from '../motion'
+import { IllustrativeTag } from '../ui'
+
+const { steps, illustrative } = site.payment
 
 const SHADES = ['bg-gold-500', 'bg-navy-500', 'bg-navy-700', 'bg-navy-900']
 
@@ -10,14 +13,19 @@ export default function PaymentPlan() {
     <section className="bg-stone-100 py-24 sm:py-36" aria-labelledby="payment-title">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <RevealHeading id="payment-title" className="max-w-2xl font-display text-[2.6rem] leading-[1.02] text-navy-950 sm:text-6xl">{"Paguani sipas ecurisë së ndërtimit"}</RevealHeading>
-        <p className="mt-4 max-w-xl text-lg text-navy-600">Pa kredi të detyrueshme dhe pa kamatë. Çmimi fiksohet me kontratë.</p>
+        <p className="mt-4 max-w-xl text-lg text-navy-600">Një strukturë pagese sipas fazave të ndërtimit. Kushtet përfundimtare përcaktohen në kontratë.</p>
+        {illustrative && (
+          <p className="mt-5 flex flex-wrap items-center gap-3 text-sm text-navy-600">
+            <IllustrativeTag>Plan ilustrues</IllustrativeTag> Përqindjet konfirmohen nga zyra e shitjes.
+          </p>
+        )}
 
         <div className="mt-14 flex h-[3px] overflow-hidden" aria-hidden="true">
-          {site.payment.map((p, i) => (
+          {steps.map((p, i) => (
             <motion.span
               key={p.title}
               className={`origin-left ${SHADES[i % SHADES.length]}`}
-              style={{ width: p.share }}
+              style={{ width: `${p.percent}%` }}
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true, amount: 1 }}
@@ -27,11 +35,11 @@ export default function PaymentPlan() {
         </div>
 
         <ol className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {site.payment.map((p, i) => (
+          {steps.map((p, i) => (
             <li key={p.title} className="flex gap-4 lg:block">
               <span className={`mt-1 size-3 shrink-0 rounded-full lg:mb-5 lg:mt-0 lg:block lg:h-1 lg:w-12 ${SHADES[i % SHADES.length]}`} aria-hidden="true" />
               <div>
-                <div className="font-display text-6xl tabular-nums text-navy-950">{p.share}</div>
+                <div className="font-display text-6xl tabular-nums text-navy-950">{p.percent}%</div>
                 <h3 className="mt-2 font-semibold text-navy-900">
                   <span className="sr-only">Hapi {i + 1}: </span>
                   {p.title}

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ButtonHTMLAttri
 import { btnCls, inputCls } from '../components/ui'
 import { useData } from '../data/DataContext'
 import { asset, centroid, toPoints } from '../lib/format'
+import { parsePolygonImport, validatePolygons } from '../lib/polygons'
 import type { Point, PolygonExport } from '../types'
 
 /* ------------------------------------------------------------------ types */
@@ -439,11 +440,9 @@ export default function EditorPage() {
 
   const importJson = (text: string) => {
     try {
-      const data = JSON.parse(text) as Partial<PolygonExport> | Poly[]
-      const list = Array.isArray(data) ? data : data.polygons
-      if (!Array.isArray(list)) throw new Error('mungon "polygons"')
-      const clean = list.map((p) => ({ id: String(p.id), points: p.points.map((q) => [Number(q[0]), Number(q[1])] as Point) }))
-      if (!Array.isArray(data) && data.width && data.height && data.image) {
+      const data = parsePolygonImport(text)
+      const clean: Poly[] = (Array.isArray(data) ? data : data.polygons).map((p) => ({ id: p.id, points: p.points }))
+      if (!Array.isArray(data)) {
         const t = data.target
         const key = t?.type === 'aerial' ? 'aerial' : t?.type === 'facade' ? `facade:${t.facadeId}` : 'custom'
         if (key !== targetKey) {
@@ -464,7 +463,13 @@ export default function EditorPage() {
   const saveToDemo = async () => {
     const data = exportData()
     if (!data || !target) return
-    if (dupIds.length) return say(`ID të dyfishta: ${[...new Set(dupIds)].join(', ')}`, 'warn')
+    const issues = validatePolygons(data.polygons, { width: data.width, height: data.height, expectedIds: target.expected })
+    const errors = issues.filter((i) => i.level === 'error')
+    if (errors.length) return say(`Nuk mund të publikohet: ${errors[0].message}${errors.length > 1 ? ` (+${errors.length - 1} të tjera)` : ''}`, 'warn')
+    const warnings = issues.filter((i) => i.level === 'warning').map((i) => `• ${i.message}`)
+    // the draft stays in this browser until confirmed; publishing replaces what visitors see
+    const question = [`Të zëvendësohen poligonet e publikuara për "${target.label}"?`, ...(warnings.length ? ['', 'Paralajmërime:', ...warnings.slice(0, 6)] : [])].join('\n')
+    if (!confirm(question)) return
     if (img!.src.startsWith('blob:'))
       say(`Kujdes: kopjoje imazhin te public/${img!.path} që faqja ta shfaqë.`, 'warn')
     try {
@@ -533,7 +538,7 @@ export default function EditorPage() {
                 commit(polys.map((q, i) => (i === poly ? { ...q, points: q.points.filter((_, j) => j !== idx) } : q)))
                 setActiveVertex(null)
               }}
-              className="rounded-xs bg-red-500/90 px-3 py-1.5 font-medium"
+              className="rounded-xs bg-sold px-3 py-1.5 font-medium"
             >
               Fshi pikën
             </button>
@@ -541,7 +546,7 @@ export default function EditorPage() {
           {drawing && (
             <div className="flex items-center gap-2">
               <span className="text-navy-300">{drawing.length} pika</span>
-              <button onClick={closeDrawing} disabled={drawing.length < 3} className="rounded-xs bg-emerald-600 px-3 py-1.5 font-medium disabled:opacity-40">
+              <button onClick={closeDrawing} disabled={drawing.length < 3} className="rounded-xs bg-available px-3 py-1.5 font-medium disabled:opacity-40">
                 Mbyll ✓
               </button>
               <button onClick={() => setDrawing(null)} className="rounded-xs px-2 py-1.5 text-navy-200 hover:bg-white/10">
@@ -700,7 +705,7 @@ export default function EditorPage() {
 
         {notice && (
           <div
-            className={`pointer-events-none absolute bottom-4 left-1/2 z-10 max-w-[90%] -translate-x-1/2 rounded-xs px-4 py-2 text-sm font-medium shadow-lg ${notice.tone === 'ok' ? 'bg-emerald-600 text-white' : 'bg-amber-400 text-navy-950'}`}
+            className={`pointer-events-none absolute bottom-4 left-1/2 z-10 max-w-[90%] -translate-x-1/2 rounded-xs px-4 py-2 text-sm font-medium shadow-lg ${notice.tone === 'ok' ? 'bg-available text-white' : 'bg-reserved text-navy-950'}`}
           >
             {notice.text}
           </div>
@@ -750,7 +755,7 @@ export default function EditorPage() {
             </label>
           )}
           {draftRestored && (
-            <p className="mt-2 rounded-xs bg-amber-100 px-3 py-2 text-xs text-amber-900">
+            <p className="mt-2 rounded-xs bg-reserved/15 px-3 py-2 text-xs text-reserved-ink">
               U rikthye drafti yt i fundit për këtë imazh. Kliko “Ringarko” për të filluar nga të dhënat e aplikacionit.
             </p>
           )}
@@ -799,7 +804,7 @@ export default function EditorPage() {
             <span>3 · Poligonet ({polys.length})</span>
             {polys.length > 0 && (
               <button
-                className="normal-case tracking-normal text-red-600 hover:underline"
+                className="normal-case tracking-normal text-sold hover:underline"
                 onClick={() => {
                   if (!confirm('Të fshihen të gjitha poligonet?')) return
                   commit([])
@@ -810,9 +815,9 @@ export default function EditorPage() {
               </button>
             )}
           </h2>
-          {dupIds.length > 0 && <p className="mb-2 rounded-xs bg-red-50 px-3 py-2 text-xs text-red-700">ID të dyfishta: {[...new Set(dupIds)].join(', ')}</p>}
+          {dupIds.length > 0 && <p className="mb-2 rounded-xs bg-sold/8 px-3 py-2 text-xs text-sold">ID të dyfishta: {[...new Set(dupIds)].join(', ')}</p>}
           {unknownIds.length > 0 && (
-            <p className="mb-2 rounded-xs bg-amber-50 px-3 py-2 text-xs text-amber-800">
+            <p className="mb-2 rounded-xs bg-reserved/10 px-3 py-2 text-xs text-reserved-ink">
               Këto ID nuk ekzistojnë në të dhëna dhe do të injorohen në faqe: {unknownIds.join(', ')}
             </p>
           )}
@@ -836,7 +841,7 @@ export default function EditorPage() {
                 />
                 <span className="text-xs text-navy-400">{p.points.length} pk</span>
                 <button
-                  className="rounded px-1.5 text-navy-400 hover:bg-red-50 hover:text-red-600"
+                  className="rounded px-1.5 text-navy-400 hover:bg-sold/8 hover:text-sold"
                   title="Fshi"
                   onClick={(e) => {
                     e.stopPropagation()

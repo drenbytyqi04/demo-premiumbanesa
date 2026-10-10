@@ -1,4 +1,4 @@
-import site from '../../data/site.json'
+import site from '../../data/site'
 import { asset } from '../../lib/format'
 import { ParallaxImage, Reveal, RevealHeading } from '../motion'
 

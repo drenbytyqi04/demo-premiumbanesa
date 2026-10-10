@@ -24,6 +24,11 @@
   --color-gold-500: #b5532e;
   --color-gold-600: #964224;
   --color-paper: #f3f2ef;
+  /* apartment status – official palette; never used as the only signal */
+  --color-available: #2f6b4f;
+  --color-reserved: #b8862b;
+  --color-reserved-ink: #7a5714; /* AA text on light backgrounds */
+  --color-sold: #a33d32;
   --radius-xs: 2px;
 }
 
@@ -140,7 +145,7 @@ body {
 /* stacking plan: sold units are hatched so status doesn't rely on colour alone */
 .stack-sold {
   background-color: var(--color-stone-100);
-  background-image: repeating-linear-gradient(135deg, rgb(168 64 46 / 0.22) 0 1px, transparent 1px 6px);
+  background-image: repeating-linear-gradient(135deg, rgb(163 61 50 / 0.22) 0 1px, transparent 1px 6px);
 }
 
 /* photo-real renders: a fine white contour at rest, status colour on hover */

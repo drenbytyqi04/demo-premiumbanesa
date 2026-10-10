@@ -1,153 +1,182 @@
-# Rezidenca Aurora – interactive apartment sales demo
+# Rezidenca Aurora – interactive apartment sales website
 
-A demo sales site for a residential complex. Buyers click a building on the aerial view, then an apartment on the facade, then take a 360° virtual tour.
-All data is mock data and every image is either a generated placeholder or a CC0 panorama.
+Buyers pick a wing on the aerial render, then an apartment on the facade, then explore an
+illustrative 360° tour and send an inquiry. Staff manage apartment data and facade polygons in a
+login-protected admin area (`#/admin`, not linked from the public site).
 
-**Stack:** Vite · React 19 · TypeScript · Tailwind CSS v4 · React Router (HashRouter) · Pannellum
+**Stack:** Vite · React 19 · TypeScript (strict) · Tailwind CSS v4 · React Router (HashRouter) ·
+motion · Lenis · Pannellum · Supabase (Postgres, Auth, Realtime) · React Hook Form + Zod ·
+Lucide React · Vitest + Testing Library · Playwright
+
+> **Status of the content.** Apartment numbers, m², prices and statuses are **deterministic demo
+> data** (2 wings × 10 floors × 7 = 140). Delivery date, parking, courtyard area, address,
+> distances, construction dates and contact details are **not invented**: they are `null` in
+> `src/data/site.json` and the site shows “Të dhënat së shpejti” until they are confirmed.
+> The payment plan, construction phases, floor plans and 360° views are labelled as illustrative.
 
 ## Run it locally
 
 ```bash
 npm install
-npm run dev          # http://localhost:5173
-npm run build        # production build in dist/ (base "./", works from any sub-path)
-npm run preview      # serve the build
+npm run dev          # http://localhost:5173 (demo mode when no Supabase variables are set)
+npm run build        # type-check + production build in dist/ (base "./")
+npm run preview      # serve the build on http://localhost:4173
 ```
 
-Optional:
+| Command | What it checks |
+|---|---|
+| `npm run typecheck` | TypeScript, strict |
+| `npm run lint` | oxlint |
+| `npm test` | Vitest unit + integration tests (data set, room mapping, prices, filters/URL, polygon validation, repository, inquiry form) |
+| `npm run test:db` | Runs both migrations + seed in an in-memory Postgres (PGlite) and checks RLS for visitor / signed-in non-admin / admin, column limits, constraints, inquiry function, rate limit. Never touches a remote database. |
+| `npm run test:e2e` | Playwright journeys on the production build in demo mode (desktop + mobile) |
 
-```bash
-npm run panoramas         # download ~4K CC0 indoor panoramas from Poly Haven into public/panoramas/
-npm run generate:images   # regenerate the placeholder aerial/facade/floor-plan images
-npm run generate:data     # ⚠ reset src/data/*.json to fresh random mock data (overwrites polygons!)
-npm run apply-polygons -- file.json   # merge an editor export into src/data/*.json
+Other scripts: `npm run export-seed` (regenerate `supabase/seed.sql` from `src/data/*.json`),
+`npm run apply-polygons -- file.json` (merge an editor export into the JSON data),
+`npm run generate:data` (⚠ rebuild the demo data and crops – overwrites `src/data/*.json`),
+`npm run panoramas` (download CC0 panoramas).
+
+## Design system
+
+Official palette (tokens in `src/index.css`; the class names `navy-*` = ink scale and `gold-*` =
+terracotta are historical):
+
+| Token | Value | Use |
+|---|---|---|
+| Deep ink green `navy-900` | `#18201B` | headings, text, navigation, footer |
+| Near-black green `navy-950` | `#0E130F` | dark hero, overlays, immersive sections |
+| Terracotta `gold-500` | `#B5532E` | primary CTA, accents, active links (measured use) |
+| Limestone `paper` | `#F3F2EF` | main background |
+| White | `#FFFFFF` | forms, cards |
+| `available` | `#2F6B4F` | free apartments |
+| `reserved` | `#B8862B` (text: `reserved-ink` `#7A5714` for AA contrast) | reserved |
+| `sold` | `#A33D32` + diagonal hatch (`.stack-sold`) | sold |
+
+Status is never shown by colour alone (label/badge text, hatch for sold). Typefaces: Instrument
+Serif (headlines) + Geist (body), self-hosted via Fontsource.
+
+## Routes
+
+| Route | |
+|---|---|
+| `#/` | Homepage: hero with aerial wing selector, facts, architecture, gallery, stacking plan, apartment types, 360° band, location, construction, payment plan, FAQ, contact form |
+| `#/buildings/:id` | Wing page: filters (1+1…4+1, m², floor, only free) kept in the URL, full-width facade with one polygon per apartment, list below |
+| `#/apartments` | All apartments with the same filters |
+| `#/apartments/:id` | Details, floor plan (illustrative), Pannellum tour, inquiry link |
+| `#/admin`, `#/admin/poligonet` | Admin (lazy-loaded): apartment editing, polygon editor |
+
+**Room types.** `rooms` is the number of bedrooms; the UI shows the local “N+1” form
+(N bedrooms + living room with kitchen): 1 → 1+1 … 4 → 4+1 (`src/lib/domain.ts`).
+
+**Filter URL:** `?dhoma=2,3&kati=3-8&min=60&max=100&lira=1`. Invalid values are ignored, reversed
+ranges fixed; chips/checkbox add a history entry so Back undoes them.
+
+## Data and modes
+
+```
+src/data/site.json              public copy + project facts (null = not confirmed) – validated by src/data/site.ts (Zod)
+src/data/*.json                 demo inventory: complex, buildings, 140 apartments, 360° scenes
+src/data/repository.ts          DataRepository interface + local demo implementation
+src/data/supabaseRepository.ts  Supabase implementation
+src/lib/domain.ts               room mapping, €/m², counts, starting price (null-safe)
+src/lib/inquiry.ts              inquiry schema shared by form + repository
+src/lib/polygons.ts             polygon coordinate system + validation
+supabase/migrations/            0001 schema + RLS, 0002 hardening + inquiries
+supabase/seed.sql               generated by npm run export-seed
+supabase/tests/rls.test.mjs     database permission tests (npm run test:db)
 ```
 
-## Home page
+- **Demo mode** – no `VITE_SUPABASE_*` variables. Data from the JSON files; admin edits and
+  inquiries are stored only in that browser’s `localStorage` (validated on read, corrupted data is
+  discarded). The demo login `admin@demo.local` / `aurora-demo` is **not secure** (it is in the
+  JavaScript bundle) – for local testing only. The UI says “Demo” wherever this matters.
+- **Supabase mode** – variables set. If the database cannot be reached the site shows an honest
+  error with “Provo përsëri”; it never falls back to demo inventory. Realtime pushes admin changes
+  to visitors; only the newest load result is applied.
 
-`#/` is built from sections in `src/components/home/` with copy in `src/data/site.json`:
-the aerial site plan as hero (outlines draw in on load, live availability per building),
-a stacking plan (floors × units, every cell clickable), apartment types, the 360° tour,
-location & features, the payment plan and a contact form (demo – nothing is sent).
-Animations use [motion](https://motion.dev) and respect `prefers-reduced-motion`.
-Typeface: Archivo (self-hosted via `@fontsource-variable/archivo`).
+## Supabase setup
 
-Design skills used are committed in `.claude/skills/` (`frontend-design` from anthropics/skills,
-`ui-ux-pro-max` installed with `npm i -g ui-ux-pro-max-cli && uipro init --ai claude`).
-
-## Pages
-
-| Route                | What it does |
-|----------------------|--------------|
-| `#/`                 | Aerial view. One SVG polygon per building: green if it has free apartments, red if sold out. Hover shows a tooltip; on touch screens the first tap previews and the second tap (or the button) opens the building. |
-| `#/buildings/:id`    | Facade with one polygon per apartment (green = free, red = sold, yellow = reserved). Filters for floor, rooms, m² and "only free" dim the units that don't match (filters are kept in the URL). Arrows switch facades (building A has 2). |
-| `#/apartments`       | List of every apartment, with the same filters. |
-| `#/apartments/:id`   | Info panel, floor plan and a Pannellum 360° tour. Floor hotspots move between rooms, and the thumbnail strip jumps straight to a room. |
-
-The public site is read-only and has **no link or login button** to the admin area.
-
-## Admin area (`#/admin`) – login required
-
-Open `https://your-site/#/admin` directly (it is not linked anywhere). After login:
-
-- **Banesat** – change status (e lirë / e rezervuar / e shitur), m², rooms and price per apartment.
-- **Poligonet** – the polygon editor (see below). `#/editor` redirects here.
-
-How the protection works (Supabase mode):
-
-- Visitors use the public *anon* key, which the database allows to **read only** (Row-Level Security in
-  `supabase/migrations/0001_init.sql`). Writes are refused by the database itself, not just hidden in the UI.
-- Only users listed in the `admins` table can update. A signed-in user who is not in `admins` is signed out.
-- Visitors never download the admin code (separate lazy-loaded bundle).
-- Changes reach visitors live (Supabase Realtime) – no reload needed.
-
-### Set up Supabase (once)
-
-1. Create a Supabase project. In **SQL Editor** run `supabase/migrations/0001_init.sql`, then `supabase/seed.sql`
-   (regenerate it from the JSON files any time with `npm run export-seed`).
-2. **Authentication → Users → Add user**: create the admin (email + strong password, "Auto confirm").
-3. Make that user an admin (SQL Editor):
+1. Create a project. In **SQL Editor** run, in order:
+   `supabase/migrations/0001_init.sql`, `supabase/migrations/0002_hardening_inquiries.sql`,
+   `supabase/seed.sql`. (Or `supabase db push` with the CLI.) All three are safe to re-run.
+2. **Authentication → Sign In / Providers**: turn **off** “Allow new users to sign up”.
+3. **First admin** (controlled, no public registration): Authentication → Users → **Add user**
+   (email + strong password, auto-confirm), then in SQL Editor:
    ```sql
    insert into public.admins (user_id) select id from auth.users where email = 'admin@yourcompany.com';
    ```
-4. **Authentication → Sign In / Providers**: turn **off** "Allow new users to sign up", so nobody else can create an account.
-5. Copy `.env.example` to `.env.local` and fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
-   (Project Settings → API). Restart `npm run dev`. Set the same two variables on your hosting (Netlify/Vercel) before building.
+   Remove access with `delete from public.admins where user_id = …` – the app signs such users out.
+4. Copy `.env.example` → `.env.local`, set `VITE_SUPABASE_URL` and
+   `VITE_SUPABASE_PUBLISHABLE_KEY` (or the legacy `VITE_SUPABASE_ANON_KEY`) from
+   Project Settings → API Keys. **Never** put the service-role / secret key in a `VITE_` variable.
+5. Optional local check of the SQL before applying it: `npm run test:db`.
 
-### Demo mode (no Supabase)
+What the database enforces (verified locally with `npm run test:db`, not yet against a live project):
 
-Without the env vars the site still runs: data comes from `src/data/*.json` and the admin login is
-`admin@demo.local` / `aurora-demo` (change via `VITE_DEMO_ADMIN_*`). This is **not secure** (the password is in the
-JavaScript) and edits are stored only in that browser's `localStorage` – use it for local testing only.
+- Visitors read project and apartment data; they cannot update, delete or add admins.
+- Admins (rows in `admins`, checked by `is_admin()` – `security definer`, empty `search_path`)
+  may update only `status, price, area, rooms, polygon, facade_id` of apartments and the image /
+  polygon columns of the aerial and facades. Nobody can delete from the app.
+- Checks: area > 0, rooms 1–4, price ≥ 0, floor 0–50, polygons are arrays of ≥ 3 points,
+  apartment number unique per wing and floor; `updated_at` on every table.
+- Inquiries: the `inquiries` table is not readable or writable by visitors. The form calls
+  `submit_inquiry(...)`, which validates the fields, ignores a repeated `client_id`
+  (double submit / retry) and rate-limits (3 per phone per 10 min, 30 per minute overall).
+  Admins can read inquiries (e.g. in the Supabase table editor). The form also has a honeypot
+  field, a minimum fill time and a consent checkbox, and shows success only after the insert succeeded.
 
-## Project images
+## Deploy on Vercel
 
-The studio renders are in `public/images/projekti/` (each with a `-900.jpg` thumbnail for the gallery).
-`npm run generate:data` (`scripts/generate-project-data.mjs`) crops from them:
+1. Import the GitHub repository (framework preset: **Vite**; build `npm run build`; output `dist`).
+2. Add the environment variables `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` for
+   Production (and Preview if wanted). Leave them out for a demo deployment.
+3. Deploy. HashRouter needs no rewrites: every route is `/#/…` on `index.html`, and `base: './'`
+   keeps assets relative.
+4. **Rollback:** Vercel → Deployments → previous deployment → “Promote to Production”.
+   Database changes are additive migrations; to undo data edits restore from a Supabase backup.
 
-| File | Used for | Cut from |
-|------|----------|----------|
-| `pamja-ajrore-3-origjinal.webp` | Homepage hero: the original aerial, served as-is | (original file) |
-| `fasada-a.jpg` | Lamela A page, 4 apartments × 10 floors | `pamja-ballore.jpg` (left wing) |
-| `fasada-b.jpg` | Lamela B page, 3 apartments × 9 floors (floor 10 is hidden by the overhang) | `pamja-ballore.jpg` (right wing) |
+## Polygon editor (`#/admin/poligonet`)
 
-…and writes `src/data/*.json` with 2 wings × 10 floors × 7 apartments = **140 apartments**.
-Apartments facing the courtyard have no polygon on the street facade and appear only in lists and the stacking plan.
+Pick the aerial view or a facade (or load an image), draw by clicking corners (close on the first
+point or `Enter`), the next apartment without a polygon is suggested, points snap to corners, drag
+points / whole polygons, add points on edge midpoints, delete, undo/redo (`Ctrl+Z`), zoom
+(`Ctrl`+wheel, `+`/`−`), pan (`Space`+drag; on touch a tap adds, a drag pans).
 
-⚠ Numbers, m², prices and statuses are **demo values** until the studio's apartment table arrives.
-Re-running `generate:data` overwrites `src/data/*.json`. Still placeholders: the floor plans (`public/images/floorplans/`)
-and the 360° panoramas (`public/panoramas/`). Polygons are measured approximations; refine them in `#/admin/poligonet`.
+- **Drafts vs published:** work is auto-saved as a draft per image in this browser; visitors see
+  only what was published. “Ruaj dhe publiko” validates first and asks for confirmation.
+- **Validation** (`src/lib/polygons.ts`): ≥ 3 points, finite coordinates inside the image, non-zero
+  area, no self-intersection, known and unique apartment ids → errors block publishing;
+  overlaps and apartments without polygon → warnings shown in the confirmation.
+- **Coordinate system:** `[x, y]` in pixels of the image whose `width`/`height` are saved with the
+  polygons (the SVG overlay uses them as its viewBox). `toNormalized` / `fromNormalized` convert to
+  0–1 if a render is re-exported at another size.
+- Import/export JSON is schema-validated:
+  ```json
+  { "version": 1, "target": { "type": "facade", "buildingId": "A", "facadeId": "A-front" },
+    "image": "images/projekti/fasada.jpg", "width": 1800, "height": 1250,
+    "polygons": [{ "id": "A-101", "points": [[156, 266], [594, 266], [594, 386], [156, 386]] }] }
+  ```
+  `npm run apply-polygons -- export.json` writes an export into `src/data/*.json`.
 
-## Redraw the polygons on your own images (editor)
+## Troubleshooting
 
-1. Copy your photo into `public/images/`, using the same name to replace a placeholder (e.g. `aerial.jpg`).
-2. Log in at **`#/admin`**, open **Poligonet** and choose what you are drawing in **"1 · Imazhi"**: *Pamja ajrore* (buildings) or a facade (apartments).
-   - Or click **"Zëvendëso imazhin…"** to load a file straight from disk. If its size differs from the old image, existing polygons are scaled to fit.
-3. Click **"Fshi të gjitha"** to start clean, or keep the existing polygons and adjust them.
-4. **Draw** (`D`): click the corners of a building or apartment. Close the shape by clicking the first point (green) or pressing `Enter`.
-   The new polygon automatically gets the next ID from the **"Pa poligon"** list (e.g. `A-801`, `A-802`…). Click a chip in that list to pick a different ID, or type one yourself.
-   New points snap to existing corners, so neighbouring apartments share edges (hold `Alt` to turn snapping off).
-5. **Edit** (`E`): drag points or whole polygons. Drag the small midpoint circles to add points. `Shift`/`Alt`+click a point to delete it. `Delete` removes the selected polygon, the arrow keys nudge it, and you can rename IDs in the list.
-   Zoom with `Ctrl`+scroll or `+`/`−`/`0`, pan with `Space`+drag, undo/redo with `Ctrl+Z` / `Ctrl+Shift+Z`.
-6. **"Ruaj dhe publiko"** saves the polygons (to Supabase, or to `localStorage` in demo mode) and the site shows them immediately.
-7. **"Shkarko JSON"**, then make the change permanent:
-   ```bash
-   npm run apply-polygons -- ~/Downloads/polygons-aerial.json ~/Downloads/polygons-facade-A-front.json
-   ```
-   After that, clear the local overrides with Admin → "Rikthe të dhënat fillestare".
+- **“Të dhënat nuk u ngarkuan”** – Supabase variables are set but the database is unreachable or
+  the migrations/seed were not run. Check the URL/key, run the SQL files, then “Provo përsëri”.
+- **Admin login works but saving fails with “nuk keni leje”** – the user is not in `public.admins`.
+- **Inquiry error “disa kërkesa radhazi”** – the rate limit; wait 10 minutes.
+- **Old design after deploy** – hard refresh (`Ctrl+Shift+R`).
+- **Demo edits look stuck** – Admin → “Rikthe të dhënat fillestare”, or clear the site’s localStorage.
 
-Your work is auto-saved as a draft per image, so a page refresh doesn't lose it. "Ringarko" discards the draft.
+## Still needed from the investor / studio
 
-Export format (the same shape `src/data` uses; points are pixel coordinates in the image):
-
-```json
-{
-  "version": 1,
-  "target": { "type": "facade", "buildingId": "A", "facadeId": "A-front" },
-  "image": "images/facade-a.jpg",
-  "width": 1200,
-  "height": 1500,
-  "polygons": [{ "id": "A-801", "points": [[156, 266], [594, 266], [594, 386], [156, 386]] }]
-}
-```
-
-## Data
-
-```
-src/data/*.json                 seed / demo data (complex, buildings, apartments, 360° scenes)
-src/data/repository.ts          DataRepository interface + local demo implementation
-src/data/supabaseRepository.ts  Supabase implementation (used when VITE_SUPABASE_* are set)
-src/data/DataContext.tsx        React provider; pages use useData()
-src/auth/AuthContext.tsx        admin login (Supabase Auth, or demo credentials)
-src/admin/                      admin shell + login page (lazy-loaded)
-supabase/migrations/0001_init.sql  tables, RLS rules, realtime
-supabase/seed.sql               generated by `npm run export-seed`
-```
-
-360° scenes stay in `scenes.json` because they describe image files in `public/panoramas/`.
+Verified apartment table (numbers, m², rooms, prices, statuses), approved floor plans per type,
+360° renders per type, delivery date, parking count, courtyard area, exact address and map pin,
+distances, construction dates, payment terms, sales contact (phone, email, office, hours), privacy
+policy text, project logo, and the original aerial/facade renders to recalibrate the polygons.
 
 ## Assets & licences
 
-- 360° panoramas: [Poly Haven](https://polyhaven.com), CC0 (see `public/panoramas/CREDITS.md`).
-- Aerial, facade and floor-plan images: generated placeholders (`scripts/generate-demo.mjs`).
-- No images from any real developer's website are used.
+- Project renders: supplied by the client (`public/images/projekti/`).
+- 360° panoramas: [Poly Haven](https://polyhaven.com), CC0 (`public/panoramas/CREDITS.md`) – illustrative only.
+- Floor plans: generated placeholder SVGs – illustrative only.
+- Icons: Lucide (ISC). Fonts: Instrument Serif, Geist (OFL).

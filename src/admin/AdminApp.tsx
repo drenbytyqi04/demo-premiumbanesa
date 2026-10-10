@@ -52,7 +52,7 @@ function Shell() {
             </NavLink>
           </nav>
           <div className="ml-auto flex items-center gap-2 text-sm">
-            {mode === 'demo' && <span className="hidden rounded-xs bg-amber-400/15 px-2.5 py-1 text-xs font-medium text-amber-300 sm:inline">Demo</span>}
+            {mode === 'demo' && <span className="hidden rounded-xs bg-reserved/15 px-2.5 py-1 text-xs font-medium text-reserved sm:inline">Demo</span>}
             <a href="#/" target="_blank" rel="noreferrer" className="rounded-xs px-3 py-2 text-navy-200 hover:bg-white/5 hover:text-white">
               Shiko faqen
             </a>

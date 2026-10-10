@@ -5,6 +5,8 @@ import { useData } from '../data/DataContext'
 import type { ApartmentPatch } from '../data/repository'
 import { STATUS_LABELS, formatNumber, formatPrice } from '../lib/format'
 import type { Apartment, ApartmentStatus } from '../types'
+import { pricePerM2 } from '../lib/domain'
+const ppm = (a: { price: number; area: number }) => { const v = pricePerM2(a); return v === null ? '—' : formatNumber(v) }
 
 const STATUSES = Object.keys(STATUS_LABELS) as ApartmentStatus[]
 const ROOMS = [1, 2, 3, 4, 5, 6]
@@ -52,7 +54,7 @@ export default function AdminPage() {
         </div>
         {mode === 'demo' && (
           <button
-            className="min-h-10 self-start rounded-xs px-3 text-sm font-medium text-red-600 ring-1 ring-red-200 hover:bg-red-50 sm:self-auto"
+            className="min-h-10 self-start rounded-xs px-3 text-sm font-medium text-sold ring-1 ring-sold/30 hover:bg-sold/8 sm:self-auto"
             onClick={() => confirm('Të rikthehen të dhënat fillestare? Ndryshimet lokale do të fshihen.') && reset()}
           >
             Rikthe të dhënat fillestare
@@ -61,7 +63,7 @@ export default function AdminPage() {
       </div>
 
       {row?.kind === 'error' && (
-        <div role="alert" className="mb-4 flex items-start justify-between gap-3 rounded-xs bg-red-50 px-4 py-3 text-sm text-red-800 ring-1 ring-red-200">
+        <div role="alert" className="mb-4 flex items-start justify-between gap-3 rounded-xs bg-sold/8 px-4 py-3 text-sm text-sold ring-1 ring-sold/30">
           <span>
             <strong>{row.id}:</strong> {row.message}
           </span>
@@ -127,7 +129,7 @@ export default function AdminPage() {
               <Labeled label="Sipërfaqja (m²)">
                 <NumberInput value={a.area} step={0.1} decimals onSave={(area) => save(a, { area })} label={`Sipërfaqja ${a.id}`} />
               </Labeled>
-              <Labeled label={`Çmimi (€) · ${formatNumber(Math.round(a.price / a.area))} €/m²`}>
+              <Labeled label={`Çmimi (€) · ${ppm(a)} €/m²`}>
                 <NumberInput value={a.price} step={500} onSave={(price) => save(a, { price })} label={`Çmimi ${a.id}`} />
               </Labeled>
             </div>
@@ -152,7 +154,7 @@ export default function AdminPage() {
           </thead>
           <tbody className="divide-y divide-stone-100">
             {list.map((a) => (
-              <tr key={a.id} className={row?.id === a.id && row.kind === 'saved' ? 'bg-emerald-50' : 'hover:bg-stone-50'}>
+              <tr key={a.id} className={row?.id === a.id && row.kind === 'saved' ? 'bg-available/8' : 'hover:bg-stone-50'}>
                 <td className="px-4 py-2 font-semibold">{a.id}</td>
                 <td className="px-4 py-2 tabular-nums">{a.floor}</td>
                 <td className="px-4 py-2">
@@ -167,7 +169,7 @@ export default function AdminPage() {
                 <td className="px-4 py-2">
                   <NumberInput value={a.price} step={500} onSave={(price) => save(a, { price })} className="w-32" label={`Çmimi ${a.id}`} />
                 </td>
-                <td className="px-4 py-2 tabular-nums text-navy-500">{formatNumber(Math.round(a.price / a.area))}</td>
+                <td className="px-4 py-2 tabular-nums text-navy-500">{ppm(a)}</td>
                 <td className="w-32 px-4 py-2 text-right">
                   <RowStatus row={row} a={a} />
                 </td>
@@ -185,8 +187,8 @@ export default function AdminPage() {
 
 function RowStatus({ row, a }: { row: RowState | null; a: Apartment }) {
   if (row?.id === a.id && row.kind === 'saving') return <span className="text-xs text-navy-500">Duke ruajtur…</span>
-  if (row?.id === a.id && row.kind === 'saved') return <span className="text-xs font-medium text-emerald-700">U ruajt</span>
-  if (row?.id === a.id && row.kind === 'error') return <span className="text-xs font-medium text-red-600">Nuk u ruajt</span>
+  if (row?.id === a.id && row.kind === 'saved') return <span className="text-xs font-medium text-available">U ruajt</span>
+  if (row?.id === a.id && row.kind === 'error') return <span className="text-xs font-medium text-sold">Nuk u ruajt</span>
   return <StatusBadge status={a.status} />
 }
 

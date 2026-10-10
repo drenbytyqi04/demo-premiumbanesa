@@ -1,4 +1,4 @@
-import site from '../../data/site.json'
+import site from '../../data/site'
 import { RevealHeading } from '../motion'
 
 /** Frequently asked questions as native <details> (keyboard + screen-reader friendly, no JS). */

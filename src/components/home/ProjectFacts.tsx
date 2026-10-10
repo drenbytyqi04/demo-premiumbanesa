@@ -1,7 +1,9 @@
 import { animate, useInView, useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { useData } from '../../data/DataContext'
-import site from '../../data/site.json'
+import site from '../../data/site'
+import { formatNumber } from '../../lib/format'
+import { Pending } from '../ui'
 
 /** The project in numbers: live counts from the data + a few facts from site.json. */
 export default function ProjectFacts() {
@@ -9,11 +11,14 @@ export default function ProjectFacts() {
   const floors = Math.max(...buildings.map((b) => b.floors))
   const free = apartments.filter((a) => a.status === 'available').length
 
-  const facts: { value: string | number; label: string }[] = [
+  const { delivery, parking, courtyardArea } = site.facts
+  const facts: { value: string | number | null; label: string }[] = [
     { value: buildings.length, label: buildings.length === 1 ? 'Lamelë' : 'Lamela të lidhura në majë' },
     { value: floors, label: 'Kate banimi mbi dyqanet' },
     { value: apartments.length, label: `Banesa, ${free} ende të lira` },
-    ...site.highlights,
+    { value: delivery, label: 'Dorëzimi i çelësave' },
+    { value: parking, label: 'Vende parkimi' },
+    { value: courtyardArea === null ? null : `${formatNumber(courtyardArea)}\u00a0m²`, label: 'Oborr i brendshëm' },
   ]
 
   return (
@@ -26,7 +31,7 @@ export default function ProjectFacts() {
           >
             <dt className="order-2 mt-2 text-sm leading-snug text-navy-500">{f.label}</dt>
             <dd className="font-display text-5xl leading-none text-navy-950 sm:text-6xl">
-              {typeof f.value === 'number' ? <CountUp to={f.value} /> : f.value}
+              {f.value === null ? <Pending className="block font-sans text-lg not-italic leading-snug text-navy-400 sm:text-xl" /> : typeof f.value === 'number' ? <CountUp to={f.value} /> : f.value}
             </dd>
           </div>
         ))}

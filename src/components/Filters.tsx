@@ -13,45 +13,54 @@ export interface FilterState {
 
 const KEYS = ['kati', 'dhoma', 'min', 'max', 'lira']
 
-const num = (v: string | null | undefined) => (v === null || v === undefined || v === '' || isNaN(+v) ? null : +v)
+/** Non-negative finite number from a URL value, else null (garbage in the URL is ignored). */
+const num = (v: string | null | undefined) => {
+  if (v === null || v === undefined || v.trim() === '') return null
+  const n = Number(v)
+  return Number.isFinite(n) && n >= 0 ? n : null
+}
 
 /**
- * Filters live in the URL so they survive navigation and can be shared:
- *   ?dhoma=1,3   rooms (one or more)
+ * Filters live in the URL so they survive navigation, can be shared and follow back/forward:
+ *   ?dhoma=1,3   room types 1+1 … 4+1 (one or more)
  *   ?kati=2-8    floor range (a single number = that floor)
  *   ?min=50&max=90   m² range,  ?lira=1  only available
  */
+export function parseFilters(params: URLSearchParams): FilterState {
+  const [f0, f1] = (params.get('kati') ?? '').split('-')
+  let [minFloor, maxFloor] = [num(f0), num(f1 ?? f0)]
+  if (minFloor !== null && maxFloor !== null && minFloor > maxFloor) [minFloor, maxFloor] = [maxFloor, minFloor]
+  let [minArea, maxArea] = [num(params.get('min')), num(params.get('max'))]
+  if (minArea !== null && maxArea !== null && minArea > maxArea) [minArea, maxArea] = [maxArea, minArea]
+  const rooms = (params.get('dhoma') ?? '')
+    .split(',')
+    .map(num)
+    .filter((n): n is number => n !== null && Number.isInteger(n) && n >= 1 && n <= 4)
+  return { rooms: [...new Set(rooms)].sort((a, b) => a - b), minFloor, maxFloor, minArea, maxArea, onlyAvailable: params.get('lira') === '1' }
+}
+
+/** Writes the filters into a copy of `base`, keeping unrelated parameters. */
+export function serializeFilters(s: FilterState, base = new URLSearchParams()): URLSearchParams {
+  const next = new URLSearchParams(base)
+  KEYS.forEach((k) => next.delete(k))
+  if (s.rooms.length) next.set('dhoma', [...s.rooms].sort((a, b) => a - b).join(','))
+  if (s.minFloor !== null || s.maxFloor !== null) {
+    const lo = s.minFloor ?? s.maxFloor!
+    const hi = s.maxFloor ?? s.minFloor!
+    next.set('kati', lo === hi ? String(lo) : `${lo}-${hi}`)
+  }
+  if (s.minArea !== null) next.set('min', String(s.minArea))
+  if (s.maxArea !== null) next.set('max', String(s.maxArea))
+  if (s.onlyAvailable) next.set('lira', '1')
+  return next
+}
+
 export function useFilters() {
   const [params, setParams] = useSearchParams()
-  const [f0, f1] = (params.get('kati') ?? '').split('-')
-  const state: FilterState = {
-    rooms: (params.get('dhoma') ?? '').split(',').map(num).filter((n): n is number => n !== null),
-    minFloor: num(f0),
-    maxFloor: num(f1 ?? f0),
-    minArea: num(params.get('min')),
-    maxArea: num(params.get('max')),
-    onlyAvailable: params.get('lira') === '1',
-  }
-  const set = (patch: Partial<FilterState>) => {
-    const s = { ...state, ...patch }
-    const next = new URLSearchParams(params)
-    KEYS.forEach((k) => next.delete(k))
-    if (s.rooms.length) next.set('dhoma', [...s.rooms].sort((a, b) => a - b).join(','))
-    if (s.minFloor !== null || s.maxFloor !== null) {
-      const lo = s.minFloor ?? s.maxFloor!
-      const hi = s.maxFloor ?? s.minFloor!
-      next.set('kati', lo === hi ? String(lo) : `${lo}-${hi}`)
-    }
-    if (s.minArea !== null) next.set('min', String(s.minArea))
-    if (s.maxArea !== null) next.set('max', String(s.maxArea))
-    if (s.onlyAvailable) next.set('lira', '1')
-    setParams(next, { replace: true })
-  }
-  const reset = () => {
-    const next = new URLSearchParams(params)
-    KEYS.forEach((k) => next.delete(k))
-    setParams(next, { replace: true })
-  }
+  const state = parseFilters(params)
+  // discrete changes add a history entry (back undoes them); slider steps replace the current one
+  const set = (patch: Partial<FilterState>, { replace = false } = {}) => setParams(serializeFilters({ ...state, ...patch }, params), { replace })
+  const reset = () => setParams(serializeFilters(parseFilters(new URLSearchParams()), params))
   const active = KEYS.some((k) => params.has(k))
   return { state, set, reset, active }
 }
@@ -135,7 +144,7 @@ export default function Filters({ apartments, filters, resultCount }: Props) {
           min={areaBounds[0]}
           max={areaBounds[1]}
           value={[state.minArea ?? areaBounds[0], state.maxArea ?? areaBounds[1]]}
-          onChange={([lo, hi]) => set({ minArea: lo > areaBounds[0] ? lo : null, maxArea: hi < areaBounds[1] ? hi : null })}
+          onChange={([lo, hi]) => set({ minArea: lo > areaBounds[0] ? lo : null, maxArea: hi < areaBounds[1] ? hi : null }, { replace: true })}
         />
 
         <RangeSlider
@@ -145,15 +154,15 @@ export default function Filters({ apartments, filters, resultCount }: Props) {
           value={[state.minFloor ?? floorBounds[0], state.maxFloor ?? floorBounds[1]]}
           onChange={([lo, hi]) => {
             const full = lo <= floorBounds[0] && hi >= floorBounds[1]
-            set({ minFloor: full ? null : lo, maxFloor: full ? null : hi })
+            set({ minFloor: full ? null : lo, maxFloor: full ? null : hi }, { replace: true })
           }}
         />
 
         <div className="flex items-center justify-between gap-6 lg:flex-col lg:items-end">
-          <label className="flex cursor-pointer items-center gap-3 text-sm">
+          <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm">
             <input
               type="checkbox"
-              className="size-4 accent-[#2e7d56]"
+              className="size-4 accent-available"
               checked={state.onlyAvailable}
               onChange={(e) => set({ onlyAvailable: e.target.checked })}
             />
