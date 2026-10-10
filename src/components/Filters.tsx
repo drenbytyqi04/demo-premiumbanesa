@@ -106,7 +106,7 @@ export default function Filters({ apartments, filters, resultCount }: Props) {
           className="-m-2 flex items-center gap-3 p-2 font-display text-2xl md:pointer-events-none md:text-3xl"
         >
           Filtro banesat
-          {activeCount > 0 && <span className="grid size-6 place-items-center bg-gold-500 font-sans text-xs">{activeCount}</span>}
+          {activeCount > 0 && <span className="grid size-6 place-items-center bg-gold-500 font-sans text-xs text-navy-950">{activeCount}</span>}
           <svg viewBox="0 0 24 24" className={`size-5 transition md:hidden ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M6 9l6 6 6-6" strokeLinecap="round" />
           </svg>

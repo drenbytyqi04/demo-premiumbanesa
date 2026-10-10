@@ -3,7 +3,7 @@ import { useAuth } from '../auth/AuthContext'
 import { useData } from '../data/DataContext'
 
 const field =
-  'mt-1.5 w-full rounded-xs border-0 bg-white px-4 py-3 text-base text-navy-900 ring-1 ring-stone-200 transition focus:ring-2 focus:ring-gold-500 focus:outline-none'
+  'mt-1.5 w-full rounded-xs border-0 bg-white px-4 py-3 text-base text-navy-900 ring-1 ring-stone-200 transition focus:ring-2 focus:ring-gold-600 focus:outline-none'
 
 export default function LoginPage() {
   const { signIn, mode } = useAuth()
@@ -43,7 +43,7 @@ export default function LoginPage() {
             <input name="password" type="password" autoComplete="current-password" required className={field} />
           </label>
           {error && (
-            <p role="alert" className="mt-4 rounded-xs bg-sold/8 px-3 py-2 text-sm text-sold">
+            <p role="alert" className="mt-4 rounded-xs bg-sold/8 px-3 py-2 text-sm text-sold-ink">
               {error}
             </p>
           )}

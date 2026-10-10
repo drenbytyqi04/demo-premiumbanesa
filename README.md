@@ -38,19 +38,20 @@ Other scripts: `npm run export-seed` (regenerate `supabase/seed.sql` from `src/d
 
 ## Design system
 
-Official palette (tokens in `src/index.css`; the class names `navy-*` = ink scale and `gold-*` =
-terracotta are historical):
+Palette from the brand board (tokens in `src/index.css`; class names `navy-*` = charcoal/slate
+scale and `gold-*` = gold accent are historical):
 
 | Token | Value | Use |
 |---|---|---|
-| Deep ink green `navy-900` | `#18201B` | headings, text, navigation, footer |
-| Near-black green `navy-950` | `#0E130F` | dark hero, overlays, immersive sections |
-| Terracotta `gold-500` | `#B5532E` | primary CTA, accents, active links (measured use) |
-| Limestone `paper` | `#F3F2EF` | main background |
-| White | `#FFFFFF` | forms, cards |
-| `available` | `#2F6B4F` | free apartments |
-| `reserved` | `#B8862B` (text: `reserved-ink` `#7A5714` for AA contrast) | reserved |
-| `sold` | `#A33D32` + diagonal hatch (`.stack-sold`) | sold |
+| Deep Charcoal `navy-950` | `#0B0F14` | hero, footer, dark sections, filter panel |
+| Slate Blue `navy-800` | `#1E293B` | dark surfaces, secondary dark |
+| Gold Accent `gold-500` | `#D4AF37` | primary buttons (with charcoal text), accents on dark |
+| Dark gold `gold-600` | `#8A6A12` | gold text and focus rings on light backgrounds (AA) |
+| Soft Gray `navy-300` | `#A3A3A3` | secondary text on dark |
+| Ivory `paper` | `#F8F7F4` | light background |
+| `available` | `#10B981` (text: `available-ink` `#047857`) | free apartments |
+| `reserved` | `#F59E0B` (text: `reserved-ink` `#92400E`) | reserved |
+| `sold` | `#EF4444` + diagonal hatch (text: `sold-ink` `#B91C1C`) | sold |
 
 Status is never shown by colour alone (label/badge text, hatch for sold). Typefaces: Instrument
 Serif (headlines) + Geist (body), self-hosted via Fontsource.

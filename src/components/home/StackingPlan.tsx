@@ -8,8 +8,8 @@ import { RevealHeading } from '../motion'
 
 // sold units recede (hatched), free units stand out; status is never shown by colour alone
 const CELL: Record<ApartmentStatus, string> = {
-  available: 'bg-available text-white hover:bg-[#285c44]',
-  reserved: 'bg-[#e5c78d] text-navy-950 hover:bg-[#dcb872]',
+  available: 'bg-available text-navy-950 hover:bg-[#34d399]',
+  reserved: 'bg-[#fcd38a] text-navy-950 hover:bg-[#fbbf24]',
   sold: 'stack-sold text-navy-400',
 }
 
@@ -53,7 +53,7 @@ export default function StackingPlan() {
             return (
               <div key={b.id} className={tab === b.id ? '' : 'hidden md:block'}>
                 <div className="mb-3 flex items-baseline justify-between">
-                  <Link to={`/buildings/${b.id}`} className="font-display text-3xl text-navy-950 hover:text-gold-500">
+                  <Link to={`/buildings/${b.id}`} className="font-display text-3xl text-navy-950 hover:text-gold-600">
                     {b.name}
                   </Link>
                   <span className="text-sm text-navy-500">{free} të lira</span>

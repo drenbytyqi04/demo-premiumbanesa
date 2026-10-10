@@ -63,7 +63,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
               : 'Ndodhi një gabim gjatë leximit të të dhënave.'}
           </p>
           <p className="mt-2 text-sm text-navy-400">{error}</p>
-          <button onClick={reload} className="mt-6 min-h-11 bg-navy-950 px-6 font-medium text-white hover:bg-gold-500">
+          <button onClick={reload} className="mt-6 min-h-11 bg-navy-950 px-6 font-medium text-white hover:bg-gold-500 hover:text-navy-950">
             Provo përsëri
           </button>
         </div>

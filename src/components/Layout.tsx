@@ -77,7 +77,7 @@ export default function Layout() {
             <Link
               to={CONTACT}
               className={`inline-flex h-11 items-center px-5 text-[15px] font-medium transition-colors ${
-                light ? 'bg-white text-navy-950 hover:bg-gold-500 hover:text-white' : 'bg-navy-950 text-white hover:bg-gold-500'
+                'bg-gold-500 text-navy-950 hover:bg-gold-400'
               }`}
             >
               Rezervo takim
@@ -102,12 +102,12 @@ export default function Layout() {
                 key={n.label}
                 to={n.to}
                 end={n.end}
-                className={({ isActive }) => `block border-b border-navy-100 py-4 font-display text-3xl ${isActive && !n.section ? "text-gold-500" : "text-navy-950"}`}
+                className={({ isActive }) => `block border-b border-navy-100 py-4 font-display text-3xl ${isActive && !n.section ? "text-gold-600" : "text-navy-950"}`}
               >
                 {n.label}
               </NavLink>
             ))}
-            <Link to={CONTACT} className="mt-6 flex h-12 items-center justify-center bg-navy-950 font-medium text-white">
+            <Link to={CONTACT} className="mt-6 flex h-12 items-center justify-center bg-gold-500 font-medium text-navy-950">
               Rezervo takim
             </Link>
           </nav>

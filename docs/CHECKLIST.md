@@ -4,7 +4,7 @@ Tracks the master prompt (palette + phases 1–8). ✅ done and verified · ⏳ 
 
 ## 1 · Foundation
 - ✅ Vite + React 19 + TS strict, Tailwind v4 tokens, HashRouter, `base: './'`, lazy admin/panorama/contact form
-- ✅ Official palette: ink `#18201B`, near-black `#0E130F`, terracotta `#B5532E`, limestone `#F3F2EF`, status `#2F6B4F` / `#B8862B` / `#A33D32` + hatch
+- ✅ Brand board palette: charcoal `#0B0F14`, slate `#1E293B`, gold `#D4AF37`, soft gray `#A3A3A3`, ivory `#F8F7F4`, status `#10B981` / `#F59E0B` / `#EF4444` + hatch (darker *-ink tones for text, AA)
 - ✅ Lucide React icons, Instrument Serif + Geist self-hosted
 
 ## 2 · Domain & repositories

@@ -47,7 +47,7 @@ export default function LocationFeatures() {
           <ul className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2">
             {site.features.map((f) => (
               <li key={f.title} className="flex gap-4 border-t border-navy-200 pt-5">
-                <Icon name={isIconName(f.icon) ? f.icon : 'check'} className="mt-0.5 size-5 shrink-0 text-gold-500" />
+                <Icon name={isIconName(f.icon) ? f.icon : 'check'} className="mt-0.5 size-5 shrink-0 text-gold-600" />
                 <div>
                   <h3 className="font-semibold text-navy-900">{f.title}</h3>
                   <p className="mt-1 text-navy-600">{f.text ?? <Pending />}</p>
@@ -72,7 +72,7 @@ export default function LocationFeatures() {
         ) : (
           <div className="grid aspect-[4/3] place-items-center bg-stone-100 px-6 text-center ring-1 ring-inset ring-navy-200 sm:aspect-[21/9]">
             <div>
-              <Icon name="pin" className="mx-auto size-7 text-gold-500" />
+              <Icon name="pin" className="mx-auto size-7 text-gold-600" />
               <p className="mt-4 font-display text-3xl text-navy-950 sm:text-4xl">Harta e lokacionit</p>
               <p className="mt-2 text-navy-500">
                 <Pending />

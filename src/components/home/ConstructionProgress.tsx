@@ -58,7 +58,7 @@ export default function ConstructionProgress() {
               <div className="flex items-center gap-3 text-sm">
                 <span
                   className={`grid size-7 shrink-0 place-items-center text-xs tabular-nums ${
-                    p.status === 'done' ? 'bg-white text-navy-950' : p.status === 'current' ? 'bg-gold-500 text-white' : 'text-white/60 ring-1 ring-white/30'
+                    p.status === 'done' ? 'bg-white text-navy-950' : p.status === 'current' ? 'bg-gold-500 text-navy-950' : 'text-white/60 ring-1 ring-white/30'
                   }`}
                 >
                   {p.status === 'done' ? <Icon name="check" className="size-4" strokeWidth={2.2} /> : i + 1}

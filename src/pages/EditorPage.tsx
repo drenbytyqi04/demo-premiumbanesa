@@ -500,7 +500,7 @@ export default function EditorPage() {
                   setMode(m)
                   if (m === 'edit') setDrawing(null)
                 }}
-                className={`rounded-xs px-3 py-1.5 font-medium transition ${mode === m ? 'bg-gold-500 text-white' : 'text-navy-100 hover:bg-white/10'}`}
+                className={`rounded-xs px-3 py-1.5 font-medium transition ${mode === m ? 'bg-gold-500 text-navy-950' : 'text-navy-100 hover:bg-white/10'}`}
               >
                 {m === 'draw' ? '✎ Vizato' : '⤧ Ndrysho'}
                 <span className="hidden sm:inline">{m === 'draw' ? ' (D)' : ' (E)'}</span>
@@ -546,7 +546,7 @@ export default function EditorPage() {
           {drawing && (
             <div className="flex items-center gap-2">
               <span className="text-navy-300">{drawing.length} pika</span>
-              <button onClick={closeDrawing} disabled={drawing.length < 3} className="rounded-xs bg-available px-3 py-1.5 font-medium disabled:opacity-40">
+              <button onClick={closeDrawing} disabled={drawing.length < 3} className="rounded-xs bg-available px-3 py-1.5 font-medium text-navy-950 disabled:opacity-40">
                 Mbyll ✓
               </button>
               <button onClick={() => setDrawing(null)} className="rounded-xs px-2 py-1.5 text-navy-200 hover:bg-white/10">
@@ -705,7 +705,7 @@ export default function EditorPage() {
 
         {notice && (
           <div
-            className={`pointer-events-none absolute bottom-4 left-1/2 z-10 max-w-[90%] -translate-x-1/2 rounded-xs px-4 py-2 text-sm font-medium shadow-lg ${notice.tone === 'ok' ? 'bg-available text-white' : 'bg-reserved text-navy-950'}`}
+            className={`pointer-events-none absolute bottom-4 left-1/2 z-10 max-w-[90%] -translate-x-1/2 rounded-xs px-4 py-2 text-sm font-medium shadow-lg ${notice.tone === 'ok' ? 'bg-available text-navy-950' : 'bg-reserved text-navy-950'}`}
           >
             {notice.text}
           </div>
@@ -789,7 +789,7 @@ export default function EditorPage() {
                       setNextId(id)
                       setMode('draw')
                     }}
-                    className={`rounded-xs px-2 py-0.5 font-mono text-xs ring-1 transition ${suggestedId === id ? 'bg-gold-500 text-white ring-gold-500' : 'bg-white text-navy-700 ring-navy-200 hover:bg-navy-100'}`}
+                    className={`rounded-xs px-2 py-0.5 font-mono text-xs ring-1 transition ${suggestedId === id ? 'bg-gold-500 text-navy-950 ring-gold-500' : 'bg-white text-navy-700 ring-navy-200 hover:bg-navy-100'}`}
                   >
                     {id}
                   </button>
@@ -804,7 +804,7 @@ export default function EditorPage() {
             <span>3 · Poligonet ({polys.length})</span>
             {polys.length > 0 && (
               <button
-                className="normal-case tracking-normal text-sold hover:underline"
+                className="normal-case tracking-normal text-sold-ink hover:underline"
                 onClick={() => {
                   if (!confirm('Të fshihen të gjitha poligonet?')) return
                   commit([])
@@ -815,7 +815,7 @@ export default function EditorPage() {
               </button>
             )}
           </h2>
-          {dupIds.length > 0 && <p className="mb-2 rounded-xs bg-sold/8 px-3 py-2 text-xs text-sold">ID të dyfishta: {[...new Set(dupIds)].join(', ')}</p>}
+          {dupIds.length > 0 && <p className="mb-2 rounded-xs bg-sold/8 px-3 py-2 text-xs text-sold-ink">ID të dyfishta: {[...new Set(dupIds)].join(', ')}</p>}
           {unknownIds.length > 0 && (
             <p className="mb-2 rounded-xs bg-reserved/10 px-3 py-2 text-xs text-reserved-ink">
               Këto ID nuk ekzistojnë në të dhëna dhe do të injorohen në faqe: {unknownIds.join(', ')}
@@ -834,14 +834,14 @@ export default function EditorPage() {
                 <span className="size-3 shrink-0 rounded-sm" style={{ background: `hsl(${hue(i)} 80% 55%)` }} />
                 <input
                   ref={i === selected ? idInputRef : undefined}
-                  className="min-w-0 flex-1 rounded border-0 bg-transparent px-1 py-0.5 font-mono text-sm focus:bg-white focus:ring-1 focus:ring-gold-500 focus:outline-none"
+                  className="min-w-0 flex-1 rounded border-0 bg-transparent px-1 py-0.5 font-mono text-sm focus:bg-white focus:ring-1 focus:ring-gold-600 focus:outline-none"
                   value={p.id}
                   onFocus={() => setSelected(i)}
                   onChange={(e) => setPolys((ps) => ps.map((q, j) => (j === i ? { ...q, id: e.target.value } : q)))}
                 />
                 <span className="text-xs text-navy-400">{p.points.length} pk</span>
                 <button
-                  className="rounded px-1.5 text-navy-400 hover:bg-sold/8 hover:text-sold"
+                  className="rounded px-1.5 text-navy-400 hover:bg-sold/8 hover:text-sold-ink"
                   title="Fshi"
                   onClick={(e) => {
                     e.stopPropagation()

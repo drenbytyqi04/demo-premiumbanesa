@@ -29,7 +29,7 @@ export default function TourBand() {
             Çdo banesë ka turë 360°. Rrotullohuni në çdo dhomë dhe kaloni nga njëra te tjetra me një prekje.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-            <Link to={`/apartments/${apt.id}`} className="inline-flex h-12 items-center bg-white px-6 font-medium text-navy-950 transition-colors hover:bg-gold-500 hover:text-white">
+            <Link to={`/apartments/${apt.id}`} className="inline-flex h-12 items-center bg-white px-6 font-medium text-navy-950 transition-colors hover:bg-gold-500 hover:text-navy-950">
               Hap turën 360°
             </Link>
             <span className="text-sm text-white/60">{rooms.join('  ·  ')}</span>

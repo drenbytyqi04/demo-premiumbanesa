@@ -50,7 +50,7 @@ export default function UnitTypes() {
                     <div className="text-sm text-navy-500">{t.minPrice ? 'Çmimi nga (ilustrues)' : 'Asnjë e lirë tani'}</div>
                     <div className="font-display text-3xl text-navy-950">{t.minPrice ? formatPrice(t.minPrice) : '—'}</div>
                   </div>
-                  <div className="text-sm font-medium text-gold-500 group-hover:text-navy-950 sm:mt-2">
+                  <div className="text-sm font-medium text-gold-600 group-hover:text-navy-950 sm:mt-2">
                     {t.free ? `Shiko ${t.free} të lira` : 'Shiko tipologjinë'}
                   </div>
                 </div>

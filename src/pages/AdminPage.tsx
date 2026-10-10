@@ -54,7 +54,7 @@ export default function AdminPage() {
         </div>
         {mode === 'demo' && (
           <button
-            className="min-h-10 self-start rounded-xs px-3 text-sm font-medium text-sold ring-1 ring-sold/30 hover:bg-sold/8 sm:self-auto"
+            className="min-h-10 self-start rounded-xs px-3 text-sm font-medium text-sold-ink ring-1 ring-sold/30 hover:bg-sold/8 sm:self-auto"
             onClick={() => confirm('Të rikthehen të dhënat fillestare? Ndryshimet lokale do të fshihen.') && reset()}
           >
             Rikthe të dhënat fillestare
@@ -63,7 +63,7 @@ export default function AdminPage() {
       </div>
 
       {row?.kind === 'error' && (
-        <div role="alert" className="mb-4 flex items-start justify-between gap-3 rounded-xs bg-sold/8 px-4 py-3 text-sm text-sold ring-1 ring-sold/30">
+        <div role="alert" className="mb-4 flex items-start justify-between gap-3 rounded-xs bg-sold/8 px-4 py-3 text-sm text-sold-ink ring-1 ring-sold/30">
           <span>
             <strong>{row.id}:</strong> {row.message}
           </span>
@@ -187,8 +187,8 @@ export default function AdminPage() {
 
 function RowStatus({ row, a }: { row: RowState | null; a: Apartment }) {
   if (row?.id === a.id && row.kind === 'saving') return <span className="text-xs text-navy-500">Duke ruajtur…</span>
-  if (row?.id === a.id && row.kind === 'saved') return <span className="text-xs font-medium text-available">U ruajt</span>
-  if (row?.id === a.id && row.kind === 'error') return <span className="text-xs font-medium text-sold">Nuk u ruajt</span>
+  if (row?.id === a.id && row.kind === 'saved') return <span className="text-xs font-medium text-available-ink">U ruajt</span>
+  if (row?.id === a.id && row.kind === 'error') return <span className="text-xs font-medium text-sold-ink">Nuk u ruajt</span>
   return <StatusBadge status={a.status} />
 }
 

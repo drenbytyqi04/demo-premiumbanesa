@@ -46,7 +46,7 @@ function BuildingView({ buildingId }: { buildingId: string }) {
       {/* title + filters */}
       <div className="mx-auto grid max-w-[1600px] gap-6 px-5 pt-8 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] lg:items-center">
         <div className="flex items-center gap-4">
-          <Link to="/" aria-label="Kthehu te projekti" className="grid size-12 shrink-0 place-items-center bg-navy-950 text-white transition-colors hover:bg-gold-500">
+          <Link to="/" aria-label="Kthehu te projekti" className="grid size-12 shrink-0 place-items-center bg-navy-950 text-white transition-colors hover:bg-gold-500 hover:text-navy-950">
             <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
               <path d="M15 5l-7 7 7 7" />
             </svg>
@@ -137,7 +137,7 @@ function WingArrow({ dir, label, onClick }: { dir: -1 | 1; label: string; onClic
       onClick={onClick}
       aria-label={`Shko te ${label}`}
       title={label}
-      className={`absolute bottom-6 z-10 grid size-12 place-items-center bg-navy-950/85 text-white backdrop-blur transition-colors hover:bg-gold-500 sm:bottom-auto sm:top-1/2 sm:size-14 sm:-translate-y-1/2 ${dir < 0 ? 'left-4 sm:left-6' : 'right-4 sm:right-6'}`}
+      className={`absolute bottom-6 z-10 grid size-12 place-items-center bg-navy-950/85 text-white backdrop-blur transition-colors hover:bg-gold-500 hover:text-navy-950 sm:bottom-auto sm:top-1/2 sm:size-14 sm:-translate-y-1/2 ${dir < 0 ? 'left-4 sm:left-6' : 'right-4 sm:right-6'}`}
     >
       <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
         <path d={dir < 0 ? 'M15 5l-7 7 7 7' : 'M9 5l7 7-7 7'} />

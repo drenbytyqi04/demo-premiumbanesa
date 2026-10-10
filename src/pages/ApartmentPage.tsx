@@ -141,7 +141,7 @@ export default function ApartmentPage() {
 
             <Link
               to={inquiryLink}
-              className={`mt-6 hidden w-full lg:flex items-center justify-center rounded-xs px-4 py-3 font-semibold transition ${apt.status === 'sold' ? 'bg-navy-950 text-white hover:bg-navy-800' : 'bg-gold-500 text-white hover:bg-gold-600'}`}
+              className={`mt-6 hidden w-full lg:flex items-center justify-center rounded-xs px-4 py-3 font-semibold transition ${apt.status === 'sold' ? 'bg-navy-950 text-white hover:bg-navy-800' : 'bg-gold-500 text-navy-950 hover:bg-gold-400'}`}
             >
               {apt.status === 'sold' ? 'Pyet për banesa të ngjashme' : 'Kërko informacion'}
             </Link>
@@ -158,7 +158,7 @@ export default function ApartmentPage() {
           </div>
           <Link
             to={inquiryLink}
-            className={`shrink-0 rounded-xs px-5 py-3 text-sm font-semibold ${apt.status === 'sold' ? 'bg-navy-950 text-white' : 'bg-gold-500 text-white active:bg-gold-600'}`}
+            className={`shrink-0 rounded-xs px-5 py-3 text-sm font-semibold ${apt.status === 'sold' ? 'bg-navy-950 text-white' : 'bg-gold-500 text-navy-950 active:bg-gold-400'}`}
           >
             {apt.status === 'sold' ? 'Banesa të ngjashme' : 'Kërko informacion'}
           </Link>

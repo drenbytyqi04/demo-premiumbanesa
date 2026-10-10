@@ -1,34 +1,40 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Palette taken from the building: green-roof ink, terracotta facade, limestone.
-     Token names are historical: "navy" = ink scale, "gold" = terracotta accent. */
+  /* Brand board palette: Deep Charcoal, Slate Blue, Gold Accent, Soft Gray, Ivory.
+     Token names: "navy" = charcoal/slate scale, "gold" = gold accent. */
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
-  --color-stone-50: #f7f6f3;
-  --color-stone-100: #efeeea;
-  --color-stone-200: #e0ded8;
-  --color-navy-50: #f2f3f0;
-  --color-navy-100: #e5e7e2;
-  --color-navy-200: #cdd1c9;
-  --color-navy-300: #a7aea4;
-  --color-navy-400: #7c857a;
-  --color-navy-500: #5d665c;
-  --color-navy-600: #485047;
-  --color-navy-700: #363d36;
-  --color-navy-800: #242a25;
-  --color-navy-900: #18201b;
-  --color-navy-950: #0e130f;
-  --color-gold-300: #e6b49b;
-  --color-gold-400: #d07a52;
-  --color-gold-500: #b5532e;
-  --color-gold-600: #964224;
-  --color-paper: #f3f2ef;
-  /* apartment status – official palette; never used as the only signal */
-  --color-available: #2f6b4f;
-  --color-reserved: #b8862b;
-  --color-reserved-ink: #7a5714; /* AA text on light backgrounds */
-  --color-sold: #a33d32;
+  --color-stone-50: #fbfaf7;
+  --color-stone-100: #f1efe9;
+  --color-stone-200: #e3e0d8;
+  /* dark scale: 950 Deep Charcoal #0B0F14, 800 Slate Blue #1E293B, 300 Soft Gray #A3A3A3 */
+  --color-navy-50: #f3f4f6;
+  --color-navy-100: #e5e7eb;
+  --color-navy-200: #cfd4dc;
+  --color-navy-300: #a3a3a3;
+  --color-navy-400: #7b8494;
+  --color-navy-500: #5b6475;
+  --color-navy-600: #434c5c;
+  --color-navy-700: #334155;
+  --color-navy-800: #1e293b;
+  --color-navy-900: #131a24;
+  --color-navy-950: #0b0f14;
+  /* Gold Accent #D4AF37; 600 is the darker gold for text and focus on light backgrounds (AA) */
+  --color-gold-300: #e9d48c;
+  --color-gold-400: #ddbf5a;
+  --color-gold-500: #d4af37;
+  --color-gold-600: #8a6a12;
+  --color-gold-700: #6f5510;
+  --color-paper: #f8f7f4; /* Ivory */
+  /* apartment status – Emerald / Amber / Coral Red; never used as the only signal.
+     *-ink variants are for text on light backgrounds (WCAG AA). */
+  --color-available: #10b981;
+  --color-available-ink: #047857;
+  --color-reserved: #f59e0b;
+  --color-reserved-ink: #92400e;
+  --color-sold: #ef4444;
+  --color-sold-ink: #b91c1c;
   --radius-xs: 2px;
 }
 
@@ -45,7 +51,7 @@ html {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-gold-500);
+  outline: 2px solid var(--color-gold-600);
   outline-offset: 2px;
 }
 
@@ -109,7 +115,7 @@ body {
 }
 .pnlm-hotspot-base.floor-hotspot:hover {
   transform: scale(1.12);
-  background: rgb(200 168 103 / 0.55);
+  background: rgb(212 175 55 / 0.55);
 }
 .pnlm-hotspot-base.floor-hotspot span {
   visibility: hidden;
@@ -120,7 +126,7 @@ body {
   white-space: nowrap;
   padding: 4px 10px;
   border-radius: 8px;
-  background: rgb(15 27 45 / 0.85);
+  background: rgb(11 15 20 / 0.85);
   color: #fff;
   font: 500 13px/1.4 'Geist Variable', sans-serif;
 }
@@ -145,7 +151,7 @@ body {
 /* stacking plan: sold units are hatched so status doesn't rely on colour alone */
 .stack-sold {
   background-color: var(--color-stone-100);
-  background-image: repeating-linear-gradient(135deg, rgb(163 61 50 / 0.22) 0 1px, transparent 1px 6px);
+  background-image: repeating-linear-gradient(135deg, rgb(239 68 68 / 0.3) 0 1px, transparent 1px 6px);
 }
 
 /* photo-real renders: a fine white contour at rest, status colour on hover */

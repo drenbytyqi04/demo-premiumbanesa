@@ -54,7 +54,7 @@ export default function HeroSitePlan() {
             {site.hero.text}
           </motion.p>
           <motion.div {...rise(0.7)} className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-            <Link to="/apartments?lira=1" className="inline-flex h-12 items-center bg-gold-500 px-6 font-medium text-white transition-colors hover:bg-gold-600">
+            <Link to="/apartments?lira=1" className="inline-flex h-12 items-center bg-gold-500 px-6 font-medium text-navy-950 transition-colors hover:bg-gold-400">
               Shiko {totalFree} banesat e lira
             </Link>
             <Link

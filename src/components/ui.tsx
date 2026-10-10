@@ -48,16 +48,16 @@ export function PageHeader({ eyebrow, title, children }: { eyebrow?: ReactNode; 
 }
 
 export const inputCls =
-  'w-full rounded-xs border-0 bg-white px-3 py-2 text-base sm:text-sm text-navy-900 ring-1 ring-navy-200 transition focus:ring-2 focus:ring-gold-500 focus:outline-none'
+  'w-full rounded-xs border-0 bg-white px-3 py-2 text-base sm:text-sm text-navy-900 ring-1 ring-navy-200 transition focus:ring-2 focus:ring-gold-600 focus:outline-none'
 
 export const btnCls = {
   primary:
     'inline-flex items-center justify-center gap-2 rounded-xs bg-navy-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-navy-700 disabled:opacity-40',
-  gold: 'inline-flex items-center justify-center gap-2 rounded-xs bg-gold-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-gold-600 disabled:opacity-40',
+  gold: 'inline-flex items-center justify-center gap-2 rounded-xs bg-gold-500 px-4 py-2 text-sm font-semibold text-navy-950 shadow-sm transition hover:bg-gold-400 disabled:opacity-40',
   ghost:
     'inline-flex items-center justify-center gap-2 rounded-xs bg-white px-4 py-2 text-sm font-medium text-navy-800 ring-1 ring-navy-200 transition hover:bg-navy-50 disabled:opacity-40',
   danger:
-    'inline-flex items-center justify-center gap-2 rounded-xs bg-white px-3 py-2 text-sm font-medium text-sold shadow-sm ring-1 ring-sold/30 transition hover:bg-sold/8 disabled:opacity-40',
+    'inline-flex items-center justify-center gap-2 rounded-xs bg-white px-3 py-2 text-sm font-medium text-sold-ink shadow-sm ring-1 ring-sold/30 transition hover:bg-sold/8 disabled:opacity-40',
 }
 
 /** Neutral state for a project fact that has not been confirmed yet. */

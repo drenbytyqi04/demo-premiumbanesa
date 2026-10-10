@@ -13,7 +13,7 @@ export default function Faq() {
         <div className="divide-y divide-navy-200 border-y border-navy-200 lg:col-span-7 lg:col-start-6">
           {site.faq.map((f) => (
             <details key={f.q} className="faq group">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg text-navy-950 transition-colors hover:text-gold-500 sm:text-xl">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg text-navy-950 transition-colors hover:text-gold-600 sm:text-xl">
                 {f.q}
                 <span className="relative size-4 shrink-0" aria-hidden="true">
                   <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-current" />

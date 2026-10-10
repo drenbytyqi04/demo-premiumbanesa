@@ -13,7 +13,7 @@ import { RevealHeading } from '../motion'
 import { Pending } from '../ui'
 
 const field =
-  'mt-1.5 w-full rounded-xs border-0 bg-white px-4 py-3 text-base text-navy-900 ring-1 ring-stone-200 transition placeholder:text-navy-400 focus:ring-2 focus:ring-gold-500 focus:outline-none aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-sold'
+  'mt-1.5 w-full rounded-xs border-0 bg-white px-4 py-3 text-base text-navy-900 ring-1 ring-stone-200 transition placeholder:text-navy-400 focus:ring-2 focus:ring-gold-600 focus:outline-none aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-sold'
 
 const newId = () => (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`)
 
@@ -90,7 +90,7 @@ export default function ContactSection() {
             <AnimatePresence mode="wait" initial={false}>
               {sent !== null ? (
                 <motion.div key="sent" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="py-10 text-center" role="status">
-                  <span className="mx-auto grid size-14 place-items-center rounded-full bg-available/15 text-available">
+                  <span className="mx-auto grid size-14 place-items-center rounded-full bg-available/15 text-available-ink">
                     <Icon name="check" className="size-7" strokeWidth={2.2} />
                   </span>
                   <h3 className="mt-5 font-display text-4xl">Faleminderit, {sent}</h3>
@@ -165,14 +165,14 @@ export default function ContactSection() {
                       </span>
                     </label>
                     {errors.consent && (
-                      <span id="err-consent" className="mt-1.5 block text-sm text-sold">
+                      <span id="err-consent" className="mt-1.5 block text-sm text-sold-ink">
                         {errors.consent.message}
                       </span>
                     )}
                   </div>
 
                   {failure && (
-                    <p role="alert" className="bg-sold/8 px-4 py-3 text-sm text-sold ring-1 ring-sold/30 sm:col-span-2">
+                    <p role="alert" className="bg-sold/8 px-4 py-3 text-sm text-sold-ink ring-1 ring-sold/30 sm:col-span-2">
                       {failure}
                     </p>
                   )}
@@ -182,7 +182,7 @@ export default function ContactSection() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xs bg-gold-500 px-7 font-semibold text-white transition hover:bg-gold-600 disabled:cursor-wait disabled:opacity-60"
+                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xs bg-gold-500 px-7 font-semibold text-navy-950 transition hover:bg-gold-400 disabled:cursor-wait disabled:opacity-60"
                     >
                       {isSubmitting && <span className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" aria-hidden="true" />}
                       {isSubmitting ? 'Duke dërguar…' : 'Rezervo takim'}
@@ -216,7 +216,7 @@ function Field({ id, label, error, className = '', children }: { id: string; lab
       </label>
       {children}
       {error && (
-        <span id={`err-${id}`} className="mt-1.5 block text-sm text-sold">
+        <span id={`err-${id}`} className="mt-1.5 block text-sm text-sold-ink">
           {error}
         </span>
       )}

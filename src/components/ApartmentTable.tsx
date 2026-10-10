@@ -55,7 +55,7 @@ export default function ApartmentTable({ apartments, showBuilding = false, compa
                 {showBuilding && <td className="px-4 py-3 font-medium">{a.buildingId}</td>}
                 <td className="px-4 py-3 font-semibold">
                   {/* the number is the row's link for keyboard users; the whole row is clickable with the mouse */}
-                  <Link to={`/apartments/${a.id}`} onClick={(e) => e.stopPropagation()} className="hover:text-gold-500">
+                  <Link to={`/apartments/${a.id}`} onClick={(e) => e.stopPropagation()} className="hover:text-gold-600">
                     {a.number}
                   </Link>
                 </td>
